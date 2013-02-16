@@ -24,3 +24,9 @@ Really hoping that you all get this setup without an issue! Hopefully I'll find 
 messages when I next read this....
 
 [AJ out]
+
+Nice one!
+
+I have been messing around with the player classes a bit.
+
+
