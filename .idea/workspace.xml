@@ -13,7 +13,7 @@
     <file path="/ComputerPlayer.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361054332410" ignored="false" />
     <file path="/PlayerHand.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361053059696" ignored="false" />
     <file path="/Player.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361054408988" ignored="false" />
-    <file path="/UI.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361055479016" ignored="false" />
+    <file path="/UI.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361057150027" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,24 +102,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Dominoes.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/dominoes/Dominoes.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="54" selection-start="804" selection-end="804" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="0" selection-start="1365" selection-end="1365" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Bone.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/dominoes/Bone.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -141,7 +123,34 @@
       <file leaf-file-name="UI.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/dominoes/UI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="11" selection-start="154" selection-end="154" vertical-scroll-proportion="0.23287672">
+            <state line="11" column="44" selection-start="361" selection-end="361" vertical-scroll-proportion="0.28462708">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Dominoes.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/dominoes/Dominoes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="58" selection-start="805" selection-end="805" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Play.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/dominoes/Play.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="13" selection-start="32" selection-end="32" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Table.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/dominoes/Table.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="23" selection-start="353" selection-end="353" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -151,15 +160,6 @@
         <entry file="file://$PROJECT_DIR$/src/dominoes/CantPlayException.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="1" column="0" selection-start="18" selection-end="18" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".name" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/dominoes/.idea/.name">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -552,20 +552,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/dominoes/InvalidPlayException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="19" selection-end="19" vertical-scroll-proportion="0.056572378">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dominoes/doc/dominoes.players.DominoPlayer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/dominoes/BoneYard.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="14" selection-start="261" selection-end="261" vertical-scroll-proportion="0.18831822">
@@ -622,13 +608,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dominoes/players/DominoPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="17" selection-start="44" selection-end="44" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/dominoes/players/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="0" selection-start="343" selection-end="343" vertical-scroll-proportion="0.0">
@@ -636,6 +615,20 @@
             <element signature="imports" expanded="true" />
             <element signature="e#331#337#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dominoes/DominoUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="0" selection-start="47" selection-end="309" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dominoes/players/DominoPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="17" selection-start="44" selection-end="44" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -648,21 +641,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/dominoes/Dominoes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="54" selection-start="804" selection-end="804" vertical-scroll-proportion="0.0">
+        <state line="20" column="58" selection-start="805" selection-end="805" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dominoes/DominoUI.java">
+    <entry file="file://$PROJECT_DIR$/src/dominoes/Play.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="47" selection-end="309" vertical-scroll-proportion="0.0">
+        <state line="2" column="13" selection-start="32" selection-end="32" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dominoes/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="23" selection-start="353" selection-end="353" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/dominoes/UI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="11" selection-start="154" selection-end="154" vertical-scroll-proportion="0.23287672">
+        <state line="11" column="44" selection-start="361" selection-end="361" vertical-scroll-proportion="0.28462708">
           <folding />
         </state>
       </provider>
