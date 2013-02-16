@@ -25,8 +25,16 @@ messages when I next read this....
 
 [AJ out]
 
+
+
+[NM 16/02/2013]
 Nice one!
 
 I have been messing around with the player classes a bit.
+
+I still need to work out how we build this thing - at the moment the supplied class files won't build. I am guessing 
+that copy pasting them into the IDE has messed them up a bit - the originals seem to be binary files if you open them in vim.
+
+[Nick]
 
 
