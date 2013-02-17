@@ -25,7 +25,7 @@ public class Player implements DominoPlayer {
         return thePlay;
     }
 
-    public dominoes.Play chooseMove(dominoes.Table table){
+    protected dominoes.Play chooseMove(dominoes.Table table){
         //not implemented yet
         return null;
     }

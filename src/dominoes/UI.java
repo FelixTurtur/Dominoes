@@ -29,8 +29,6 @@ public class UI implements DominoUI {
         System.out.println(dominoPlayer.getName() + "wins the round!" );
         System.out.println("************************************************");
         System.out.println("");
-
-
     }
 
     public void displayInvalidPlay(dominoes.players.DominoPlayer dominoPlayer){
@@ -45,7 +43,6 @@ public class UI implements DominoUI {
             System.out.println(dominoPlayers[i].getPoints() + "    " +dominoPlayers[i].getName() );
         }
         System.out.println("************************************");
-
     }
 
     private void drawBoneYard(BoneYard boneYard){
@@ -76,7 +73,6 @@ public class UI implements DominoUI {
         }
         System.out.println("");
         System.out.println("");
-
     }
 
     private void drawBone(Bone b){

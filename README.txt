@@ -38,3 +38,10 @@ that copy pasting them into the IDE has messed them up a bit - the originals see
 [Nick]
 
 
+
+[NM 17/02/2013]
+
+Now working in a simplistic way for CPU vs CPU
+
+[Nick]
+

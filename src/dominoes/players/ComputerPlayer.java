@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ComputerPlayer extends Player {
 
-    public dominoes.Play chooseMove(dominoes.Table table){
+    protected dominoes.Play chooseMove(dominoes.Table table){
         Play thePlay=null;
         List<PossiblePlay> legalMoves=findLegalMoves(table);
 
