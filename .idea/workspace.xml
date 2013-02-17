@@ -6,14 +6,15 @@
     <ignored path=".idea/workspace.xml" />
     <file path="/a.dummy" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1360798937069" ignored="false" />
     <file path="/Dominoes.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1360800433708" ignored="false" />
-    <file path="/fragment.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1360800487742" ignored="false" />
-    <file path="/Dummy.txt" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361108973421" ignored="false" />
+    <file path="/fragment.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361110047632" ignored="false" />
+    <file path="/Dummy.txt" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361109770869" ignored="false" />
     <file path="/README.txt" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361055336412" ignored="false" />
     <file path="/HumanPlayer.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361051697833" ignored="false" />
     <file path="/ComputerPlayer.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361054332410" ignored="false" />
     <file path="/PlayerHand.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361053059696" ignored="false" />
     <file path="/Player.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361108242084" ignored="false" />
-    <file path="/UI.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361057150027" ignored="false" />
+    <file path="/UI.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361110368249" ignored="false" />
+    <file path="/test.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361110275486" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,11 +73,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Player.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Player.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/dominoes/players/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="0" selection-start="913" selection-end="913" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="35" column="4" selection-start="736" selection-end="736" vertical-scroll-proportion="0.36656597">
+              <folding>
+                <element signature="e#330#336#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -84,7 +87,7 @@
       <file leaf-file-name="DominoPlayer.class" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/dominoes/players/DominoPlayer.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="9" selection-start="403" selection-end="403" vertical-scroll-proportion="0.0">
+            <state line="6" column="17" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -102,16 +105,7 @@
       <file leaf-file-name="ComputerPlayer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/dominoes/players/ComputerPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="20" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BoneYard.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/dominoes/BoneYard.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="13" selection-start="151" selection-end="151" vertical-scroll-proportion="0.0">
+            <state line="8" column="13" selection-start="126" selection-end="126" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -126,10 +120,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UI.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="BoneYard.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/dominoes/BoneYard.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="13" selection-start="151" selection-end="151" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CantPlayException.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/dominoes/CantPlayException.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="13" selection-start="151" selection-end="151" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UI.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/dominoes/UI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="27" selection-start="132" selection-end="132" vertical-scroll-proportion="0.13695872">
+            <state line="8" column="13" selection-start="118" selection-end="118" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -172,7 +184,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/dominoes/Table.java" />
         <option value="$PROJECT_DIR$/src/dominoes/Play.java" />
         <option value="$PROJECT_DIR$/src/dominoes/InvalidPlayException.java" />
         <option value="$PROJECT_DIR$/src/dominoes/DominoUI.java" />
@@ -186,6 +197,7 @@
         <option value="$PROJECT_DIR$/src/dominoes/players/PlayerHand.java" />
         <option value="$PROJECT_DIR$/src/dominoes/players/ComputerPlayer.java" />
         <option value="$PROJECT_DIR$/README.txt" />
+        <option value="$PROJECT_DIR$/src/dominoes/players/test.java" />
         <option value="$PROJECT_DIR$/src/dominoes/UI.java" />
         <option value="$PROJECT_DIR$/src/dominoes/players/Player.java" />
       </list>
@@ -211,7 +223,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="Scope" currentSubView="Project Files" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -223,7 +235,52 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dominoes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dominoes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dominoes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dominoes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dominoes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dominoes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dominoes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dominoes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="players" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -288,7 +345,61 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scope">
+        <subPane subId="Problems" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Dominoes">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Dominoes">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="dominoes">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Dominoes">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="dominoes">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="players">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -296,9 +407,10 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="fileTemplates" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/dominoes/players" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -315,10 +427,65 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="C:\Users\nick\Documents\GitHub\Dominoes" />
+      <setting name="debug" value="false" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
       <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="workingDirPath" value="" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GriffonRunConfigurationType" factoryName="Griffon">
+      <module name="" />
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="depsClasspath" value="true" />
+      <setting name="passParentEnv" value="true" />
       <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -327,6 +494,22 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="XSLT" factoryName="XSLT">
+      <option name="myOutputFile" />
+      <option name="myOpenOutputFile" value="false" />
+      <option name="myOpenInBrowser" value="false" />
+      <option name="mySmartErrorHandling" value="true" />
+      <option name="myRunnerPort" value="34873" />
+      <option name="myVmArguments" />
+      <option name="myWorkingDirectory" />
+      <option name="myModule" />
+      <option name="myJdk" />
+      <parameters />
+      <OutputType value="CONSOLE" save-to-file="false" />
+      <FileType name="XML" />
+      <JdkChoice value="FROM_MODULE" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -403,6 +586,21 @@
       <patterns />
       <method />
     </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <method />
+    </configuration>
     <list size="0" />
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -437,8 +635,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="0" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -453,7 +651,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17609392" sideWeight="0.67026496" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17609392" sideWeight="0.67026496" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -522,13 +720,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/dominoes/UI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="27" selection-start="132" selection-end="132" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/dominoes/DominoUI.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="0" selection-start="1" selection-end="118" vertical-scroll-proportion="0.0">
@@ -550,7 +741,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/dominoes/.idea/uiDesigner.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/dominoes/.idea/.name">
@@ -570,16 +763,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dominoes/players/ComputerPlayer.java">
+    <entry file="file://$PROJECT_DIR$/src/dominoes/DominoUI.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="20" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dominoes/BoneYard.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="151" selection-end="151" vertical-scroll-proportion="0.0">
+        <state line="1" column="0" selection-start="1" selection-end="118" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -591,9 +777,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dominoes/players/DominoPlayer.class">
+    <entry file="file://$PROJECT_DIR$/src/dominoes/BoneYard.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="9" selection-start="403" selection-end="403" vertical-scroll-proportion="0.0">
+        <state line="6" column="13" selection-start="151" selection-end="151" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dominoes/CantPlayException.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="151" selection-end="151" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -605,24 +798,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dominoes/DominoUI.class">
+    <entry file="file://$PROJECT_DIR$/src/dominoes/UI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="1" selection-end="118" vertical-scroll-proportion="0.0">
+        <state line="8" column="13" selection-start="118" selection-end="118" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dominoes/players/ComputerPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="13" selection-start="126" selection-end="126" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dominoes/players/DominoPlayer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="17" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/dominoes/players/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="0" selection-start="913" selection-end="913" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dominoes/UI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="27" selection-start="132" selection-end="132" vertical-scroll-proportion="0.13695872">
-          <folding />
+        <state line="35" column="4" selection-start="736" selection-end="736" vertical-scroll-proportion="0.36656597">
+          <folding>
+            <element signature="e#330#336#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

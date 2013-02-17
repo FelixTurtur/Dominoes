@@ -22,7 +22,6 @@ public class UI implements DominoUI {
         System.out.println("Invalid Play");
     }
 
-
     private void drawBone(Bone b){
         System.out.println("[" + b.left() + "|" + b.right() +"]" );
     }
