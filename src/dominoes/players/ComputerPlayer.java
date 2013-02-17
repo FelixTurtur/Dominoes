@@ -6,6 +6,7 @@ package dominoes.players;
  * Date: 16/02/13
  * Time: 21:33
  */
+
 public class ComputerPlayer extends Player {
 
     public dominoes.Play makePlay(dominoes.Table table) throws dominoes.CantPlayException{

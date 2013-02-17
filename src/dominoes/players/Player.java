@@ -12,8 +12,8 @@ import java.util.List;
  */
 public class Player implements DominoPlayer {
 
-    private String name;
-    private int points;
+    private String name="new player";
+    private int points=0;
     protected List<Bone> hand = new LinkedList<Bone>();
 
 
