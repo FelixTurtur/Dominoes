@@ -1,7 +1,6 @@
 package dominoes.players;
 
 import dominoes.Bone;
-
 import java.util.LinkedList;
 import java.util.List;
 
