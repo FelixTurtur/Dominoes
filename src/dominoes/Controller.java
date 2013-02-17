@@ -1,6 +1,7 @@
 package dominoes;
 
 import dominoes.players.Player;
+import dominoes.players.ComputerPlayer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,7 +17,7 @@ public class Controller {
     {
         UI ui=new UI();
 
-        Player[] players = {new Player(),new Player()};
+        Player[] players = {new ComputerPlayer(),new ComputerPlayer()};
         players[0].setName("Player 1");
         players[1].setName("Player 2");
 
@@ -24,13 +25,16 @@ public class Controller {
         BoneYard boneYard=new BoneYard(6);
 
         //for testing purposes - does the Dominoes class handle the initial deal? I would imagine so...
-        for (int i=0;i<7;i++){
+      /*  for (int i=0;i<7;i++){
             players[0].draw(boneYard);
             players[1].draw(boneYard);
-        }
+        } */
 
 
-        ui.display(players,table,boneYard);
+      //  ui.display(players,table,boneYard);
+
+        Dominoes dominoes=new Dominoes(ui,players[0],players[1],50,6);
+        dominoes.play();
     }
 
 }
