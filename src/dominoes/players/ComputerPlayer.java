@@ -1,7 +1,8 @@
 package dominoes.players;
 
 import dominoes.Play;
-
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,28 +13,15 @@ import dominoes.Play;
 
 public class ComputerPlayer extends Player {
 
-    public dominoes.Play makePlay(dominoes.Table table) throws dominoes.CantPlayException{
-
+    public dominoes.Play chooseMove(dominoes.Table table){
+        Play thePlay=null;
+        List<PossiblePlay> legalMoves=findLegalMoves(table);
 
         //for now just go with first possible move.
-        Play thePlay=null;
-        for (int i=0; i<hand.size() && thePlay==null;i++){
-            if (hand.get(i).right()== table.left()){
-                hand.get(i).flip();
-                thePlay = new Play(hand.get(i),thePlay.LEFT);
-                }
-            if (hand.get(i).right()== table.right()){
-                thePlay = new Play(hand.get(i),thePlay.RIGHT);
-            }
-            if (hand.get(i).left()== table.right()){
-                hand.get(i).flip();
-                thePlay = new Play(hand.get(i),thePlay.RIGHT);
-            }
-            if (hand.get(i).left()== table.left()){
-                thePlay = new Play(hand.get(i),thePlay.LEFT);
-            }
+        if (legalMoves.size()>0){
+            legalMoves.get(0).flipIfNeeded();
+            thePlay=legalMoves.get(0).getPlay();
         }
-
 
         // Pause so that we can watch the computer play
         try {
@@ -41,17 +29,27 @@ public class ComputerPlayer extends Player {
         } catch(InterruptedException e) {
         }
 
-
-
-        if (thePlay==null) throw new dominoes.CantPlayException();
-
-        // remove the bone being played from player's hand
-        hand.remove(thePlay.bone());
-
-
-
         return thePlay;
+
     }
 
+     private List<PossiblePlay> findLegalMoves(dominoes.Table table){
+         List<PossiblePlay> legalMoves=new LinkedList<PossiblePlay>();
+         for (int i=0; i<hand.size();i++){
+             if (hand.get(i).right()== table.left()){
+                 legalMoves.add(new PossiblePlay(hand.get(i),Play.LEFT, true));
+             }
+             if (hand.get(i).right()== table.right()){
+                 legalMoves.add(new PossiblePlay(hand.get(i),Play.RIGHT,false));
+             }
+             if (hand.get(i).left()== table.right()){
 
+                 legalMoves.add(new PossiblePlay(hand.get(i),Play.RIGHT,true));
+             }
+             if (hand.get(i).left()== table.left()){
+                 legalMoves.add(new PossiblePlay(hand.get(i), Play.LEFT, false));
+             }
+         }
+         return legalMoves;
+     }
 }

@@ -24,12 +24,17 @@ public class UI implements DominoUI {
     }
 
     public void displayRoundWinner(dominoes.players.DominoPlayer dominoPlayer){
+        System.out.println("");
+        System.out.println("************************************************");
         System.out.println(dominoPlayer.getName() + "wins the round!" );
+        System.out.println("************************************************");
+        System.out.println("");
+
 
     }
 
     public void displayInvalidPlay(dominoes.players.DominoPlayer dominoPlayer){
-        System.out.println("Invalid Play");
+        System.out.println("%%%%% Invalid Play %%%%%");
     }
 
 

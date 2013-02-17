@@ -19,9 +19,17 @@ public class Player implements DominoPlayer {
 
 
     public dominoes.Play makePlay(dominoes.Table table) throws dominoes.CantPlayException{
+        Play thePlay=chooseMove(table);
+        if (thePlay==null) throw new dominoes.CantPlayException();
+        hand.remove(thePlay.bone());
+        return thePlay;
+    }
+
+    public dominoes.Play chooseMove(dominoes.Table table){
         //not implemented yet
         return null;
     }
+
 
     public void takeBack(dominoes.Bone bone){
         hand.add(bone);
