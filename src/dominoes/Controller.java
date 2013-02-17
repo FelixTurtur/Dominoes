@@ -10,8 +10,11 @@ import dominoes.players.ComputerPlayer;
  * Time: 14:49
  */
 public class Controller {
-
     //controls the running of the program
+
+    //parameters
+    static int targetScore=50;
+    static int maxpips=6;
 
     public static void main(String [ ] args)
     {
@@ -21,7 +24,7 @@ public class Controller {
         players[0].setName("Player 1");
         players[1].setName("Player 2");
 
-        Dominoes dominoes=new Dominoes(ui,players[0],players[1],50,6);
+        Dominoes dominoes=new Dominoes(ui,players[0],players[1],targetScore,maxpips);
         dominoes.play();
     }
 

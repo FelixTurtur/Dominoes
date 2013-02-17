@@ -15,7 +15,7 @@
     <file path="/Player.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361130889852" ignored="false" />
     <file path="/UI.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361120239340" ignored="false" />
     <file path="/test.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361110275486" ignored="false" />
-    <file path="/Controller.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361117400936" ignored="false" />
+    <file path="/Controller.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361140045226" ignored="false" />
     <file path="/PossiblePlay.java" changelist="a39aa89a-80ff-4d95-a808-266bf41bfac2" time="1361124737370" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -129,17 +129,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PossiblePlay.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/dominoes/players/PossiblePlay.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="43" selection-start="139" selection-end="139" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Player.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/dominoes/players/Player.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -165,11 +154,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.txt" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="README.txt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="44" selection-start="1711" selection-end="1711" vertical-scroll-proportion="0.8782344">
+            <state line="28" column="55" selection-start="1296" selection-end="1296" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Controller.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/dominoes/Controller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="29" selection-start="320" selection-end="320" vertical-scroll-proportion="0.4870624">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -202,13 +202,13 @@
         <option value="$PROJECT_DIR$/src/dominoes/players/HumanPlayer.java" />
         <option value="$PROJECT_DIR$/src/dominoes/players/PlayerHand.java" />
         <option value="$PROJECT_DIR$/src/dominoes/players/test.java" />
-        <option value="$PROJECT_DIR$/src/dominoes/Controller.java" />
         <option value="$PROJECT_DIR$/src/dominoes/PossiblePlay.java" />
         <option value="$PROJECT_DIR$/src/dominoes/players/PossiblePlay.java" />
         <option value="$PROJECT_DIR$/src/dominoes/UI.java" />
         <option value="$PROJECT_DIR$/src/dominoes/players/Player.java" />
         <option value="$PROJECT_DIR$/src/dominoes/players/ComputerPlayer.java" />
         <option value="$PROJECT_DIR$/README.txt" />
+        <option value="$PROJECT_DIR$/src/dominoes/Controller.java" />
       </list>
     </option>
   </component>
@@ -760,15 +760,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dominoes/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="26" selection-start="572" selection-end="572" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/dominoes/Play.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="13" selection-start="151" selection-end="151" vertical-scroll-proportion="0.0">
@@ -871,8 +862,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="44" selection-start="1711" selection-end="1711" vertical-scroll-proportion="0.8782344">
+        <state line="28" column="55" selection-start="1296" selection-end="1296" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dominoes/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="29" selection-start="320" selection-end="320" vertical-scroll-proportion="0.4870624">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
