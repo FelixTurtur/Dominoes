@@ -17,7 +17,7 @@ local.properties
 .loadpath
 
 #IntelliJ Workspace
-*workspace.xml
+.workspace.xml
 
 # External tool builders
 .externalToolBuilders/
