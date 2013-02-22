@@ -30,7 +30,6 @@ public class ComputerPlayer extends Player {
         }
 
         return thePlay;
-
     }
 
      private List<PossiblePlay> findLegalMoves(dominoes.Table table){
@@ -43,7 +42,6 @@ public class ComputerPlayer extends Player {
                  legalMoves.add(new PossiblePlay(hand.get(i),Play.RIGHT,false));
              }
              if (hand.get(i).left()== table.right()){
-
                  legalMoves.add(new PossiblePlay(hand.get(i),Play.RIGHT,true));
              }
              if (hand.get(i).left()== table.left()){
