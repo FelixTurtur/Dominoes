@@ -11,7 +11,6 @@ public class UI implements DominoUI {
         private Artist artist;
     UI(){
         artist=Artist.getInstance();
-
     }
 
     public void display(dominoes.players.DominoPlayer[] dominoPlayers, dominoes.Table table, dominoes.BoneYard boneYard){
@@ -20,13 +19,11 @@ public class UI implements DominoUI {
         drawScoreBoard(dominoPlayers);
         drawBoneYard(boneYard);
 
-
         drawTable(table);
 
         //for now - let's display both players hands
         drawHand(dominoPlayers[0]);
         drawHand(dominoPlayers[1]);
-
 
     }
 
@@ -61,10 +58,11 @@ public class UI implements DominoUI {
 
     private void drawTable(Table table){
         Bone[] bones=table.layout();
+
         System.out.println("");
-        for (int i=0; i<bones.length;i++){
+        for (int i=0,n=0; i<bones.length;i++,n++){
             drawTextBone(bones[i]);
-            artist.drawBone(125*i,40,bones[i]);
+            artist.drawBone(10+125*n,40,bones[i]);
             System.out.print(" ");
         }
         System.out.println("");

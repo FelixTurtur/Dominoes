@@ -12,6 +12,10 @@ import javax.swing.*;
 
 public class Artist extends Canvas {
     private static Artist instance=null;
+    int windowWidth=1400;
+    int windowHeight=800;
+    int size=120;     //domino size
+
     private Graphics graphics;
     public static Artist getInstance(){
         if (instance==null){
@@ -23,7 +27,7 @@ public class Artist extends Canvas {
 
     private void setupCanvas (){
         JFrame frame = new JFrame();
-        frame.setSize(1400, 800);
+        frame.setSize(windowWidth, windowHeight);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(instance);
         frame.setVisible(true);
@@ -32,15 +36,16 @@ public class Artist extends Canvas {
     }
 
     public void drawBone(int x,int y,Bone bone){
-        int size=120;
         graphics.setColor(Color.black);
-        graphics.fillRoundRect(x, y, size,size/2,size/24,size/24);
+        graphics.fillRoundRect(x, y, size,size/2,size/20,size/20);
         drawPips(bone.left(),x,y,size);
         graphics.setColor(Color.white);
         graphics.drawLine(x+size/2, y, x+size/2, y+size/2);
         drawPips(bone.right(),x+size/2,y,size);
-
     }
+
+
+
 
     private void drawPips(int num,int x,int y,int size){
         switch(num){
