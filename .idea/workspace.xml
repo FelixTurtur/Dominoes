@@ -127,7 +127,7 @@
       <file leaf-file-name="UI.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/dominoes/UI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="60" selection-start="2832" selection-end="2832" vertical-scroll-proportion="0.53608245">
+            <state line="81" column="50" selection-start="2616" selection-end="2616" vertical-scroll-proportion="0.69072163">
               <folding />
             </state>
           </provider>
@@ -861,7 +861,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/dominoes/UI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="60" selection-start="2832" selection-end="2832" vertical-scroll-proportion="0.53608245">
+        <state line="81" column="50" selection-start="2616" selection-end="2616" vertical-scroll-proportion="0.69072163">
           <folding />
         </state>
       </provider>

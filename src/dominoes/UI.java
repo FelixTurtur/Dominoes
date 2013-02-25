@@ -65,10 +65,10 @@ public class UI implements DominoUI {
             drawTextBone(bones[i]);
             if ((i>3) && (i<bones.length-4)){
                 i=bones.length-5;
-                artist.drawDashes(10+125*n,y+30);
+                artist.drawDashes(10+130*n,y+30);
             }
             else{
-                artist.drawBone(10+125*n,y,bones[i]);
+                artist.drawBone(10+130*n,y,bones[i]);
             }
             System.out.print(" ");
         }
@@ -82,7 +82,7 @@ public class UI implements DominoUI {
             Bone[] bones=players[n].bonesInHand();
             System.out.print(players[n].getName() + "'s hand:  ");
             for (int i=0; i<bones.length;i++){
-                artist.drawBone(10+125*i,500+n*100,bones[i]);
+                artist.drawBone(10+130*i,500+n*100,bones[i]);
                 drawTextBone(bones[i]);
                 System.out.print(" ");
             }
