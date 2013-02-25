@@ -1,5 +1,6 @@
 package dominoes;
 
+
 /**
  * Created with IntelliJ IDEA.
  * User: nick
@@ -7,19 +8,22 @@ package dominoes;
  * Time: 22:57
  */
 public class UI implements DominoUI {
+        private Artist artist;
+    UI(){
+        artist=Artist.getInstance();
+    }
+
     public void display(dominoes.players.DominoPlayer[] dominoPlayers, dominoes.Table table, dominoes.BoneYard boneYard){
         System.out.println("************************************************************************************");
         System.out.println("");
         drawScoreBoard(dominoPlayers);
         drawBoneYard(boneYard);
 
-
         drawTable(table);
 
         //for now - let's display both players hands
         drawHand(dominoPlayers[0]);
         drawHand(dominoPlayers[1]);
-
 
     }
 
@@ -54,9 +58,11 @@ public class UI implements DominoUI {
 
     private void drawTable(Table table){
         Bone[] bones=table.layout();
+
         System.out.println("");
-        for (int i=0; i<bones.length;i++){
-            drawBone(bones[i]);
+        for (int i=0,n=0; i<bones.length;i++,n++){
+            drawTextBone(bones[i]);
+            artist.drawBone(10+125*n,40,bones[i]);
             System.out.print(" ");
         }
         System.out.println("");
@@ -68,14 +74,15 @@ public class UI implements DominoUI {
         Bone[] bones=player.bonesInHand();
         System.out.print(player.getName() + "'s hand:  ");
         for (int i=0; i<bones.length;i++){
-            drawBone(bones[i]);
+
+            drawTextBone(bones[i]);
             System.out.print(" ");
         }
         System.out.println("");
         System.out.println("");
     }
 
-    private void drawBone(Bone b){
+    private void drawTextBone(Bone b){
         System.out.print("[" + b.left() + "|" + b.right() +"]" );
     }
 
