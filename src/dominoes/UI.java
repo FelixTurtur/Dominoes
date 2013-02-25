@@ -23,8 +23,8 @@ public class UI implements DominoUI {
         drawTable(table);
 
         //for now - let's display both players hands
-        drawHand(dominoPlayers[0]);
-        drawHand(dominoPlayers[1]);
+        drawHands(dominoPlayers);
+
 
     }
 
@@ -76,17 +76,19 @@ public class UI implements DominoUI {
         System.out.println("");
     }
 
-    private void drawHand(dominoes.players.DominoPlayer player){
+    private void drawHands(dominoes.players.DominoPlayer[] players){
         System.out.println("");
-        Bone[] bones=player.bonesInHand();
-        System.out.print(player.getName() + "'s hand:  ");
-        for (int i=0; i<bones.length;i++){
-
-            drawTextBone(bones[i]);
-            System.out.print(" ");
+        for (int n=0; n<players.length;n++){
+            Bone[] bones=players[n].bonesInHand();
+            System.out.print(players[n].getName() + "'s hand:  ");
+            for (int i=0; i<bones.length;i++){
+                artist.drawBone(10+125*i,500+n*100,bones[i]);
+                drawTextBone(bones[i]);
+                System.out.print(" ");
+            }
+            System.out.println("");
+            System.out.println("");
         }
-        System.out.println("");
-        System.out.println("");
     }
 
     private void drawTextBone(Bone b){
