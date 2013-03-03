@@ -14,6 +14,7 @@ public class UI implements DominoUI {
     }
 
     public void display(dominoes.players.DominoPlayer[] dominoPlayers, dominoes.Table table, dominoes.BoneYard boneYard){
+        artist.clearCanvas();
         System.out.println("************************************************************************************");
         System.out.println("");
         drawScoreBoard(dominoPlayers);
@@ -22,15 +23,15 @@ public class UI implements DominoUI {
         drawTable(table);
 
         //for now - let's display both players hands
-        drawHand(dominoPlayers[0]);
-        drawHand(dominoPlayers[1]);
+        drawHands(dominoPlayers);
+
 
     }
 
     public void displayRoundWinner(dominoes.players.DominoPlayer dominoPlayer){
         System.out.println("");
         System.out.println("************************************************");
-        System.out.println(dominoPlayer.getName() + "wins the round!" );
+        System.out.println(dominoPlayer.getName() + " wins the round!" );
         System.out.println("************************************************");
         System.out.println("");
     }
@@ -58,28 +59,36 @@ public class UI implements DominoUI {
 
     private void drawTable(Table table){
         Bone[] bones=table.layout();
-
+        int y=300; //y position of domino line
         System.out.println("");
         for (int i=0,n=0; i<bones.length;i++,n++){
             drawTextBone(bones[i]);
-            artist.drawBone(10+125*n,40,bones[i]);
+            if ((i>3) && (i<bones.length-4)){
+                i=bones.length-5;
+                artist.drawDashes(10+130*n,y+30);
+            }
+            else{
+                artist.drawBone(10+130*n,y,bones[i]);
+            }
             System.out.print(" ");
         }
         System.out.println("");
         System.out.println("");
     }
 
-    private void drawHand(dominoes.players.DominoPlayer player){
+    private void drawHands(dominoes.players.DominoPlayer[] players){
         System.out.println("");
-        Bone[] bones=player.bonesInHand();
-        System.out.print(player.getName() + "'s hand:  ");
-        for (int i=0; i<bones.length;i++){
-
-            drawTextBone(bones[i]);
-            System.out.print(" ");
+        for (int n=0; n<players.length;n++){
+            Bone[] bones=players[n].bonesInHand();
+            System.out.print(players[n].getName() + "'s hand:  ");
+            for (int i=0; i<bones.length;i++){
+                artist.drawBone(10+130*i,500+n*100,bones[i]);
+                drawTextBone(bones[i]);
+                System.out.print(" ");
+            }
+            System.out.println("");
+            System.out.println("");
         }
-        System.out.println("");
-        System.out.println("");
     }
 
     private void drawTextBone(Bone b){

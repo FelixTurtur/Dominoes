@@ -15,6 +15,7 @@ public class Artist extends Canvas {
     int windowWidth=1400;
     int windowHeight=800;
     int size=120;     //domino size
+    JFrame frame;
 
     private Graphics graphics;
     public static Artist getInstance(){
@@ -25,13 +26,27 @@ public class Artist extends Canvas {
         return instance;
     }
 
+    public void drawDashes(int x, int y){
+        for (int i=0;i<5;i=i+2){
+            graphics.setColor(Color.black);
+            graphics.fillRoundRect(10+x+20*i,y,20,5,2,2);
+
+        }
+    }
+
     private void setupCanvas (){
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setSize(windowWidth, windowHeight);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(instance);
         frame.setVisible(true);
         graphics=getGraphics();
+
+    }
+
+    public void clearCanvas(){
+        graphics.setColor(Color.gray);
+        graphics.fillRect(0, 0, windowWidth, windowHeight);
 
     }
 
