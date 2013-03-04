@@ -57,13 +57,13 @@ public class ComputerPlayer extends Player {
 
     private Play examineMoveScores(List<PossiblePlay> legalMoves){
         Play thePlay;
-        int highscore=0;
+        int highScore=0;
         int bestPlay=0;
 
         for (int i=0; i<legalMoves.size();i++){
             int theScore=legalMoves.get(i).getScore();
-            if ( theScore>highscore){
-                highscore=theScore;
+            if ( theScore>highScore){
+                highScore=theScore;
                 bestPlay=i;
             }
         }
