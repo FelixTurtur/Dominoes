@@ -21,7 +21,7 @@ public class Artist extends Container {
     public static Artist getInstance(){
         if (instance == null){
             instance = new Artist();
-            instance.setupCanvas();
+            instance.setupTable();
         }
         return instance;
     }
@@ -34,9 +34,10 @@ public class Artist extends Container {
         }
     }
 
-    private void setupCanvas (){
+    private void setupTable(){
         frame = new JFrame("Awesome Dominoes");
         frame.setSize(windowWidth, windowHeight);
+        //TODO EXIT will close entire application. We want to add in a popup "Are you sure?" window, I reckon
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(instance);
         frame.setVisible(true);
@@ -44,15 +45,7 @@ public class Artist extends Container {
 
     }
 
-    public void clearCanvas(){
-        /*[AJ] If you look in the Swing declaration of Canvas, the "reset" function is in the paint method
-        * that is overwritten, but by standard is:
-        *   public void paint(Graphics g) {
-            g.clearRect(0, 0, width, height);
-            }
-        * This fills the canvas with the background colour again.
-        * Should we actually be using a canvas rather than a container?
-        */
+    public void clearTable(){
         graphics.setColor(Color.gray);
         graphics.fillRect(0, 0, windowWidth, windowHeight);
 
@@ -66,8 +59,6 @@ public class Artist extends Container {
         graphics.drawLine(x+size/2, y, x+size/2, y+size/2);
         drawPips(bone.right(),x+size/2,y,size);
     }
-
-
 
 
     private void drawPips(int num,int x,int y,int size){

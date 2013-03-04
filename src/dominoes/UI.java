@@ -14,7 +14,7 @@ public class UI implements DominoUI {
     }
 
     public void display(dominoes.players.DominoPlayer[] dominoPlayers, dominoes.Table table, dominoes.BoneYard boneYard){
-        artist.clearCanvas();
+        artist.clearTable();
         System.out.println("************************************************************************************");
         System.out.println("");
         drawScoreBoard(dominoPlayers);
@@ -51,6 +51,9 @@ public class UI implements DominoUI {
     }
 
     private void drawBoneYard(BoneYard boneYard){
+        //TODO Draw this in the game window
+        //TODO Put this in a frame above the top hand, in the right hand corner.
+        //TODO Game option buttons will be on the left of the same frame.
         System.out.println("");
         System.out.println("Boneyard [ " + boneYard.size() + " ]");
         System.out.println("");
@@ -58,7 +61,10 @@ public class UI implements DominoUI {
 
 
     private void drawTable(Table table){
-        Bone[] bones=table.layout();
+        //Draws the line of dominoes that have so far been played this round.
+        //Includes ellipse in the middle to limit the total number to a viewable amount
+        //TODO Put this into a frame central within the master frame.
+        Bone[] bones = table.layout();
         int y=300; //y position of domino line
         System.out.println("");
         for (int i=0,n=0; i<bones.length;i++,n++){
@@ -77,6 +83,9 @@ public class UI implements DominoUI {
     }
 
     private void drawHands(dominoes.players.DominoPlayer[] players){
+        //Represent the domino hands each player has.
+        //Consider visible/not visible to human player
+        //TODO Put each into a frame above and below the central table frame within parent frame
         System.out.println("");
         for (int n=0; n<players.length;n++){
             Bone[] bones=players[n].bonesInHand();
