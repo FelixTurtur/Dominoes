@@ -13,9 +13,18 @@ import java.util.List;
  */
 public class Player implements DominoPlayer {
 
-    private String name="new player";
-    private int points=0;
+    private String name = "new player";
+    private int points = 0;
     protected List<Bone> hand = new LinkedList<Bone>();
+    protected Boolean isHuman;
+
+    protected void detectLifeform() {
+        isHuman = true;
+    }
+
+    public Boolean isHuman() {
+        return isHuman;
+    }
 
 
     public dominoes.Play makePlay(dominoes.Table table) throws dominoes.CantPlayException{
@@ -64,13 +73,12 @@ public class Player implements DominoPlayer {
         return points;
     }
 
-    public void setName(java.lang.String s){
+    public void setName(String s){
         name=s;
     }
 
-    public java.lang.String getName(){
+    public String getName(){
         return name;
     }
-
 
 }

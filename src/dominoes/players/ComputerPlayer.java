@@ -14,6 +14,10 @@ import java.util.List;
 
 public class ComputerPlayer extends Player {
 
+    protected void detectLifeform() {
+        isHuman = false;
+    }
+
     protected dominoes.Play chooseMove(dominoes.Table table){
         Play thePlay=null;
         List<PossiblePlay> legalMoves=findLegalMoves(table);

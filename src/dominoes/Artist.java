@@ -51,6 +51,15 @@ public class Artist extends Container {
 
     }
 
+    public void drawBone(int x,int y,Bone bone, String playerType){
+        if (playerType == "Player") {
+            drawBone(x,y,bone);
+        } else {
+            //TODO drawHiddenBone; //will replace below line when ready
+            drawBone(x,y,bone);
+        }
+    }
+
     public void drawBone(int x,int y,Bone bone){
         graphics.setColor(Color.black);
         graphics.fillRoundRect(x, y, size,size/2,size/20,size/20);

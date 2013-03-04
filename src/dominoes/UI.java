@@ -86,12 +86,15 @@ public class UI implements DominoUI {
         //Represent the domino hands each player has.
         //Consider visible/not visible to human player
         //TODO Put each into a frame above and below the central table frame within parent frame
+        //Within each human hand, in order for the dominoes to be selectable, they will need to sit in a frame
+        //This frame can glow when mouse-over events happen and playBone when clicked.
         System.out.println("");
+        // When is players.length not 2?
         for (int n=0; n<players.length;n++){
             Bone[] bones=players[n].bonesInHand();
             System.out.print(players[n].getName() + "'s hand:  ");
             for (int i=0; i<bones.length;i++){
-                artist.drawBone(10+130*i,500+n*100,bones[i]);
+                artist.drawBone(10+130*i,500+n*100,bones[i], players[n].getClass().getName());
                 drawTextBone(bones[i]);
                 System.out.print(" ");
             }

@@ -17,6 +17,8 @@ public class Controller {
 
     public static void main(String [ ] args)
     {
+        // TODO Because we're so good we could have a text or GUI option for the game with text only or
+        // glorious, colourful dominoes. What do you think?
         UI ui = new UI();
 
         Player[] players = {new ComputerPlayer(),new ComputerPlayer()};
