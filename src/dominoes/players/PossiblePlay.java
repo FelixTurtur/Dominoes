@@ -13,9 +13,12 @@ import dominoes.Bone;
 public class PossiblePlay {
     private Play play;
     private boolean flipped = false;
-
+    private int score; //used for computer player routine to score the possible moves to pick a better option
+    private static int doubleWeighting=5; //bias to add if the bone is a double since it is harder to get rid of
 
     PossiblePlay(Bone bone, int end, boolean flip) {
+        score=bone.right()+bone.left();
+        if (bone.right()==bone.left()) score=score+doubleWeighting;
         flipped = flip;
         play = new Play(bone, end);
     }
@@ -30,5 +33,16 @@ public class PossiblePlay {
     public Play getPlay() {
         return play;
     }
+
+    public int getScore(){
+        return score;
+    }
+
+    public void addToScore(int i){
+        score=score+i;
+    }
+
+
+
 
 }
