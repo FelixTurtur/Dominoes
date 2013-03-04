@@ -1,5 +1,4 @@
 package dominoes;
-import javax.swing.*;
 import java.awt.*;
 /**
  * Created with IntelliJ IDEA.
@@ -10,12 +9,12 @@ import java.awt.*;
 
 // OK, I think this bit should be a singleton but can't work out how to do it and still run the constructor inherited from the parent class.
 
-public class Artist extends Container {
+public class Artist extends Canvas {
     private static Artist instance = getInstance();
     int windowWidth = 1400;
     int windowHeight = 800;
     int size = 120;     //domino size
-    JFrame frame;
+    FramePanels frame;
     private Graphics graphics;
 
     public static Artist getInstance(){
@@ -35,19 +34,15 @@ public class Artist extends Container {
     }
 
     private void setupTable(){
-        frame = new JFrame("Awesome Dominoes");
-        frame.setSize(windowWidth, windowHeight);
-        //TODO EXIT will close entire application. We want to add in a popup "Are you sure?" window, I reckon
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(instance);
-        frame.setVisible(true);
+        frame = new FramePanels("Awesome Dominoes", windowWidth, windowHeight);
+        frame.tableArea.add(instance);
         graphics = getGraphics();
-
     }
 
     public void clearTable(){
         graphics.setColor(Color.gray);
         graphics.fillRect(0, 0, windowWidth, windowHeight);
+        frame.tableArea.update(graphics);
 
     }
 
