@@ -216,3 +216,10 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+
+######################
+## Dominoes specific
+######################
+out/
+.idea/workspace.xml

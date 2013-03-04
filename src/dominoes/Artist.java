@@ -1,6 +1,6 @@
 package dominoes;
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 /**
  * Created with IntelliJ IDEA.
  * User: nick
@@ -10,18 +10,18 @@ import javax.swing.*;
 
 // OK, I think this bit should be a singleton but can't work out how to do it and still run the constructor inherited from the parent class.
 
-public class Artist extends Canvas {
-    private static Artist instance=null;
-    int windowWidth=1400;
-    int windowHeight=800;
-    int size=120;     //domino size
+public class Artist extends Container {
+    private static Artist instance = getInstance();
+    int windowWidth = 1400;
+    int windowHeight = 800;
+    int size = 120;     //domino size
     JFrame frame;
-
     private Graphics graphics;
+
     public static Artist getInstance(){
-        if (instance==null){
-            instance=new Artist();
-            instance.setupCanvas();
+        if (instance == null){
+            instance = new Artist();
+            instance.setupTable();
         }
         return instance;
     }
@@ -34,20 +34,30 @@ public class Artist extends Canvas {
         }
     }
 
-    private void setupCanvas (){
-        frame = new JFrame();
+    private void setupTable(){
+        frame = new JFrame("Awesome Dominoes");
         frame.setSize(windowWidth, windowHeight);
+        //TODO EXIT will close entire application. We want to add in a popup "Are you sure?" window, I reckon
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(instance);
         frame.setVisible(true);
-        graphics=getGraphics();
+        graphics = getGraphics();
 
     }
 
-    public void clearCanvas(){
+    public void clearTable(){
         graphics.setColor(Color.gray);
         graphics.fillRect(0, 0, windowWidth, windowHeight);
 
+    }
+
+    public void drawBone(int x,int y,Bone bone, String playerType){
+        if (playerType == "Player") {
+            drawBone(x,y,bone);
+        } else {
+            //TODO drawHiddenBone; //will replace below line when ready
+            drawBone(x,y,bone);
+        }
     }
 
     public void drawBone(int x,int y,Bone bone){
@@ -58,8 +68,6 @@ public class Artist extends Canvas {
         graphics.drawLine(x+size/2, y, x+size/2, y+size/2);
         drawPips(bone.right(),x+size/2,y,size);
     }
-
-
 
 
     private void drawPips(int num,int x,int y,int size){
@@ -114,7 +122,6 @@ public class Artist extends Canvas {
         graphics.fillOval(x+10, y+40, size/12, size/12);
         graphics.fillOval(x+40, y+40, size/12, size/12);
     }
-
 
     private void drawSix(int x,int y,int size){
         graphics.setColor(Color.yellow);
