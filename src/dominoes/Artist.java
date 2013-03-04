@@ -10,7 +10,7 @@ import java.awt.*;
 
 // OK, I think this bit should be a singleton but can't work out how to do it and still run the constructor inherited from the parent class.
 
-public class Artist extends Canvas {
+public class Artist extends Container {
     private static Artist instance = getInstance();
     int windowWidth = 1400;
     int windowHeight = 800;
