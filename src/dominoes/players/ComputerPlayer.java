@@ -1,6 +1,7 @@
 package dominoes.players;
 
 import dominoes.Play;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class ComputerPlayer extends Player {
         return thePlay;
     }
 
-     private List<PossiblePlay> findLegalMoves(dominoes.Table table){
+    private List<PossiblePlay> findLegalMoves(dominoes.Table table){
          List<PossiblePlay> legalMoves=new LinkedList<PossiblePlay>();
          for (int i=0; i<hand.size();i++){
              if (hand.get(i).right()== table.left()){
@@ -50,4 +51,5 @@ public class ComputerPlayer extends Player {
          }
          return legalMoves;
      }
+
 }

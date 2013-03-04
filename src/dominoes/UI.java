@@ -8,9 +8,9 @@ package dominoes;
  * Time: 22:57
  */
 public class UI implements DominoUI {
-        private Artist artist;
+    private Artist artist;
     UI(){
-        artist=Artist.getInstance();
+        artist = Artist.getInstance();
     }
 
     public void display(dominoes.players.DominoPlayer[] dominoPlayers, dominoes.Table table, dominoes.BoneYard boneYard){

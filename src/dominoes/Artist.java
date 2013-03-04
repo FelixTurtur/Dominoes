@@ -1,6 +1,6 @@
 package dominoes;
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 /**
  * Created with IntelliJ IDEA.
  * User: nick
@@ -11,16 +11,16 @@ import javax.swing.*;
 // OK, I think this bit should be a singleton but can't work out how to do it and still run the constructor inherited from the parent class.
 
 public class Artist extends Canvas {
-    private static Artist instance=null;
-    int windowWidth=1400;
-    int windowHeight=800;
-    int size=120;     //domino size
+    private static Artist instance = getInstance();
+    int windowWidth = 1400;
+    int windowHeight = 800;
+    int size = 120;     //domino size
     JFrame frame;
-
     private Graphics graphics;
+
     public static Artist getInstance(){
-        if (instance==null){
-            instance=new Artist();
+        if (instance == null){
+            instance = new Artist();
             instance.setupCanvas();
         }
         return instance;
@@ -35,16 +35,24 @@ public class Artist extends Canvas {
     }
 
     private void setupCanvas (){
-        frame = new JFrame();
+        frame = new JFrame("Awesome Dominoes");
         frame.setSize(windowWidth, windowHeight);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(instance);
         frame.setVisible(true);
-        graphics=getGraphics();
+        graphics = getGraphics();
 
     }
 
     public void clearCanvas(){
+        /*[AJ] If you look in the Swing declaration of Canvas, the "reset" function is in the paint method
+        * that is overwritten, but by standard is:
+        *   public void paint(Graphics g) {
+            g.clearRect(0, 0, width, height);
+            }
+        * This fills the canvas with the background colour again.
+        * Should we actually be using a canvas rather than a container?
+        */
         graphics.setColor(Color.gray);
         graphics.fillRect(0, 0, windowWidth, windowHeight);
 
@@ -114,7 +122,6 @@ public class Artist extends Canvas {
         graphics.fillOval(x+10, y+40, size/12, size/12);
         graphics.fillOval(x+40, y+40, size/12, size/12);
     }
-
 
     private void drawSix(int x,int y,int size){
         graphics.setColor(Color.yellow);
