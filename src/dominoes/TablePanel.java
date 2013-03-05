@@ -1,7 +1,5 @@
 package dominoes;
 
-import dominoes.players.DominoPlayer;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -46,7 +44,7 @@ public class TablePanel extends JPanel {
                 drawDashes(10 + 130 * n, y + 30, graphics);
             }
             else{
-                BoneDrawer boneDrawer = new BoneDrawer(bones[i]);
+                BoneDrawer boneDrawer = new BoneDrawer(bones[i], "");
                 boneDrawer.drawBone(10 + 130 * n, y, graphics);
             }
             System.out.print(" ");
