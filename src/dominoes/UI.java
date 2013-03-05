@@ -17,11 +17,6 @@ public class UI implements DominoUI {
 
     public void display(dominoes.players.DominoPlayer[] dominoPlayers, dominoes.Table table, dominoes.BoneYard boneYard){
 
-        //TODO find a better way of doing this that passing the below to the artist with every call to paint
-        artist.setTable(table);
-        artist.setDominoPlayers(dominoPlayers);
-        artist.setBoneYard(boneYard);
-
         System.out.println("************************************************************************************");
         System.out.println("");
         drawScoreBoard(dominoPlayers);
@@ -30,7 +25,8 @@ public class UI implements DominoUI {
         //drawTable(table);
 
         //drawHands(dominoPlayers);
-        artist.repaint();
+        artist.updateScreen(table, dominoPlayers, boneYard);
+        //artist.repaint();
 
     }
 

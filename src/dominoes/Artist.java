@@ -20,61 +20,58 @@ import java.awt.event.ActionListener;
 public class Artist extends JFrame implements ActionListener {
 
     JPanel menuBar;
+    PlayerHandPanel player1Hand;
     PlayerHandPanel player2Hand;
     TablePanel tableArea;
     JPanel infoText;
-    PlayerHandPanel player1Hand;
     JButton newGame;
     JButton exitGame;
     static Artist instance;
     int windowWidth=1400;
     int windowHeight=800;
     int size=120; //size of bones
-    Table table;
     BoneYard boneYard;
-    DominoPlayer[] dominoPlayers;
 
     private Artist() {
         super("Awesome Dominoes");
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(windowWidth, windowHeight);
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
-        setMenuBar(eb1, windowWidth, windowHeight/5);
+        setupMenuBar(eb1, windowWidth, windowHeight/5);
+
+        player1Hand = new PlayerHandPanel(new FlowLayout());
+        setupPlayerHand(player1Hand, eb1);
         player2Hand = new PlayerHandPanel(new FlowLayout());
-        player2Hand.setBackground(Color.lightGray);
-        player2Hand.setSize(windowWidth,windowHeight/5);
-        player2Hand.setBorder(eb1);
-        add(player2Hand);
+        setupPlayerHand(player2Hand, eb1);
+
         tableArea = new TablePanel(new FlowLayout());
-        tableArea.setBackground(Color.gray);
-        tableArea.setSize(windowWidth,windowHeight/4);
-        tableArea.setBorder(eb1);
-        add(tableArea);
+        setupTableArea(eb1);
         infoText = new JPanel(new FlowLayout());
+        setupInfoText(eb1);
+    }
+
+    private void setupInfoText(EtchedBorder eb1) {
         infoText.setBackground(Color.lightGray);
-        infoText.setSize(windowWidth,windowHeight*3/20);
+        infoText.setSize(windowWidth, windowHeight * 3 / 20);
         infoText.setBorder(eb1);
         add(infoText);
-        player1Hand = new PlayerHandPanel(new FlowLayout());
-        player1Hand.setBackground(Color.gray);
-        player1Hand.setSize(windowWidth,windowHeight/5);
-        player1Hand.setBorder(eb1);
-        add(player1Hand);
     }
 
-    public void setTable(Table t){
-        table=t;
+    private void setupTableArea(EtchedBorder eb1) {
+        tableArea.setBackground(Color.gray);
+        tableArea.setSize(windowWidth, windowHeight / 4);
+        tableArea.setBorder(eb1);
+        add(tableArea);
     }
 
-    public void setDominoPlayers(dominoes.players.DominoPlayer[] dp){
-            dominoPlayers=dp;
-    }
-    public void setBoneYard(BoneYard by){
-            boneYard=by;
+    private void setupPlayerHand(PlayerHandPanel panel, EtchedBorder eb1) {
+        panel.setBackground(Color.gray);
+        panel.setSize(windowWidth,windowHeight/5);
+        panel.setBorder(eb1);
+        add(panel);
     }
 
-
-    private void setMenuBar(EtchedBorder eb, int x, int y) {
+    private void setupMenuBar(EtchedBorder eb, int x, int y) {
         //Creates menu bar with chosen settings and all components required
         menuBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
         menuBar.setBackground(Color.gray);
@@ -101,13 +98,7 @@ public class Artist extends JFrame implements ActionListener {
     }
 
     public void paint(Graphics graphics){
-
-        //TODO work out how to set this up better so that we are not setting this on each run of this method!
-        player1Hand.setPlayer(dominoPlayers[0]);
-        player2Hand.setPlayer(dominoPlayers[1]);
-        tableArea.setTable(table);
         super.paint(graphics);
-
     }
 
     public static Artist getInstance(){
@@ -118,8 +109,27 @@ public class Artist extends JFrame implements ActionListener {
         return instance;
     }
 
+    private void setTable(Table table){
+        tableArea.setTable(table);
+    }
 
+    private void setDominoPlayers(dominoes.players.DominoPlayer[] dominoPlayers){
+        player1Hand.setPlayer(dominoPlayers[0]);
+        player2Hand.setPlayer(dominoPlayers[1]);
+    }
 
+    private void setBoneYard(BoneYard boneYard){
+        this.boneYard = boneYard;
+    }
+
+    // Update state of Artist prior to redraw
+    public void updateScreen(Table table, DominoPlayer[] dominoPlayers, BoneYard boneYard) {
+        this.setTable(table);
+        this.setDominoPlayers(dominoPlayers);
+        this.setBoneYard(boneYard);
+
+        this.repaint();
+    }
 }
 
 
