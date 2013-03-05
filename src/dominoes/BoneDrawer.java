@@ -6,14 +6,29 @@ public class BoneDrawer {
 
     private Bone bone;
 
+    private String playerType;
+
     private int size = 120;
 
-    public BoneDrawer(Bone bone) {
+    public BoneDrawer(Bone bone, String playerType) {
         this.bone = bone;
+        this.playerType = playerType;
     }
 
     public void drawBone(int x, int y, Graphics graphics) {
-        //TODO get it to draw something else for non human player type
+        if (playerType == "Player") {
+            drawPlayerBone(x, y, graphics);
+        } else {
+            drawHiddenBone(x, y, graphics);
+        }
+    }
+
+    private void drawHiddenBone(int x, int y, Graphics graphics) {
+        // TODO - implement this method to do something different
+        drawPlayerBone(x, y, graphics);
+    }
+
+    private void drawPlayerBone(int x, int y, Graphics graphics) {
         drawBackground(x, y, graphics);
         drawPips(bone.left(), x, y, graphics);
         drawMidLine(x, y, graphics);
