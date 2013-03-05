@@ -24,8 +24,7 @@ public class ComputerPlayer extends Player {
 
         //for now just go with first possible move.
         if (legalMoves.size()>0){
-            legalMoves.get(0).flipIfNeeded();
-            thePlay=legalMoves.get(0).getPlay();
+            thePlay=examineMoveScores(legalMoves);
         }
 
         // Pause so that we can watch the computer play
@@ -56,4 +55,21 @@ public class ComputerPlayer extends Player {
          return legalMoves;
      }
 
+    private Play examineMoveScores(List<PossiblePlay> legalMoves){
+        Play thePlay;
+        int highScore=0;
+        int bestPlay=0;
+
+        for (int i=0; i<legalMoves.size();i++){
+            int theScore=legalMoves.get(i).getScore();
+            if ( theScore>highScore){
+                highScore=theScore;
+                bestPlay=i;
+            }
+        }
+        legalMoves.get(bestPlay).flipIfNeeded();
+        thePlay=legalMoves.get(bestPlay).getPlay();
+
+        return thePlay;
+    }
 }

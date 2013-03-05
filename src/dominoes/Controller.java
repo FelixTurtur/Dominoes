@@ -17,8 +17,12 @@ public class Controller {
 
     public static void main(String [ ] args)
     {
+
         // TODO Because we're so good we could have a text or GUI option for the game with text only or
         // glorious, colourful dominoes. What do you think?
+        // Yep, text version can also double as our testing classes  - NM
+
+
         UI ui = new UI();
 
         Player[] players = {new ComputerPlayer(),new ComputerPlayer()};
@@ -27,6 +31,7 @@ public class Controller {
 
         Dominoes dominoes = new Dominoes(ui, players[0], players[1], targetScore, maxpips);
         dominoes.play();
+
     }
 
 }
