@@ -11,20 +11,26 @@ public class UI implements DominoUI {
     private Artist artist;
     UI(){
         artist = Artist.getInstance();
+        artist.setVisible(true);
+
     }
 
     public void display(dominoes.players.DominoPlayer[] dominoPlayers, dominoes.Table table, dominoes.BoneYard boneYard){
-        artist.clearTable();
+
+        //TODO find a better way of doing this that passing the below to the artist with every call to paint
+        artist.setTable(table);
+        artist.setDominoPlayers(dominoPlayers);
+        artist.setBoneYard(boneYard);
+
         System.out.println("************************************************************************************");
         System.out.println("");
         drawScoreBoard(dominoPlayers);
         drawBoneYard(boneYard);
 
-        drawTable(table);
+        //drawTable(table);
 
-        //for now - let's display both players hands
-        drawHands(dominoPlayers);
-
+        //drawHands(dominoPlayers);
+        artist.repaint();
 
     }
 
@@ -60,7 +66,7 @@ public class UI implements DominoUI {
     }
 
 
-    private void drawTable(Table table){
+   /* private void drawTable(Table table){
         //Draws the line of dominoes that have so far been played this round.
         //Includes ellipse in the middle to limit the total number to a viewable amount
         //TODO Put this into a frame central within the master frame.
@@ -81,7 +87,8 @@ public class UI implements DominoUI {
         System.out.println("");
         System.out.println("");
     }
-
+    */
+    /*
     private void drawHands(dominoes.players.DominoPlayer[] players){
         //Represent the domino hands each player has.
         //Consider visible/not visible to human player
@@ -102,7 +109,7 @@ public class UI implements DominoUI {
             System.out.println("");
         }
     }
-
+      */
     private void drawTextBone(Bone b){
         System.out.print("[" + b.left() + "|" + b.right() +"]" );
     }
