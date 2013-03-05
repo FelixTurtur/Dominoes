@@ -42,7 +42,6 @@ public class PlayerHandPanel extends JPanel {
         //Within each human hand, in order for the dominoes to be selectable, they will need to sit in a frame
         //This frame can glow when mouse-over events happen and playBone when clicked.
         Bone[] bones=player.bonesInHand();
-        System.out.print(player.getName() + "'s hand:  ");
         for (int i=0; i<bones.length;i++){
             drawBone(10+130*i,40,bones[i], player.getClass().getName(),graphics);
             System.out.print(" ");
