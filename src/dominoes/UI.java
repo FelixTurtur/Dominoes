@@ -110,9 +110,9 @@ public class UI implements DominoUI {
         }
     }
       */
-    private void drawTextBone(Bone b){
+   /* private void drawTextBone(Bone b){
         System.out.print("[" + b.left() + "|" + b.right() +"]" );
     }
-
+     */
 
 }
