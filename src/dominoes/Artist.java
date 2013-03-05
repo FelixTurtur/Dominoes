@@ -1,6 +1,14 @@
 package dominoes;
+import com.sun.media.jfxmedia.events.PlayerStateEvent;
+import dominoes.players.Player;
+import dominoes.players.DominoPlayer;
+
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  * Created with IntelliJ IDEA.
  * User: nick
@@ -8,14 +16,125 @@ import java.awt.*;
  * Time: 23:18
  */
 
-// OK, I think this bit should be a singleton but can't work out how to do it and still run the constructor inherited from the parent class.
 
-public class Artist extends Container {
+public class Artist extends JFrame implements ActionListener {
+
+    JPanel menuBar;
+    PlayerHandPanel player2Hand;
+    TablePanel tableArea;
+    JPanel infoText;
+    PlayerHandPanel player1Hand;
+    JButton newGame;
+    JButton exitGame;
+    static Artist instance;
+    int windowWidth=1400;
+    int windowHeight=800;
+    int size=120; //size of bones
+    Table table;
+    BoneYard boneYard;
+    DominoPlayer[] dominoPlayers;
+
+    private Artist() {
+        super("Awesome Dominoes");
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        setSize(windowWidth, windowHeight);
+        EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
+        setMenuBar(eb1, windowWidth, windowHeight/5);
+        player2Hand = new PlayerHandPanel(new FlowLayout());
+        player2Hand.setBackground(Color.lightGray);
+        player2Hand.setSize(windowWidth,windowHeight/5);
+        player2Hand.setBorder(eb1);
+        add(player2Hand);
+        tableArea = new TablePanel(new FlowLayout());
+        tableArea.setBackground(Color.gray);
+        tableArea.setSize(windowWidth,windowHeight/4);
+        tableArea.setBorder(eb1);
+        add(tableArea);
+        infoText = new JPanel(new FlowLayout());
+        infoText.setBackground(Color.lightGray);
+        infoText.setSize(windowWidth,windowHeight*3/20);
+        infoText.setBorder(eb1);
+        add(infoText);
+        player1Hand = new PlayerHandPanel(new FlowLayout());
+        player1Hand.setBackground(Color.gray);
+        player1Hand.setSize(windowWidth,windowHeight/5);
+        player1Hand.setBorder(eb1);
+        add(player1Hand);
+    }
+
+    public void setTable(Table t){
+        table=t;
+    }
+
+    public void setDominoPlayers(dominoes.players.DominoPlayer[] dp){
+            dominoPlayers=dp;
+    }
+    public void setBoneYard(BoneYard by){
+            boneYard=by;
+    }
+
+
+    private void setMenuBar(EtchedBorder eb, int x, int y) {
+        //Creates menu bar with chosen settings and all components required
+        menuBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        menuBar.setBackground(Color.gray);
+        menuBar.setSize(x,y);
+        menuBar.setBorder(eb);
+        newGame = new JButton("New Game");
+        exitGame = new JButton("Exit");
+        newGame.setActionCommand("NewGame");   // set the command
+        exitGame.setActionCommand("Exit"); // set the command
+        newGame.addActionListener(this);
+        exitGame.addActionListener(this);
+        menuBar.add(newGame);
+        menuBar.add(exitGame);
+        add(menuBar);
+    }
+
+    public void actionPerformed(ActionEvent evt) {
+        if (evt.getActionCommand().equals("Exit")) {
+            //Are you sure you want to quit?
+        }
+        else if (evt.getActionCommand().equals("NewGame")) {
+            //Are you sure you want to start a new game?
+        }
+    }
+
+    public void paint(Graphics graphics){
+
+        //TODO work out how to set this up better so that we are not setting this on each run of this method!
+        player1Hand.setPlayer(dominoPlayers[0]);
+        player2Hand.setPlayer(dominoPlayers[1]);
+        tableArea.setTable(table);
+        super.paint(graphics);
+
+    }
+
+    public static Artist getInstance(){
+        if (instance == null){
+            instance = new Artist();
+            //instance.setupTable();
+        }
+        return instance;
+    }
+
+
+
+}
+
+
+
+
+/*
+
+
+
+public class Artist extends Canvas {
     private static Artist instance = getInstance();
     int windowWidth = 1400;
     int windowHeight = 800;
     int size = 120;     //domino size
-    JFrame frame;
+    FramePanels frame;
     private Graphics graphics;
 
     public static Artist getInstance(){
@@ -35,19 +154,15 @@ public class Artist extends Container {
     }
 
     private void setupTable(){
-        frame = new JFrame("Awesome Dominoes");
-        frame.setSize(windowWidth, windowHeight);
-        //TODO EXIT will close entire application. We want to add in a popup "Are you sure?" window, I reckon
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(instance);
-        frame.setVisible(true);
+        frame = new FramePanels("Awesome Dominoes", windowWidth, windowHeight);
+        frame.tableArea.add(instance);
         graphics = getGraphics();
-
     }
 
     public void clearTable(){
         graphics.setColor(Color.gray);
         graphics.fillRect(0, 0, windowWidth, windowHeight);
+        frame.tableArea.update(graphics);
 
     }
 
@@ -137,3 +252,5 @@ public class Artist extends Container {
 
 
 }
+
+*/
