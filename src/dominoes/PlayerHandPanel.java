@@ -41,7 +41,7 @@ public class PlayerHandPanel extends JPanel {
         Bone[] bones=player.bonesInHand();
         for (int i=0; i<bones.length;i++){
             BoneDrawer boneDrawer = new BoneDrawer(bones[i], player.getClass().getName());
-            boneDrawer.drawBone(10 + 130 * i, 40, graphics);
+            boneDrawer.drawBone(10 + 80 * i, 10, graphics);
             System.out.print(" ");
         }
     }
