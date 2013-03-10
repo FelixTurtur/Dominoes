@@ -15,6 +15,8 @@ public class PlayerHandPanel extends JPanel {
 
     // TODO Make a class to derive TablePanel and PlayerHandPanel from!!!!!!!!!!
 
+    //TODO use this.getWidth() and this.getHeight to place everthing in case we resize the window
+
     DominoPlayer player;
 
     public PlayerHandPanel(FlowLayout flowLayout){
