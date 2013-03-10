@@ -39,7 +39,8 @@ public class Artist extends JFrame implements ActionListener {
         setSize(windowWidth, windowHeight);
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
         setupMenuBar(eb1, windowWidth, windowHeight/2);
-
+        scorePanel=new ScorePanel(new FlowLayout());
+        setupScorePanel(scorePanel,eb1);
         tableArea = new TablePanel(new FlowLayout());
         setupTableArea(eb1);
 
@@ -47,18 +48,10 @@ public class Artist extends JFrame implements ActionListener {
         setupPlayerHand(player1Hand, eb1);
         player2Hand = new PlayerHandPanel(new FlowLayout());
         setupPlayerHand(player2Hand, eb1);
-        scorePanel=new ScorePanel(new FlowLayout());
-        setupScorePanel(scorePanel,eb1);
-        //infoText = new JPanel(new FlowLayout());
-      //  setupInfoText(eb1);
+
     }
 
-    private void setupInfoText(EtchedBorder eb1) {
-        infoText.setBackground(Color.lightGray);
-        infoText.setSize(windowWidth, windowHeight * 3 / 20);
-        infoText.setBorder(eb1);
-        add(infoText);
-    }
+
 
     private void setupTableArea(EtchedBorder eb1) {
         tableArea.setBackground(Color.gray);
