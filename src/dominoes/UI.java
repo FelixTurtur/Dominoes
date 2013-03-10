@@ -22,11 +22,7 @@ public class UI implements DominoUI {
         drawScoreBoard(dominoPlayers);
         drawBoneYard(boneYard);
 
-        //drawTable(table);
-
-        //drawHands(dominoPlayers);
         artist.updateScreen(table, dominoPlayers, boneYard);
-        //artist.repaint();
 
     }
 

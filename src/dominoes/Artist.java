@@ -22,6 +22,7 @@ public class Artist extends JFrame implements ActionListener {
     JPanel menuBar;
     PlayerHandPanel player1Hand;
     PlayerHandPanel player2Hand;
+    ScorePanel scorePanel;
     TablePanel tableArea;
     JPanel infoText;
     JButton newGame;
@@ -37,17 +38,19 @@ public class Artist extends JFrame implements ActionListener {
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(windowWidth, windowHeight);
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
-        setupMenuBar(eb1, windowWidth, windowHeight/5);
+        setupMenuBar(eb1, windowWidth, windowHeight/2);
+
+        tableArea = new TablePanel(new FlowLayout());
+        setupTableArea(eb1);
 
         player1Hand = new PlayerHandPanel(new FlowLayout());
         setupPlayerHand(player1Hand, eb1);
         player2Hand = new PlayerHandPanel(new FlowLayout());
         setupPlayerHand(player2Hand, eb1);
-
-        tableArea = new TablePanel(new FlowLayout());
-        setupTableArea(eb1);
-        infoText = new JPanel(new FlowLayout());
-        setupInfoText(eb1);
+        scorePanel=new ScorePanel(new FlowLayout());
+        setupScorePanel(scorePanel,eb1);
+        //infoText = new JPanel(new FlowLayout());
+      //  setupInfoText(eb1);
     }
 
     private void setupInfoText(EtchedBorder eb1) {
@@ -67,6 +70,13 @@ public class Artist extends JFrame implements ActionListener {
     private void setupPlayerHand(PlayerHandPanel panel, EtchedBorder eb1) {
         panel.setBackground(Color.gray);
         panel.setSize(windowWidth,windowHeight/4);
+        panel.setBorder(eb1);
+        add(panel);
+    }
+
+    private void setupScorePanel(ScorePanel panel, EtchedBorder eb1) {
+        panel.setBackground(Color.gray);
+        panel.setSize(windowWidth,windowHeight/5);
         panel.setBorder(eb1);
         add(panel);
     }
@@ -115,14 +125,18 @@ public class Artist extends JFrame implements ActionListener {
     private void setDominoPlayers(dominoes.players.DominoPlayer[] dominoPlayers){
         player1Hand.setPlayer(dominoPlayers[0]);
         player2Hand.setPlayer(dominoPlayers[1]);
+        scorePanel.setPlayers(dominoPlayers);
     }
 
     private void setBoneYard(BoneYard boneYard){
         this.boneYard = boneYard;
+        scorePanel.setBoneYard(boneYard);
     }
 
     // Update state of Artist prior to redraw
     public void updateScreen(Table table, DominoPlayer[] dominoPlayers, BoneYard boneYard) {
+       //TODO we should not need to set these every time!
+
         this.setTable(table);
         this.setDominoPlayers(dominoPlayers);
         this.setBoneYard(boneYard);
