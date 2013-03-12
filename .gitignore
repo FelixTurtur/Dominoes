@@ -223,3 +223,7 @@ pip-log.txt
 ######################
 out/
 .idea/workspace.xml
+
+out/production/Dominoes/dominoes/UI.class
+
+out/production/Dominoes/dominoes/Artist.class

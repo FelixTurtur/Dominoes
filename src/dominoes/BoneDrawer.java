@@ -9,6 +9,7 @@ public class BoneDrawer {
     private String playerType;
 
     private int size = 120;
+    private static boolean hideComputerHand=true;
 
     public BoneDrawer(Bone bone, String playerType) {
         this.bone = bone;
@@ -19,7 +20,8 @@ public class BoneDrawer {
         if (playerType == "dominoes.players.Player") {
             drawPlayerBone(x, y, graphics);
         } else if (playerType=="dominoes.players.ComputerPlayer"){
-            drawHiddenBone(x, y, graphics);
+            if (hideComputerHand) drawHiddenBone(x, y, graphics);
+            else drawPlayerBone(x,y,graphics);
         }
         else {
            drawTableBone(x,y,graphics);
