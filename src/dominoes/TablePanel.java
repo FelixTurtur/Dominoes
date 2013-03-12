@@ -36,7 +36,6 @@ public class TablePanel extends JPanel {
         //TODO Put this into a frame central within the master frame.
         Bone[] bones = table.layout();
         int y=40; //y position of domino line
-        System.out.println("");
         for (int i=0,n=0; i<bones.length;i++,n++){
 
             if ((i>3) && (i<bones.length-4)){
@@ -47,10 +46,8 @@ public class TablePanel extends JPanel {
                 BoneDrawer boneDrawer = new BoneDrawer(bones[i], "");
                 boneDrawer.drawBone(10 + 130 * n, y, graphics);
             }
-            System.out.print(" ");
         }
-        System.out.println("");
-        System.out.println("");
+
     }
 
     private void drawDashes(int x, int y,Graphics graphics){
