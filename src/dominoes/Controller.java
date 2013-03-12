@@ -32,6 +32,8 @@ public class Controller {
         Dominoes dominoes = new Dominoes(ui, players[0], players[1], targetScore, maxpips);
         dominoes.play();
 
+        //TODO work out who won the game and display it
+
     }
 
 }
