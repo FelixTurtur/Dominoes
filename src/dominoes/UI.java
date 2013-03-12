@@ -33,7 +33,7 @@ public class UI implements DominoUI {
         //TODO - add a continue button
 
         try {
-            Thread.sleep(6000);
+            Thread.sleep(3000);
         } catch(InterruptedException e) {
         }
 
