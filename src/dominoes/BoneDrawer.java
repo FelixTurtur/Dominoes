@@ -27,8 +27,11 @@ public class BoneDrawer {
     }
 
     private void drawHiddenBone(int x, int y, Graphics graphics) {
-        // TODO - implement this method to do something different
-        drawPlayerBone(x, y, graphics);
+        drawPortraitBackground(x, y, graphics);
+        graphics.setColor(Color.white);
+        int xpoints[]={ x+size/4, x+size*3/8,x+size/4,x+size/8};
+        int ypoints[]={y+size*3/8,y+size/2,y+size*5/8,y+size/2};
+        graphics.fillPolygon(xpoints,ypoints,4);
     }
 
     private void drawPlayerBone(int x, int y, Graphics graphics) {

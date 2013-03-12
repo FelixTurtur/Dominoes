@@ -8,6 +8,9 @@ package dominoes;
  * Time: 22:57
  */
 public class UI implements DominoUI {
+
+    //TODO - Remove Artist class by getting this class to handle it's job. This is currently only passing identical function calls to the Artist
+
     private Artist artist;
     UI(){
         artist = Artist.getInstance();
@@ -17,21 +20,23 @@ public class UI implements DominoUI {
 
     public void display(dominoes.players.DominoPlayer[] dominoPlayers, dominoes.Table table, dominoes.BoneYard boneYard){
 
-        System.out.println("************************************************************************************");
-        System.out.println("");
-        drawScoreBoard(dominoPlayers);
-        drawBoneYard(boneYard);
-
         artist.updateScreen(table, dominoPlayers, boneYard);
 
     }
 
     public void displayRoundWinner(dominoes.players.DominoPlayer dominoPlayer){
-        System.out.println("");
-        System.out.println("************************************************");
-        System.out.println(dominoPlayer.getName() + " wins the round!" );
-        System.out.println("************************************************");
-        System.out.println("");
+
+        artist.displayRoundWinner(dominoPlayer);
+
+
+        // Pause so that we see the message
+        //TODO - add a continue button
+
+        try {
+            Thread.sleep(6000);
+        } catch(InterruptedException e) {
+        }
+
     }
 
     public void displayInvalidPlay(dominoes.players.DominoPlayer dominoPlayer){
@@ -39,23 +44,7 @@ public class UI implements DominoUI {
     }
 
 
-    private void drawScoreBoard(dominoes.players.DominoPlayer[] dominoPlayers){
-        System.out.println("");
-        System.out.println("Scores:");
-        for (int i=0; i<dominoPlayers.length;i++){
-            System.out.println(dominoPlayers[i].getPoints() + "    " +dominoPlayers[i].getName() );
-        }
-        System.out.println("************************************");
-    }
 
-    private void drawBoneYard(BoneYard boneYard){
-        //TODO Draw this in the game window
-        //TODO Put this in a frame above the top hand, in the right hand corner.
-        //TODO Game option buttons will be on the left of the same frame.
-        System.out.println("");
-        System.out.println("Boneyard [ " + boneYard.size() + " ]");
-        System.out.println("");
-    }
 
 
 }

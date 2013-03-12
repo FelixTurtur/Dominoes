@@ -1,6 +1,4 @@
 package dominoes;
-import com.sun.media.jfxmedia.events.PlayerStateEvent;
-import dominoes.players.Player;
 import dominoes.players.DominoPlayer;
 
 import javax.swing.*;
@@ -22,7 +20,7 @@ public class Artist extends JFrame implements ActionListener {
     JPanel menuBar;
     PlayerHandPanel player1Hand;
     PlayerHandPanel player2Hand;
-    ScorePanel scorePanel;
+    InfoPanel infoPanel;
     TablePanel tableArea;
     JPanel infoText;
     JButton newGame;
@@ -39,8 +37,8 @@ public class Artist extends JFrame implements ActionListener {
         setSize(windowWidth, windowHeight);
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
         setupMenuBar(eb1, windowWidth, windowHeight/2);
-        scorePanel=new ScorePanel(new FlowLayout());
-        setupScorePanel(scorePanel,eb1);
+        infoPanel =new InfoPanel(new FlowLayout());
+        setupScorePanel(infoPanel,eb1);
         tableArea = new TablePanel(new FlowLayout());
         setupTableArea(eb1);
 
@@ -67,7 +65,7 @@ public class Artist extends JFrame implements ActionListener {
         add(panel);
     }
 
-    private void setupScorePanel(ScorePanel panel, EtchedBorder eb1) {
+    private void setupScorePanel(InfoPanel panel, EtchedBorder eb1) {
         panel.setBackground(Color.gray);
         panel.setSize(windowWidth,windowHeight/5);
         panel.setBorder(eb1);
@@ -102,6 +100,7 @@ public class Artist extends JFrame implements ActionListener {
 
     public void paint(Graphics graphics){
         super.paint(graphics);
+
     }
 
     public static Artist getInstance(){
@@ -118,12 +117,12 @@ public class Artist extends JFrame implements ActionListener {
     private void setDominoPlayers(dominoes.players.DominoPlayer[] dominoPlayers){
         player1Hand.setPlayer(dominoPlayers[0]);
         player2Hand.setPlayer(dominoPlayers[1]);
-        scorePanel.setPlayers(dominoPlayers);
+        infoPanel.setPlayers(dominoPlayers);
     }
 
     private void setBoneYard(BoneYard boneYard){
         this.boneYard = boneYard;
-        scorePanel.setBoneYard(boneYard);
+        infoPanel.setBoneYard(boneYard);
     }
 
     // Update state of Artist prior to redraw
@@ -136,6 +135,15 @@ public class Artist extends JFrame implements ActionListener {
 
         this.repaint();
     }
+
+    public void displayRoundWinner(DominoPlayer dominoPlayer){
+        infoPanel.setWinner(dominoPlayer);
+        //TODO - technically possible in a test situation that table, dominoPlayers, etc are null which would break at this point
+        this.repaint();
+
+    }
+
+
 }
 
 
