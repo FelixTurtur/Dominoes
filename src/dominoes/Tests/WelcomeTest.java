@@ -1,10 +1,6 @@
 package dominoes.Tests;
 
-import dominoes.Controller;
 import dominoes.WelcomePage;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,11 +9,11 @@ import java.awt.event.ActionListener;
  * Time: 21:41
  * To change this template use File | Settings | File Templates.
  */
-public class WelcomeTest implements ActionListener {
+public class WelcomeTest {
     //Test Setup
     String[] args;
 
-    public void actionPerformed(ActionEvent evt) {
+    /*public void actionPerformed(ActionEvent evt) {
         if(evt.getActionCommand().equals("Start")) {
             Controller.main(args);
         }
@@ -26,12 +22,14 @@ public class WelcomeTest implements ActionListener {
 
             };
         }
-    }
+    }*/
 
     public static void main(String[] args) {
         WelcomePage myWelcome = new WelcomePage();
-        myWelcome.
-
+        try {
+            Thread.sleep(2000);
+        } catch(InterruptedException e) {
+        }
     }
 
 }
