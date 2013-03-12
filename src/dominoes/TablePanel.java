@@ -14,6 +14,8 @@ public class TablePanel extends JPanel {
     // TODO sort out repeated code - eg. size variable and the drawPips method
     // TODO Make a class to derive TablePanel and PlayerHandPanel from!!!!!!!!!!
     Table table;
+    //TODO - size needs to be only be set in one class not all of them! Relate it to window size?
+    int size=120; //size of bone
 
     public TablePanel(FlowLayout flowLayout){
         super(flowLayout);
@@ -35,18 +37,27 @@ public class TablePanel extends JPanel {
         //Includes ellipse in the middle to limit the total number to a viewable amount
         //TODO Put this into a frame central within the master frame.
         Bone[] bones = table.layout();
-        int y=40; //y position of domino line
-        for (int i=0,n=0; i<bones.length;i++,n++){
-
-            if ((i>3) && (i<bones.length-4)){
-                i=bones.length-5;
-                drawDashes(10 + 130 * n, y + 30, graphics);
-            }
-            else{
-                BoneDrawer boneDrawer = new BoneDrawer(bones[i], "");
-                boneDrawer.drawBone(10 + 130 * n, y, graphics);
-            }
+        int y=this.getHeight()/2-size/4; //y position of domino line
+        int i=(bones.length/2)-1;
+        int j=bones.length/2;
+        int n=0;
+        if (bones.length > 9){
+            drawDashes(this.getWidth()/2-size/2, y + size/4, graphics);
+            i=3;
+            j=bones.length-4;
+            n=1;
         }
+
+        for ( ; j<bones.length;j++,n++){
+            BoneDrawer boneDrawer = new BoneDrawer(bones[j], "");
+            boneDrawer.drawBone(this.getWidth()/2-size/2 + (size+10) * n, y, graphics);
+        }
+
+        for (n=1 ; i>=0;i--,n++){
+            BoneDrawer boneDrawer = new BoneDrawer(bones[i], "");
+            boneDrawer.drawBone(this.getWidth()/2-size/2 - (size+10) * n, y, graphics);
+        }
+
 
     }
 
