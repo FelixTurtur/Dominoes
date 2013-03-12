@@ -17,6 +17,7 @@ public class ScorePanel extends JPanel{
     private Font font;
     private BoneYard boneYard;
     private static int size=120;
+    private DominoPlayer winner=null;
 
     ScorePanel(FlowLayout flowLayout){
         super(flowLayout);
@@ -31,11 +32,30 @@ public class ScorePanel extends JPanel{
         boneYard=by;
     }
 
+    public void setWinner(DominoPlayer w){
+        winner=w;
+    }
+
+
     public void paint(Graphics graphics){
         super.paint(graphics);
         displayScore(graphics);
         drawBoneYard(graphics);
+        if (winner!=null){
+            displayWinner(graphics);
+            winner=null;
+        }
     }
+
+    private void displayWinner(Graphics graphics){
+        graphics.setColor(Color.yellow);
+        graphics.fillRect(this.getWidth()/2-300,10,getWidth()/2,getHeight()-20);
+        graphics.setColor(Color.black);
+        graphics.setFont(new Font("Arial", Font.BOLD, 40));
+        graphics.drawString(winner.getName() + " wins the round!",this.getWidth()/2-100,this.getHeight()/2);
+
+    }
+
 
     private void displayScore(Graphics graphics){
         graphics.setFont(font);
