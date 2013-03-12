@@ -10,7 +10,7 @@ package dominoes;
 public class UI implements DominoUI {
 
     //TODO - Remove Artist class by getting this class to handle it's job. This is currently only passing identical function calls to the Artist
-
+    //TODO - need to change the implements bit on the Artist class so that the above is possible.
     private Artist artist;
     UI(){
         artist = Artist.getInstance();
@@ -31,7 +31,6 @@ public class UI implements DominoUI {
 
         // Pause so that we see the message
         //TODO - add a continue button
-
         try {
             Thread.sleep(3000);
         } catch(InterruptedException e) {
@@ -40,6 +39,8 @@ public class UI implements DominoUI {
     }
 
     public void displayInvalidPlay(dominoes.players.DominoPlayer dominoPlayer){
+
+        //TODO - make graphics version of this. Need unit test or human interaction first to ensure it works
         System.out.println("%%%%% Invalid Play %%%%%");
     }
 
