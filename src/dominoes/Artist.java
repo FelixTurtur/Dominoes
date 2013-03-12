@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
  */
 
 
+//TODO - terminate program if window is closed
+
 public class Artist extends JFrame implements ActionListener {
 
     JPanel menuBar;

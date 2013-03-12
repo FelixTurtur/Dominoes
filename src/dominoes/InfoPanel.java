@@ -52,10 +52,10 @@ public class InfoPanel extends JPanel{
 
     private void displayWinner(Graphics graphics){
         graphics.setColor(Color.yellow);
-        graphics.fillRect(this.getWidth() / 2 - 300, 10, getWidth() / 2, getHeight() - 20);
+        graphics.fill3DRect(this.getWidth() / 4, 10, getWidth() / 2, getHeight() - 20,true);
         graphics.setColor(Color.black);
         graphics.setFont(new Font("Arial", Font.BOLD, 50));
-        graphics.drawString(winner.getName() + " wins the round!", this.getWidth() / 2 - 220, this.getHeight() / 2+20);
+        graphics.drawString(winner.getName() + " wins the round!", this.getWidth()/2-300, this.getHeight() / 2+20);
     }
 
 
