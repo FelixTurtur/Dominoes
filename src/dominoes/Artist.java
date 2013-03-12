@@ -38,7 +38,7 @@ public class Artist extends JFrame implements ActionListener {
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(windowWidth, windowHeight);
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
-        setupMenuBar(eb1, windowWidth, windowHeight/2);
+        setupMenuBar(eb1, windowWidth, windowHeight/10);
         infoPanel =new InfoPanel(new FlowLayout());
         setupScorePanel(infoPanel,eb1);
         tableArea = new TablePanel(new FlowLayout());
@@ -55,20 +55,20 @@ public class Artist extends JFrame implements ActionListener {
 
     private void setupTableArea(EtchedBorder eb1) {
         tableArea.setBackground(Color.orange);
-        tableArea.setSize(windowWidth, windowHeight / 4);
+        tableArea.setSize(windowWidth, windowHeight / 3);
         tableArea.setBorder(eb1);
         add(tableArea);
     }
 
     private void setupPlayerHand(PlayerHandPanel panel, EtchedBorder eb1) {
-        panel.setBackground(Color.gray);
-        panel.setSize(windowWidth,windowHeight/4);
+        panel.setBackground(Color.lightGray);
+        panel.setSize(windowWidth,windowHeight/3);
         panel.setBorder(eb1);
         add(panel);
     }
 
     private void setupScorePanel(InfoPanel panel, EtchedBorder eb1) {
-        panel.setBackground(Color.gray);
+        panel.setBackground(Color.lightGray);
         panel.setSize(windowWidth,windowHeight/5);
         panel.setBorder(eb1);
         add(panel);
