@@ -54,7 +54,7 @@ public class Artist extends JFrame implements ActionListener {
 
 
     private void setupTableArea(EtchedBorder eb1) {
-        tableArea.setBackground(Color.gray);
+        tableArea.setBackground(Color.orange);
         tableArea.setSize(windowWidth, windowHeight / 4);
         tableArea.setBorder(eb1);
         add(tableArea);

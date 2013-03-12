@@ -13,7 +13,7 @@ public class Controller {
 
     //parameters
     static int targetScore = 50;
-    static int maxpips = 6;
+    static int maxpips = 6;  //graphics output currently can not cope with higher than 6
 
     public static void main(String [ ] args)
     {
