@@ -23,7 +23,7 @@ public class Controller {
         // Yep, text version can also double as our testing classes  - NM
 
 
-        UI ui = new UI();
+        DominoUI ui = UI.getInstance();
 
         Player[] players = {new ComputerPlayer(),new ComputerPlayer()};
         players[0].setName("Player 1");
