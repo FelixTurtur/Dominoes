@@ -17,43 +17,43 @@ import java.awt.event.ActionListener;
  */
 public class WelcomePage extends JFrame implements ActionListener {
 
-    //These are the items that will be configured on this welcome page
-    //and then passed to Controller to begin the game.
-    DominoPlayer p1;
-    DominoPlayer p2;
-    int ScoreTarget = 50;
-    JPanel titlePanel;
-    JPanel p1Panel;
-    JPanel p2Panel;
-    ButtonGroup p1Options;
-    ButtonGroup p2Options;
-    JTextField p1NameBox;
-    JTextField p2NameBox;
-    JPanel targetScore;
-    JTextField scoreBox;
-    JPanel gameButtons;
-    JButton newGame;
-    JButton exitGame;
-    PopupFactory popMaker = PopupFactory.getSharedInstance();
+
+    //region Parameters
+    //A whole tonne of parameters
+    DominoPlayer p1, p2;
+    String ScoreTarget = "50"; //Textfield is string, resulting args is string
+    JPanel titlePanel, p1Panel, p2Panel, targetScore, gameButtons;
+    JToggleButton p1H, p1C, p2H, p2C;
+    ButtonGroup p1Options, p2Options;
+    JTextField p1NameBox, p2NameBox, scoreBox;
+    JButton newGame, exitGame;
+    //endregion
 
     public WelcomePage() {
         super("Awesome Dominoes");
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(800, 800);
         setBackground(Color.BLUE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         addTitlePanel();
         addTargetScorePanel();
         addPlayerChoicePanels();
         addButtonsPanel();
-        super.setVisible(true);
+        //super.setVisible(true);
         try {
             Thread.sleep(2000);
         } catch(InterruptedException e) {
         }
     }
 
+    public void setUpGame() {
+        //TODO reset controls
+        super.setVisible(true);
+        newGame.addActionListener(this);
+        exitGame.addActionListener(this);
+    }
     private void addTitlePanel() {
-        //To change body of created methods use File | Settings | File Templates.
         //Draw a background square
         titlePanel = new JPanel();
         titlePanel.add(new JLabel("DOMINOES!"));
@@ -74,8 +74,8 @@ public class WelcomePage extends JFrame implements ActionListener {
 //        exitGame.setBackground(Color.BLUE);
 //        exitGame.setForeground(Color.WHITE);
 //        exitGame.setActionCommand("Exit");
-        newGame.addActionListener(this);
-        exitGame.addActionListener(this);
+        //newGame.addActionListener(this);
+        //exitGame.addActionListener(this);
         gameButtons.setBackground(Color.green);
         gameButtons.add(newGame);
         gameButtons.add(exitGame);
@@ -87,6 +87,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         targetScore.setSize(800, 10);
         targetScore.add(new JLabel("Score goal to reach:"));
         scoreBox = new JTextField(ScoreTarget);
+        scoreBox.setText(ScoreTarget);
         scoreBox.setSize(100, 50);
         scoreBox.setBorder(new EtchedBorder());
         scoreBox.setColumns(3);
@@ -102,19 +103,29 @@ public class WelcomePage extends JFrame implements ActionListener {
         p1Panel.setBorder(eb1);
         p1Panel.add(new JLabel("Player 1 Type:"));
         p1Options = new ButtonGroup();
-        JToggleButton tb1 = new JToggleButton("Human");
-        p1Options.add(tb1);
-        JToggleButton tb2 = new JToggleButton("Computer");
-        p1Options.add(tb2);
-        p1Panel.add(tb1);
-        p1Panel.add(tb2);
+        p1H = new JToggleButton("Human");
+        p1Options.add(p1H);
+        p1C = new JToggleButton("Computer");
+        p1Options.add(p1C);
+        p1Panel.add(p1H);
+        p1Panel.add(p1C);
         p1Panel.add(new JLabel("Player 1 Name:"));
         //getPlayerChoicePanel(eb1, "Player 1", p1Options);
         p1Panel.setSize(800,10);
         p1NameBox = new JTextField();
         p1NameBox.setColumns(20);
         p1Panel.add(p1NameBox);
-        p2Panel = getPlayerChoicePanel(eb1, "Player 2 Type", p2Options);
+        p2Panel = new JPanel();
+        p2Panel.setBorder(eb1);
+        p2Panel.add(new JLabel("Player 2 Type:"));
+        p2Options = new ButtonGroup();
+        p2H = new JToggleButton("Human");
+        p2Options.add(p2H);
+        p2C = new JToggleButton("Computer");
+        p2Options.add(p2C);
+        p2Panel.add(p2H);
+        p2Panel.add(p2C);
+        p2Panel.add(new JLabel("Player 2 Name:"));
         p2Panel.setSize(800,10);
         p2NameBox = new JTextField();
         p2NameBox.setColumns(20);
@@ -122,21 +133,6 @@ public class WelcomePage extends JFrame implements ActionListener {
         add(p1Panel);
         add(p2Panel);
    }
-
-   private JPanel getPlayerChoicePanel(EtchedBorder eb1, String label, ButtonGroup bg1) {
-        JPanel panel = new JPanel();
-        panel.setBorder(eb1);
-        panel.add(new JLabel(label));
-        bg1 = new ButtonGroup();
-        JToggleButton tb1 = new JToggleButton("Human");
-        bg1.add(tb1);
-        JToggleButton tb2 = new JToggleButton("Computer");
-        bg1.add(tb2);
-        panel.add(tb1);
-        panel.add(tb2);
-        panel.add(new JLabel(label + " Name:"));
-        return panel;
-    }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
@@ -153,38 +149,41 @@ public class WelcomePage extends JFrame implements ActionListener {
                 //TODO Actually close the program
                 System.out.println("Closing...");
                 this.setVisible(false);
-                return;
+                System.exit(0);
             }
         }
-        else if (evt.getActionCommand().equals("newGame")) {
-            //TODO Validate options are legit?
-            String[] args = {};
-            Boolean parseError = false;
+         else if (evt.getActionCommand().equals("newGame")) {
+            //Validate game options
+            String[] args = {"","","","",""};
             try {
-                //might need to switch out ButtonGroup for something else
-                if (p1Options.getSelection().isSelected()) {
-                    args[0] = p1Options.getSelection().toString();
+                if (p1H.isSelected()) {
+                    args[0] = p1H.getText();
                 }
-                args[1] = p2Options.getSelection().toString();
+                else args[0] = p1C.getText();
+                if (p2H.isSelected()) {
+                    args[1] = p2H.getText();
+                }
+                else args[1] = p2C.getText();
                 args[2] = p1NameBox.getText();
                 args[3] = p2NameBox.getText();
-                args[4] = Integer.toString(ScoreTarget);
+                args[4] = scoreBox.getText();
+                for (String s : args) {
+                    if (s.length() == 0) {
+                        throw new Exception("Missing value");
+                    }
+                }
             } catch (Exception e){
-                //TODO Did you enter all fields?
                 JOptionPane.showMessageDialog(
                         new JFrame(),
                         "Unable to start Game. Please ensure all fields are populated",
-                        "Error",
+                        e.getMessage(),
                         JOptionPane.ERROR_MESSAGE
                 );
-                parseError = true;
-                //TODO Return control to frame
+                return;
             }
-            if (!parseError) {
-                this.setVisible(false);
-                Controller.main(args);
-            }
-
+            //start game
+            this.setVisible(false);
+            Controller.runGame(args);
         }
     }
 
