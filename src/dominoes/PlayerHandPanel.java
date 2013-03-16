@@ -18,10 +18,10 @@ public class PlayerHandPanel extends JPanel {
     //TODO use this.getWidth() and this.getHeight to place everthing in case we resize the window
 
     DominoPlayer player;
-    int size=120;
-    int boneGap=30;
+    int size = 120;
+    int boneGap = 30;
 
-    public PlayerHandPanel(FlowLayout flowLayout){
+    public PlayerHandPanel() {
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
     }
 
@@ -29,19 +29,19 @@ public class PlayerHandPanel extends JPanel {
         this.removeAll();
         if (player != null) {
             Bone[] bones = player.bonesInHand();
-            for (int i = 0; i < bones.length; i++){
+            for (int i = 0; i < bones.length; i++) {
                 this.add(new BoneWidget(bones[i], player.getClass().getName(), 120));
             }
         }
         this.validate();
     }
 
-    public void setPlayer(DominoPlayer dp){
-        player=dp;
+    public void setPlayer(DominoPlayer dp) {
+        player = dp;
         setUpBones();
     }
 
-    public void paint(Graphics graphics){
+    public void paint(Graphics graphics) {
         super.paint(graphics);
     }
 }

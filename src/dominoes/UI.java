@@ -44,13 +44,13 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         setupMenuBar(eb1, windowWidth, windowHeight/10);
         infoPanel =new InfoPanel(new FlowLayout());
         setupScorePanel(infoPanel,eb1);
-        player1Hand = new PlayerHandPanel(new FlowLayout());
+        player1Hand = new PlayerHandPanel();
         setupPlayerHand(player1Hand, eb1);
 
-        tableArea = new TablePanel(new FlowLayout());
+        tableArea = new TablePanel();
         setupTableArea(eb1);
 
-        player2Hand = new PlayerHandPanel(new FlowLayout());
+        player2Hand = new PlayerHandPanel();
         setupPlayerHand(player2Hand, eb1);
         this.setVisible(true);
     }
