@@ -8,6 +8,7 @@ import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 /**
  * Created with IntelliJ IDEA.
@@ -96,13 +97,30 @@ public class UI extends JFrame implements ActionListener, DominoUI {
 
     public void actionPerformed(ActionEvent evt) {
         if (evt.getActionCommand().equals("Exit")) {
-            //Are you sure you want to quit?
+            exitOption();
         }
         else if (evt.getActionCommand().equals("NewGame")) {
-            //Are you sure you want to start a new game?
+            //TODO: If game not over: "Leave this game?"
+            super.setVisible(false);
+            Controller.main();
         }
     }
 
+    public void windowClosing(WindowEvent e) {exitOption();}
+    public void exitOption() {
+        Object[] options = {"Yes, sorry", "No, whoops!"};
+        int x = JOptionPane.showOptionDialog(new JFrame(), "Are you sure you want to quit?",
+                "Leaving so soon?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
+                null, options,  options[1]);
+        if (x == 1) {
+            System.out.println("Knew you wouldn't leave");
+        }
+        else {
+            System.out.println("Closing...");
+            this.setVisible(false);
+            System.exit(0);
+        }
+    }
     public void paint(Graphics graphics){
         super.paint(graphics);
 

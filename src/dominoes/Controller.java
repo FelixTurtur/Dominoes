@@ -17,11 +17,8 @@ public class Controller {
     static Boolean gametime = true;
     static int maxpips = 6;  //graphics output currently can not cope with higher than 6
 
-    public static void main(String [ ] args)
+    public static void main()
     {
-        // TODO Because we're so good we could have a text or GUI option for the game with text only or
-        // glorious, colourful dominoes. What do you think?
-        // Yep, text version can also double as our testing classes  - NM
         WelcomePage myWelcomePage = new WelcomePage();
         myWelcomePage.setUpGame();
 
