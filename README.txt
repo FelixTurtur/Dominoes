@@ -1,5 +1,38 @@
 **Welcome to our Dominoes set up!**
 
+[AJ 16/03/2013]
+Today I have altered the UI page slightly - moving from a Menu Panel to a Menu Bar proper. I have also 
+altered the event handling a bit. 
+
+I have merged in my attempts at the Welcome Page and therefore also merged a UI Test class so that it is
+possible to run the game directly until the synchro between the welcome page and UI Game is working 
+properly.
+
+The link from UI Game to Welcome Page (when you click "New Game") is working fine, so a bit gutted it doesn't
+work in reverse.
+I'm going to continue trying to get the link working well.
+
+I am also keeping an eye out for opportunities to replace our code with more pattern-like Java that I've read 
+about recently.
+
+[Abbie]
+
+[NM 17/02/2013]
+
+Now working in a simplistic way for CPU vs CPU
+
+[Nick]
+
+[NM 16/02/2013]
+Nice one!
+
+I have been messing around with the player classes a bit.
+
+I still need to work out how we build this thing - at the moment the supplied class files won't build. I am guessing 
+that copy pasting them into the IDE has messed them up a bit - the originals seem to be binary files if you open them in vim.
+
+[Nick]
+
 [AJ 13/02/2013]
 Things I have learnt:
 
@@ -25,23 +58,4 @@ messages when I next read this....
 
 [AJ out]
 
-
-
-[NM 16/02/2013]
-Nice one!
-
-I have been messing around with the player classes a bit.
-
-I still need to work out how we build this thing - at the moment the supplied class files won't build. I am guessing 
-that copy pasting them into the IDE has messed them up a bit - the originals seem to be binary files if you open them in vim.
-
-[Nick]
-
-
-
-[NM 17/02/2013]
-
-Now working in a simplistic way for CPU vs CPU
-
-[Nick]
 
