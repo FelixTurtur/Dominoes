@@ -1,7 +1,5 @@
 package dominoes.Tests;
 
-import dominoes.WelcomePage;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Abbie
@@ -14,8 +12,7 @@ public class WelcomeTest {
     String[] args;
 
     public static void main(String[] args) {
-        WelcomePage myWelcome = new WelcomePage();
-        myWelcome.setUpGame();
+        dominoes.Controller.main(args);
     }
 
 }

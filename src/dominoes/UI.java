@@ -89,9 +89,11 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         this.setMenuBar(menuBar);
         Menu dom = new Menu("Dominoes");
         menuBar.add(dom);
-        //TODO for geek credits we could have an About menu with a standard pop-up info box
+        Menu about = new Menu("About");
+        menuBar.add(about);
         MenuItem newGame = new MenuItem("New Game", new MenuShortcut(KeyEvent.VK_N));
         MenuItem exitGame = new MenuItem("Exit Dominoes", new MenuShortcut(KeyEvent.VK_X));
+        MenuItem aboutItem = new MenuItem("About AD", new MenuShortcut(KeyEvent.VK_A));
         /*
         newGame = new JButton("New Game");
         exitGame = new JButton("Exit");
@@ -100,23 +102,42 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         exitGame.setActionCommand("Exit"); // set the command
         newGame.addActionListener(this);
         exitGame.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {exitOption();}
         });
-
         /*
         menuBar.add(newGame);
         menuBar.add(exitGame);
          */
         dom.add(newGame);
         dom.add(exitGame);
+        aboutItem.setActionCommand("About");
+        aboutItem.addActionListener(this);
+        about.add(aboutItem);
     }
 
     public void actionPerformed(ActionEvent evt) {
         if (evt.getActionCommand().equals("NewGame")) {
             //TODO: If game not over: "Leave this game?"
             super.setVisible(false);
-            Controller.main();
+            Controller.main(new String[] {});
+        } else if (evt.getActionCommand().equals("About")) {
+            //TODO make the AboutDialog show
+            //TODO this is the same thing that prevents game from showing from welcomepage
+            final JFrame af = new JFrame("About Awesome Dominoes");
+            af.setVisible(true);
+            af.setSize(300,300);
+            af.add(new AboutDialog(af,"AAD",true));
+            /*JButton button = new JButton("OK");
+            af.setVisible(true);
+            af.setSize(300,300);
+            af.add(new JLabel("About Awesome Dominoes"));
+            af.add(button);
+            button.addActionListener(new ButtonListener());
+            af.pack();*/
+
         }
+
     }
 
     public void windowClosing(WindowEvent e) {exitOption();}

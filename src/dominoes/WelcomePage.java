@@ -42,10 +42,6 @@ public class WelcomePage extends JFrame implements ActionListener {
         addPlayerChoicePanels();
         addButtonsPanel();
         //super.setVisible(true);
-        try {
-            Thread.sleep(2000);
-        } catch(InterruptedException e) {
-        }
     }
 
     public void setUpGame() {
@@ -165,7 +161,7 @@ public class WelcomePage extends JFrame implements ActionListener {
                 return;
             }
             //start game
-            this.setVisible(false);
+            this.dispose();
             Controller.runGame(args);
         }
     }

@@ -17,7 +17,7 @@ public class Controller {
     static Boolean gametime = true;
     static int maxpips = 6;  //graphics output currently can not cope with higher than 6
 
-    public static void main()
+    public static void main(String[] args)
     {
         WelcomePage myWelcomePage = new WelcomePage();
         myWelcomePage.setUpGame();
@@ -44,7 +44,7 @@ public class Controller {
     }
 
     private static Player setPlayerType(String type) {
-        if (type == "Human") {
+        if (type.equals("Human")) {
             return new Player();
         }
         return new ComputerPlayer();
