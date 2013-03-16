@@ -8,6 +8,7 @@ import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
 /**
@@ -22,14 +23,12 @@ import java.awt.event.WindowEvent;
 
 public class UI extends JFrame implements ActionListener, DominoUI {
 
-    JPanel menuBar;
+    MenuBar menuBar;
     PlayerHandPanel player1Hand;
     PlayerHandPanel player2Hand;
     InfoPanel infoPanel;
     TablePanel tableArea;
     JPanel infoText;
-    JButton newGame;
-    JButton exitGame;
     static UI instance;
     int windowWidth=1400;
     int windowHeight=800;
@@ -41,18 +40,19 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(windowWidth, windowHeight);
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
+        //add items in order top -> bottom
         setupMenuBar(eb1, windowWidth, windowHeight/10);
         infoPanel =new InfoPanel(new FlowLayout());
         setupScorePanel(infoPanel,eb1);
+        player1Hand = new PlayerHandPanel(new FlowLayout());
+        setupPlayerHand(player1Hand, eb1);
+
         tableArea = new TablePanel(new FlowLayout());
         setupTableArea(eb1);
 
-        player1Hand = new PlayerHandPanel(new FlowLayout());
-        setupPlayerHand(player1Hand, eb1);
         player2Hand = new PlayerHandPanel(new FlowLayout());
         setupPlayerHand(player2Hand, eb1);
         this.setVisible(true);
-
     }
 
 
@@ -80,26 +80,39 @@ public class UI extends JFrame implements ActionListener, DominoUI {
 
     private void setupMenuBar(EtchedBorder eb, int x, int y) {
         //Creates menu bar with chosen settings and all components required
-        menuBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        /*menuBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
         menuBar.setBackground(Color.gray);
         menuBar.setSize(x,y);
         menuBar.setBorder(eb);
+        */
+        menuBar = new MenuBar();
+        this.setMenuBar(menuBar);
+        Menu dom = new Menu("Dominoes");
+        menuBar.add(dom);
+        //TODO for geek credits we could have an About menu with a standard pop-up info box
+        MenuItem newGame = new MenuItem("New Game", new MenuShortcut(KeyEvent.VK_N));
+        MenuItem exitGame = new MenuItem("Exit Dominoes", new MenuShortcut(KeyEvent.VK_X));
+        /*
         newGame = new JButton("New Game");
         exitGame = new JButton("Exit");
-        newGame.setActionCommand("NewGame");   // set the command
+        */
+        newGame.setActionCommand("NewGame"); // set the command
         exitGame.setActionCommand("Exit"); // set the command
         newGame.addActionListener(this);
-        exitGame.addActionListener(this);
+        exitGame.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {exitOption();}
+        });
+
+        /*
         menuBar.add(newGame);
         menuBar.add(exitGame);
-        add(menuBar);
+         */
+        dom.add(newGame);
+        dom.add(exitGame);
     }
 
     public void actionPerformed(ActionEvent evt) {
-        if (evt.getActionCommand().equals("Exit")) {
-            exitOption();
-        }
-        else if (evt.getActionCommand().equals("NewGame")) {
+        if (evt.getActionCommand().equals("NewGame")) {
             //TODO: If game not over: "Leave this game?"
             super.setVisible(false);
             Controller.main();
