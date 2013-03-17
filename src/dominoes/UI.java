@@ -80,11 +80,6 @@ public class UI extends JFrame implements ActionListener, DominoUI {
 
     private void setupMenuBar(EtchedBorder eb, int x, int y) {
         //Creates menu bar with chosen settings and all components required
-        /*menuBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        menuBar.setBackground(Color.gray);
-        menuBar.setSize(x,y);
-        menuBar.setBorder(eb);
-        */
         menuBar = new MenuBar();
         this.setMenuBar(menuBar);
         Menu dom = new Menu("Dominoes");
@@ -94,10 +89,6 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         MenuItem newGame = new MenuItem("New Game", new MenuShortcut(KeyEvent.VK_N));
         MenuItem exitGame = new MenuItem("Exit Dominoes", new MenuShortcut(KeyEvent.VK_X));
         MenuItem aboutItem = new MenuItem("About AD", new MenuShortcut(KeyEvent.VK_A));
-        /*
-        newGame = new JButton("New Game");
-        exitGame = new JButton("Exit");
-        */
         newGame.setActionCommand("NewGame"); // set the command
         exitGame.setActionCommand("Exit"); // set the command
         newGame.addActionListener(this);
@@ -105,10 +96,6 @@ public class UI extends JFrame implements ActionListener, DominoUI {
             @Override
             public void actionPerformed(ActionEvent e) {exitOption();}
         });
-        /*
-        menuBar.add(newGame);
-        menuBar.add(exitGame);
-         */
         dom.add(newGame);
         dom.add(exitGame);
         aboutItem.setActionCommand("About");
@@ -122,20 +109,10 @@ public class UI extends JFrame implements ActionListener, DominoUI {
             super.setVisible(false);
             Controller.main(new String[] {});
         } else if (evt.getActionCommand().equals("About")) {
-            //TODO make the AboutDialog show
-            //TODO this is the same thing that prevents game from showing from welcomepage
-            final JFrame af = new JFrame("About Awesome Dominoes");
-            af.setVisible(true);
-            af.setSize(300,300);
-            af.add(new AboutDialog(af,"AAD",true));
-            /*JButton button = new JButton("OK");
-            af.setVisible(true);
-            af.setSize(300,300);
-            af.add(new JLabel("About Awesome Dominoes"));
-            af.add(button);
-            button.addActionListener(new ButtonListener());
-            af.pack();*/
-
+            //TODO Pause game
+            String aboutTxt = "Awesome Dominoes was written by:\nAbbie James\nNick Mackin\nTimothy Baldock";
+            JOptionPane.showMessageDialog(new JFrame(), aboutTxt, "About Awesome Dominoes",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
@@ -155,6 +132,8 @@ public class UI extends JFrame implements ActionListener, DominoUI {
             System.exit(0);
         }
     }
+
+    @Override
     public void paint(Graphics graphics){
         super.paint(graphics);
 

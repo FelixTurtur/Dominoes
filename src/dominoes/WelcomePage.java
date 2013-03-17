@@ -33,15 +33,13 @@ public class WelcomePage extends JFrame implements ActionListener {
     public WelcomePage() {
         super("Awesome Dominoes");
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        setSize(800, 800);
         setBackground(Color.BLUE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         addTitlePanel();
         addTargetScorePanel();
         addPlayerChoicePanels();
         addButtonsPanel();
-        //super.setVisible(true);
+        this.pack();
     }
 
     public void setUpGame() {
