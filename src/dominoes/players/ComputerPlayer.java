@@ -14,6 +14,10 @@ import java.util.List;
 
 public class ComputerPlayer extends Player {
 
+    public ComputerPlayer(String name) {
+        super(name);
+    }
+
     protected void detectLifeform() {
         isHuman = false;
     }

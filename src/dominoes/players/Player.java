@@ -18,12 +18,20 @@ public class Player implements DominoPlayer {
     protected List<Bone> hand = new LinkedList<Bone>();
     protected Boolean isHuman;
 
+    public Player(String name) {
+        this.name = name;
+    }
+
     protected void detectLifeform() {
         isHuman = true;
     }
 
     public Boolean isHuman() {
         return isHuman;
+    }
+
+    public PlayerType getPlayerType() {
+        return isHuman ? PlayerType.Human : PlayerType.Computer;
     }
 
 

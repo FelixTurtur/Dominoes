@@ -2,6 +2,7 @@ package dominoes;
 
 import dominoes.players.ComputerPlayer;
 import dominoes.players.Player;
+import dominoes.players.PlayerType;
 
 import javax.swing.*;
 
@@ -26,15 +27,24 @@ public class Controller {
 
     }
 
-    public static void runGame(String[] args) {
+    private static Player createPlayer(PlayerType type, String name) {
+        if (type == PlayerType.Computer) {
+            return new ComputerPlayer(name);
+        } else if (type == PlayerType.Human) {
+            return new Player(name);
+        }
+        throw new IllegalArgumentException("type was not a valid createable player type");
+    }
+
+    public static void runGame(PlayerType player1Type, PlayerType player2Type, String player1Name, String player2Name, int targetScore) {
         while (gametime) {
-            DominoUI ui = UI.getInstance();
-            Player player1 = setPlayerType(args[0]);
-            Player player2 = setPlayerType(args[1]);
-            Player[] players = {player1, player2};
-            players[0].setName(args[2]);
-            players[1].setName(args[3]);
-            targetScore = Integer.parseInt((args[4]));
+            UI ui = UI.getInstance();
+            ui.setPlayer1Type(player1Type);
+            ui.setPlayer2Type(player2Type);
+            ui.setPlayer1Name(player1Name);
+            ui.setPlayer2Name(player2Name);
+
+            Player[] players = { createPlayer(player1Type, player1Name), createPlayer(player2Type, player2Name) };
 
             Dominoes dominoes = new Dominoes(ui, players[0], players[1], targetScore, maxpips);
             dominoes.players.DominoPlayer victorious = dominoes.play();
@@ -45,12 +55,4 @@ public class Controller {
             if (x == 1) gametime = false;
         }
     }
-
-    private static Player setPlayerType(String type) {
-        if (type.equals("Human")) {
-            return new Player();
-        }
-        return new ComputerPlayer();
-    }
-
 }

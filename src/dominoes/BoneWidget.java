@@ -1,5 +1,7 @@
 package dominoes;
 
+import dominoes.players.PlayerType;
+
 import java.awt.*;
 
 /**
@@ -10,7 +12,7 @@ import java.awt.*;
  */
 public class BoneWidget extends Canvas {
     private Bone bone;
-    private String playerType;
+    private PlayerType playerType = PlayerType.None;
     private int size = 120;
     private boolean portraitOrientation = false;
     private boolean hidden = false;
@@ -20,16 +22,16 @@ public class BoneWidget extends Canvas {
     long entered = 0;
     long inComponent = 0;
 
-    public BoneWidget(Bone bone, String playerType, int size) {
+    public BoneWidget(Bone bone, PlayerType playerType, int size) {
         this.bone = bone;
         this.playerType = playerType;
         this.size = size;
 
         // Orientation depends on playerType
-        if (this.playerType == "dominoes.players.Player" || this.playerType == "dominoes.players.ComputerPlayer") {
+        if (this.playerType == PlayerType.Human || this.playerType == PlayerType.Computer) {
             portraitOrientation = true;
             reshape(0, 0, size / 2, size);
-            if (this.playerType == "dominoes.players.ComputerPlayer") {
+            if (this.playerType == PlayerType.Computer) {
                 hidden = true;
             }
         } else {
@@ -37,9 +39,9 @@ public class BoneWidget extends Canvas {
         }
     }
 
-    public boolean mouseEnter(Event e, int x, int y) {
+    /*public boolean mouseEnter(Event e, int x, int y) {
         entered = e.when;
-        background = Color.red;
+        background = Color.yellow;
         repaint();
         return true;
     }
@@ -49,6 +51,20 @@ public class BoneWidget extends Canvas {
         background = Color.black;
         repaint();
         return true;
+    }*/
+
+    public boolean mouseUp(Event e, int x, int y) {
+        // Send bone selected event to parent
+        // Update bone colour to indicate selection
+        background = Color.red;
+        // Container should see event
+        return false;
+    }
+
+    public void eventDeselected() {
+        // This bone has been deselected, normal colour
+        background = Color.black;
+        repaint();
     }
 
     public void paint(Graphics g) {

@@ -5,6 +5,7 @@ import dominoes.Dominoes;
 import dominoes.UI;
 import dominoes.players.ComputerPlayer;
 import dominoes.players.Player;
+import dominoes.players.PlayerType;
 
 import javax.swing.*;
 
@@ -23,11 +24,11 @@ public class UI_Test {
 
     public static void main(String[] args) {
         while (x == 0) {
-            DominoUI ui = UI.getInstance();
+            UI ui = UI.getInstance();
+            ui.setPlayer1Type(PlayerType.Computer);
+            ui.setPlayer2Type(PlayerType.Computer);
 
-            Player[] players = {new ComputerPlayer(),new ComputerPlayer()};
-            players[0].setName("Player 1");
-            players[1].setName("Player 2");
+            Player[] players = {new ComputerPlayer("Player 1"), new ComputerPlayer("Player 2")};
 
             Dominoes dominoes = new Dominoes(ui, players[0], players[1], targetScore, maxpips);
             dominoes.players.DominoPlayer victorious = dominoes.play();

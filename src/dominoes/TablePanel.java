@@ -1,5 +1,7 @@
 package dominoes;
 
+import dominoes.players.PlayerType;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -35,16 +37,16 @@ public class TablePanel extends JPanel {
             if (bones.length > maxBones) {
                 // Draw elipsis in middle
                 for (int i = 0; i < maxBones / 2; i++) {
-                    this.add(new BoneWidget(bones[i], "", boneSize));
+                    this.add(new BoneWidget(bones[i], PlayerType.None, boneSize));
                 }
                 this.add(new ElipsisWidget(boneSize));
                 for (int i = bones.length - maxBones / 2; i < bones.length; i++) {
-                    this.add(new BoneWidget(bones[i], "", boneSize));
+                    this.add(new BoneWidget(bones[i], PlayerType.None, boneSize));
                 }
             } else {
                 // Just draw them all
                 for (int i = 0; i < bones.length; i++) {
-                    this.add(new BoneWidget(bones[i], "", boneSize));
+                    this.add(new BoneWidget(bones[i], PlayerType.None, boneSize));
                 }
             }
         }

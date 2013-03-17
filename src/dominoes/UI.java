@@ -2,6 +2,7 @@ package dominoes;
 
 
 import dominoes.players.DominoPlayer;
+import dominoes.players.PlayerType;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -35,6 +36,11 @@ public class UI extends JFrame implements ActionListener, DominoUI {
     int size=120; //size of bones
     BoneYard boneYard;
 
+    private PlayerType player1Type = PlayerType.None;
+    private PlayerType player2Type = PlayerType.None;
+    private String player1Name;
+    private String player2Name;
+
     private UI() {
         super("Awesome Dominoes");
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
@@ -44,13 +50,13 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         setupMenuBar(eb1, windowWidth, windowHeight/10);
         infoPanel =new InfoPanel(new FlowLayout());
         setupScorePanel(infoPanel,eb1);
-        player1Hand = new PlayerHandPanel();
+        player1Hand = new PlayerHandPanel(player1Type);
         setupPlayerHand(player1Hand, eb1);
 
         tableArea = new TablePanel();
         setupTableArea(eb1);
 
-        player2Hand = new PlayerHandPanel();
+        player2Hand = new PlayerHandPanel(player2Type);
         setupPlayerHand(player2Hand, eb1);
         this.setVisible(true);
     }
@@ -66,7 +72,7 @@ public class UI extends JFrame implements ActionListener, DominoUI {
 
     private void setupPlayerHand(PlayerHandPanel panel, EtchedBorder eb1) {
         panel.setBackground(Color.lightGray);
-        panel.setSize(windowWidth,windowHeight/3);
+        panel.setSize(windowWidth, windowHeight / 3);
         panel.setBorder(eb1);
         add(panel);
     }
@@ -139,7 +145,7 @@ public class UI extends JFrame implements ActionListener, DominoUI {
 
     }
 
-    public static DominoUI getInstance(){
+    public static UI getInstance(){
         if (instance == null){
             instance = new UI();
         }
@@ -185,7 +191,21 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         System.out.println("%%%%% Invalid Play %%%%%");
     }
 
+    public void setPlayer1Type(PlayerType type) {
+        this.player1Type = type;
+        this.player1Hand.setPlayerType(type);
+    }
 
+    public void setPlayer2Type(PlayerType type) {
+        this.player2Type = type;
+        this.player2Hand.setPlayerType(type);
+    }
 
+    public void setPlayer1Name(String name) {
+        this.player1Name = name;
+    }
 
+    public void setPlayer2Name(String name) {
+        this.player2Name = name;
+    }
 }

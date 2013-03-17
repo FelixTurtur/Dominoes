@@ -1,6 +1,7 @@
 package dominoes;
 
 import dominoes.players.DominoPlayer;
+import dominoes.players.PlayerType;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -8,6 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+
+import static java.lang.Integer.parseInt;
 
 /**
  * Created with IntelliJ IDEA.
@@ -131,36 +134,44 @@ public class WelcomePage extends JFrame implements ActionListener {
         }
          else if (evt.getActionCommand().equals("newGame")) {
             //Validate game options
-            String[] args = {"","","","",""};
-            try {
-                if (p1H.isSelected()) {
-                    args[0] = p1H.getText();
-                }
-                else args[0] = p1C.getText();
-                if (p2H.isSelected()) {
-                    args[1] = p2H.getText();
-                }
-                else args[1] = p2C.getText();
-                args[2] = p1NameBox.getText();
-                args[3] = p2NameBox.getText();
-                args[4] = scoreBox.getText();
-                for (String s : args) {
-                    if (s.length() == 0) {
-                        throw new Exception("Missing value");
-                    }
-                }
-            } catch (Exception e){
+            PlayerType player1Type = p1H.isSelected() ? PlayerType.Human : PlayerType.Computer;
+            PlayerType player2Type = p1H.isSelected() ? PlayerType.Human : PlayerType.Computer;
+            String player1Name = p1NameBox.getText();
+            String player2Name = p2NameBox.getText();
+            int targetScore = parseInt(scoreBox.getText());
+
+            // Validate fields
+            if (player1Type == PlayerType.None || player2Type == PlayerType.None) {
                 JOptionPane.showMessageDialog(
                         new JFrame(),
-                        "Unable to start Game. Please ensure all fields are populated",
-                        e.getMessage(),
+                        "Unable to start Game. Please select a type for players 1 and 2.",
+                        "",
                         JOptionPane.ERROR_MESSAGE
                 );
                 return;
             }
+            if (player1Name == "" || player2Name == "") {
+                JOptionPane.showMessageDialog(
+                        new JFrame(),
+                        "Unable to start Game. Please select a name for players 1 and 2.",
+                        "",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+            if (targetScore == 0) {
+                JOptionPane.showMessageDialog(
+                        new JFrame(),
+                        "Unable to start Game. Please enter a target score.",
+                        "",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+
             //start game
             this.dispose();
-            Controller.runGame(args);
+            Controller.runGame(player1Type, player2Type, player1Name, player2Name, targetScore);
         }
     }
     public void windowClosing(WindowEvent e) {exitOption();}
