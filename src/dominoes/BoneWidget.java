@@ -12,14 +12,14 @@ public class BoneWidget extends Canvas {
     private Bone bone;
     private String playerType;
     private int size = 120;
-    private static boolean hideComputerHand=true;
+    private static boolean hideComputerHand = true;
     private boolean portraitOrientation = false;
     private boolean hidden = false;
 
     private Color background = Color.black;
 
-    long	entered = 0;
-    long	inComponent = 0;
+    long entered = 0;
+    long inComponent = 0;
 
     public BoneWidget(Bone bone, String playerType, int size) {
         this.bone = bone;
@@ -61,74 +61,40 @@ public class BoneWidget extends Canvas {
         if (hidden) {
             drawForegroundHidden(g);
         } else {
-            drawForegroundPips(g);
+            drawPips(g);
         }
     }
 
-    private void drawForegroundPips(Graphics g) {
-        drawLeftPips(bone.left(), g);
-        drawRightPips(bone.right(), g);
-    }
-
-    private void drawRightPips(int num, Graphics g) {
-        if (portraitOrientation) {
-            // Bottom
-            switch(num) {
-                case 1: drawOnePip(0, size / 2, g);    break;
-                case 2: drawPortraitTwoPips(0, size / 2, g);   break;
-                case 3: drawPortraitThreePips(0, size / 2, g); break;
-                case 4: drawFourPips(0, size / 2, g);  break;
-                case 5: drawFivePips(0, size / 2, g);  break;
-                case 6: drawPortraitSixPips(0, size / 2, g);   break;
-            }
-        } else {
-            // Right
-            switch(num) {
-                case 1: drawOnePip(size / 2, 0, g);    break;
-                case 2: drawLandscapeTwoPips(size / 2, 0, g);   break;
-                case 3: drawLandscapeThreePips(size / 2, 0, g); break;
-                case 4: drawFourPips(size / 2, 0, g);  break;
-                case 5: drawFivePips(size / 2, 0, g);  break;
-                case 6: drawLandscapeSixPips(size / 2, 0, g);   break;
-            }
+    private void drawPips(Graphics g) {
+        switch (bone.left()) {
+            case 1: drawOnePip(g, false);   break;
+            case 2: drawTwoPips(g, false);  break;
+            case 3: drawThreePips(g, false);break;
+            case 4: drawFourPips(g, false); break;
+            case 5: drawFivePips(g, false); break;
+            case 6: drawSixPips(g, false);  break;
         }
-    }
-
-    private void drawLeftPips(int num, Graphics g) {
-        if (portraitOrientation) {
-            // Top
-            switch(num) {
-                case 1: drawOnePip(0, 0, g);    break;
-                case 2: drawPortraitTwoPips(0, 0, g);   break;
-                case 3: drawPortraitThreePips(0, 0, g); break;
-                case 4: drawFourPips(0, 0, g);  break;
-                case 5: drawFivePips(0, 0, g);  break;
-                case 6: drawPortraitSixPips(0, 0, g);   break;
-            }
-        } else {
-            // Left
-            switch(num) {
-                case 1: drawOnePip(0, 0, g);    break;
-                case 2: drawLandscapeTwoPips(0, 0, g);   break;
-                case 3: drawLandscapeThreePips(0, 0, g); break;
-                case 4: drawFourPips(0, 0, g);  break;
-                case 5: drawFivePips(0, 0, g);  break;
-                case 6: drawLandscapeSixPips(0, 0, g);   break;
-            }
+        switch (bone.right()) {
+            case 1: drawOnePip(g, true);    break;
+            case 2: drawTwoPips(g, true);   break;
+            case 3: drawThreePips(g, true); break;
+            case 4: drawFourPips(g, true);  break;
+            case 5: drawFivePips(g, true);  break;
+            case 6: drawSixPips(g, true);   break;
         }
     }
 
     private void drawForegroundHidden(Graphics g) {
         g.setColor(Color.white);
-        int xpoints[] = { size/4, size * 3 / 8, size / 4, size / 8 };
-        int ypoints[] = { size * 3 / 8, size / 2, size * 5 / 8, size / 2 };
-        g.fillPolygon( xpoints, ypoints, 4);
+        int xpoints[] = {size / 4, size * 3 / 8, size / 4, size / 8};
+        int ypoints[] = {size * 3 / 8, size / 2, size * 5 / 8, size / 2};
+        g.fillPolygon(xpoints, ypoints, 4);
     }
 
     private void drawBackground(Graphics g) {
         g.setColor(background);
         if (portraitOrientation) {
-            g.fillRoundRect(0, 0, size /2, size, size / 20, size / 20);
+            g.fillRoundRect(0, 0, size / 2, size, size / 20, size / 20);
         } else {
             g.fillRoundRect(0, 0, size, size / 2, size / 20, size / 20);
         }
@@ -140,74 +106,81 @@ public class BoneWidget extends Canvas {
         }
     }
 
-    private void drawOnePip(int x, int y, Graphics graphics) {
+    private Dimension getOffset(boolean offset) {
+        if (offset) {
+            if (portraitOrientation) {
+                return new Dimension(0, size / 2);
+            } else {
+                return new Dimension(size / 2, 0);
+            }
+        } else {
+            return new Dimension(0, 0);
+        }
+    }
+
+    private void drawOnePip(Graphics graphics, boolean offset) {
         graphics.setColor(Color.green);
-        graphics.fillOval(x+25, y+25, size/12, size/12);
+        Dimension off = getOffset(offset);
+        graphics.fillOval(off.width + 25, off.height + 25, size / 12, size / 12);
     }
 
-    private void drawLandscapeTwoPips(int x, int y, Graphics graphics) {
+    private void drawTwoPips(Graphics graphics, boolean offset) {
         graphics.setColor(Color.blue);
-        graphics.fillOval(x+10, y+10, size/12, size/12);
-        graphics.fillOval(x+40, y+40, size/12, size/12);
+        Dimension off = getOffset(offset);
+        if (portraitOrientation) {
+            graphics.fillOval(off.width + 40, off.height + 10, size / 12, size / 12);
+            graphics.fillOval(off.width + 10, off.height + 40, size / 12, size / 12);
+        } else {
+            graphics.fillOval(off.width + 10, off.height + 10, size / 12, size / 12);
+            graphics.fillOval(off.width + 40, off.height + 40, size / 12, size / 12);
+        }
     }
 
-    private void drawPortraitTwoPips(int x, int y, Graphics graphics) {
-        graphics.setColor(Color.blue);
-        graphics.fillOval(x+40, y+10, size/12, size/12);
-        graphics.fillOval(x+10, y+40, size/12, size/12);
-    }
-
-    private void drawLandscapeThreePips(int x, int y, Graphics graphics) {
+    private void drawThreePips(Graphics graphics, boolean offset) {
         graphics.setColor(Color.pink);
-        graphics.fillOval(x+10, y+10, size/12, size/12);
-        graphics.fillOval(x+25, y+25, size/12, size/12);
-        graphics.fillOval(x+40, y+40, size/12, size/12);
+        Dimension off = getOffset(offset);
+        graphics.fillOval(off.width + 25, off.height + 25, size / 12, size / 12);
+        if (portraitOrientation) {
+            graphics.fillOval(off.width + 40, off.height + 10, size / 12, size / 12);
+            graphics.fillOval(off.width + 10, off.height + 40, size / 12, size / 12);
+        } else {
+            graphics.fillOval(off.width + 10, off.height + 10, size / 12, size / 12);
+            graphics.fillOval(off.width + 40, off.height + 40, size / 12, size / 12);
+        }
     }
 
-    private void drawPortraitThreePips(int x, int y, Graphics graphics) {
-        graphics.setColor(Color.pink);
-        graphics.fillOval(x+40, y+10, size/12, size/12);
-        graphics.fillOval(x+25, y+25, size/12, size/12);
-        graphics.fillOval(x+10, y+40, size/12, size/12);
-    }
-
-    private void drawFourPips(int x, int y, Graphics graphics) {
+    private void drawFourPips(Graphics graphics, boolean offset) {
         graphics.setColor(Color.red);
-        graphics.fillOval(x+10, y+10, size/12, size/12);
-        graphics.fillOval(x+40, y+10, size/12, size/12);
-        graphics.fillOval(x+10, y+40, size/12, size/12);
-        graphics.fillOval(x+40, y+40, size/12, size/12);
+        Dimension off = getOffset(offset);
+        graphics.fillOval(off.width + 10, off.height + 10, size / 12, size / 12);
+        graphics.fillOval(off.width + 40, off.height + 10, size / 12, size / 12);
+        graphics.fillOval(off.width + 10, off.height + 40, size / 12, size / 12);
+        graphics.fillOval(off.width + 40, off.height + 40, size / 12, size / 12);
     }
 
-    private void drawFivePips(int x, int y, Graphics graphics) {
+    private void drawFivePips(Graphics graphics, boolean offset) {
         graphics.setColor(Color.cyan);
-        graphics.fillOval(x+25, y+25, size/12, size/12);
-        graphics.fillOval(x+10, y+10, size/12, size/12);
-        graphics.fillOval(x+40, y+10, size/12, size/12);
-        graphics.fillOval(x+10, y+40, size/12, size/12);
-        graphics.fillOval(x+40, y+40, size/12, size/12);
+        Dimension off = getOffset(offset);
+        graphics.fillOval(off.width + 25, off.height + 25, size / 12, size / 12);
+        graphics.fillOval(off.width + 10, off.height + 10, size / 12, size / 12);
+        graphics.fillOval(off.width + 40, off.height + 10, size / 12, size / 12);
+        graphics.fillOval(off.width + 10, off.height + 40, size / 12, size / 12);
+        graphics.fillOval(off.width + 40, off.height + 40, size / 12, size / 12);
     }
 
-
-
-    private void drawLandscapeSixPips(int x, int y, Graphics graphics) {
+    private void drawSixPips(Graphics graphics, boolean offset) {
         graphics.setColor(Color.yellow);
-        graphics.fillOval(x+10, y+10, size/12, size/12);
-        graphics.fillOval(x+25, y+10, size/12, size/12);
-        graphics.fillOval(x+40, y+10, size/12, size/12);
-        graphics.fillOval(x+10, y+40, size/12, size/12);
-        graphics.fillOval(x+25, y+40, size/12, size/12);
-        graphics.fillOval(x+40, y+40, size/12, size/12);
+        Dimension off = getOffset(offset);
+        graphics.fillOval(off.width + 10, off.height + 10, size / 12, size / 12);
+        graphics.fillOval(off.width + 40, off.height + 10, size / 12, size / 12);
+        graphics.fillOval(off.width + 10, off.height + 40, size / 12, size / 12);
+        graphics.fillOval(off.width + 40, off.height + 40, size / 12, size / 12);
+        if (portraitOrientation) {
+            graphics.fillOval(off.width + 10, off.height + 25, size / 12, size / 12);
+            graphics.fillOval(off.width + 40, off.height + 25, size / 12, size / 12);
+        } else {
+            graphics.fillOval(off.width + 25, off.height + 10, size / 12, size / 12);
+            graphics.fillOval(off.width + 25, off.height + 40, size / 12, size / 12);
+        }
     }
-
-    private void drawPortraitSixPips(int x, int y, Graphics graphics) {
-        graphics.setColor(Color.yellow);
-        graphics.fillOval(x+10, y+10, size/12, size/12);
-        graphics.fillOval(x+10, y+25, size/12, size/12);
-        graphics.fillOval(x+40, y+10, size/12, size/12);
-        graphics.fillOval(x+10, y+40, size/12, size/12);
-        graphics.fillOval(x+40, y+25, size/12, size/12);
-        graphics.fillOval(x+40, y+40, size/12, size/12);
-    }
-
 }
