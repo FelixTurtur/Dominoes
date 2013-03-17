@@ -24,7 +24,6 @@ public class Controller {
     {
         WelcomePage myWelcomePage = new WelcomePage();
         myWelcomePage.setUpGame();
-
     }
 
     private static Player createPlayer(PlayerType type, String name) {
@@ -41,8 +40,6 @@ public class Controller {
             UI ui = UI.getInstance();
             ui.setPlayer1Type(player1Type);
             ui.setPlayer2Type(player2Type);
-            ui.setPlayer1Name(player1Name);
-            ui.setPlayer2Name(player2Name);
 
             Player[] players = { createPlayer(player1Type, player1Name), createPlayer(player2Type, player2Name) };
 

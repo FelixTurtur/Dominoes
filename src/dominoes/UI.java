@@ -23,7 +23,6 @@ import java.awt.event.WindowEvent;
 
 
 public class UI extends JFrame implements ActionListener, DominoUI {
-
     MenuBar menuBar;
     PlayerHandPanel player1Hand;
     PlayerHandPanel player2Hand;
@@ -182,11 +181,9 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         infoPanel.setWinner(dominoPlayer);
         //TODO - technically possible in a test situation that table, dominoPlayers, etc are null which would break at this point
         this.repaint();
-
     }
 
     public void displayInvalidPlay(dominoes.players.DominoPlayer dominoPlayer){
-
         //TODO - make graphics version of this. Need unit test or human interaction first to ensure it works
         System.out.println("%%%%% Invalid Play %%%%%");
     }
@@ -199,13 +196,5 @@ public class UI extends JFrame implements ActionListener, DominoUI {
     public void setPlayer2Type(PlayerType type) {
         this.player2Type = type;
         this.player2Hand.setPlayerType(type);
-    }
-
-    public void setPlayer1Name(String name) {
-        this.player1Name = name;
-    }
-
-    public void setPlayer2Name(String name) {
-        this.player2Name = name;
     }
 }
