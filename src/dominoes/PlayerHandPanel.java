@@ -19,10 +19,10 @@ public class PlayerHandPanel extends JPanel {
 
     DominoPlayer player;
     int size = 120;
-    int boneGap = 30;
+    int boneSpacing = 30;
 
     public PlayerHandPanel() {
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 5));
     }
 
     private void setUpBones() {
