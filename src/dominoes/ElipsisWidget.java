@@ -14,13 +14,13 @@ public class ElipsisWidget extends Canvas {
 
     public ElipsisWidget(int size) {
         this.size = size;
-        reshape(0, 0, size, size / 2);
+        reshape(0, 0, this.size, this.size / 2);
     }
 
     public void paint(Graphics g) {
         g.setColor(Color.black);
         for (int i = 0; i < 5; i = i + 2) {
-            g.fillRoundRect(10 + 20 * i, size / 4, 20, 5, 2, 2);
+            g.fillRoundRect(10 + 20 * i, this.size / 4, 20, 5, 2, 2);
         }
     }
 }

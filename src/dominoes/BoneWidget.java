@@ -12,7 +12,6 @@ public class BoneWidget extends Canvas {
     private Bone bone;
     private String playerType;
     private int size = 120;
-    private static boolean hideComputerHand = true;
     private boolean portraitOrientation = false;
     private boolean hidden = false;
 
