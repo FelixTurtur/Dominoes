@@ -1,10 +1,9 @@
 package dominoes;
 
-import com.sun.media.jfxmedia.events.PlayerStateEvent;
+import dominoes.players.DominoPlayer;
 
 import javax.swing.*;
 import java.awt.*;
-import dominoes.players.DominoPlayer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -62,10 +61,12 @@ public class InfoPanel extends JPanel{
     private void displayScore(Graphics graphics){
         graphics.setFont(font);
         graphics.setColor(Color.blue);
-        for (int i=0; i<players.length;i++){
-            graphics.drawString(players[i].getPoints() + "    " ,this.getWidth()-300,this.getHeight()*(i+1)/3);
-            graphics.drawString(players[i].getName(),this.getWidth()-230,this.getHeight()*(i+1)/3);
+        if (players != null) { //on first paint call players will not be set up
+            for (int i=0; i<players.length;i++){
+                graphics.drawString(players[i].getPoints() + "    " ,this.getWidth()-300,this.getHeight()*(i+1)/3);
+                graphics.drawString(players[i].getName(),this.getWidth()-230,this.getHeight()*(i+1)/3);
 
+            }
         }
     }
 
@@ -74,8 +75,10 @@ public class InfoPanel extends JPanel{
         graphics.fillRoundRect(40, this.getHeight()/2-60, size /2, size, size / 20, size / 20);
         graphics.setColor(Color.white);
         String s="";
-        if (boneYard.size()<10) s=" ";
-        graphics.drawString(s+boneYard.size(),50,this.getHeight()/2+10);
+        if (boneYard != null) {
+            if (boneYard.size()<10) s=" ";
+            graphics.drawString(s+boneYard.size(),50,this.getHeight()/2+10);
+        }
     }
 
 }

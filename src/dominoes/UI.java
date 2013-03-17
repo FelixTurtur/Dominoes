@@ -8,6 +8,8 @@ import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,14 +23,12 @@ import java.awt.event.ActionListener;
 
 public class UI extends JFrame implements ActionListener, DominoUI {
 
-    JPanel menuBar;
+    MenuBar menuBar;
     PlayerHandPanel player1Hand;
     PlayerHandPanel player2Hand;
     InfoPanel infoPanel;
     TablePanel tableArea;
     JPanel infoText;
-    JButton newGame;
-    JButton exitGame;
     static UI instance;
     int windowWidth=1400;
     int windowHeight=800;
@@ -40,18 +40,19 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(windowWidth, windowHeight);
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
+        //add items in order top -> bottom
         setupMenuBar(eb1, windowWidth, windowHeight/10);
         infoPanel =new InfoPanel(new FlowLayout());
         setupScorePanel(infoPanel,eb1);
-        tableArea = new TablePanel(new FlowLayout());
+        player1Hand = new PlayerHandPanel();
+        setupPlayerHand(player1Hand, eb1);
+
+        tableArea = new TablePanel();
         setupTableArea(eb1);
 
-        player1Hand = new PlayerHandPanel(new FlowLayout());
-        setupPlayerHand(player1Hand, eb1);
-        player2Hand = new PlayerHandPanel(new FlowLayout());
+        player2Hand = new PlayerHandPanel();
         setupPlayerHand(player2Hand, eb1);
         this.setVisible(true);
-
     }
 
 
@@ -79,30 +80,60 @@ public class UI extends JFrame implements ActionListener, DominoUI {
 
     private void setupMenuBar(EtchedBorder eb, int x, int y) {
         //Creates menu bar with chosen settings and all components required
-        menuBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        menuBar.setBackground(Color.gray);
-        menuBar.setSize(x,y);
-        menuBar.setBorder(eb);
-        newGame = new JButton("New Game");
-        exitGame = new JButton("Exit");
-        newGame.setActionCommand("NewGame");   // set the command
+        menuBar = new MenuBar();
+        this.setMenuBar(menuBar);
+        Menu dom = new Menu("Dominoes");
+        menuBar.add(dom);
+        Menu about = new Menu("About");
+        menuBar.add(about);
+        MenuItem newGame = new MenuItem("New Game", new MenuShortcut(KeyEvent.VK_N));
+        MenuItem exitGame = new MenuItem("Exit Dominoes", new MenuShortcut(KeyEvent.VK_X));
+        MenuItem aboutItem = new MenuItem("About AD", new MenuShortcut(KeyEvent.VK_A));
+        newGame.setActionCommand("NewGame"); // set the command
         exitGame.setActionCommand("Exit"); // set the command
         newGame.addActionListener(this);
-        exitGame.addActionListener(this);
-        menuBar.add(newGame);
-        menuBar.add(exitGame);
-        add(menuBar);
+        exitGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {exitOption();}
+        });
+        dom.add(newGame);
+        dom.add(exitGame);
+        aboutItem.setActionCommand("About");
+        aboutItem.addActionListener(this);
+        about.add(aboutItem);
     }
 
     public void actionPerformed(ActionEvent evt) {
-        if (evt.getActionCommand().equals("Exit")) {
-            //Are you sure you want to quit?
+        if (evt.getActionCommand().equals("NewGame")) {
+            //TODO: If game not over: "Leave this game?"
+            super.setVisible(false);
+            Controller.main(new String[] {});
+        } else if (evt.getActionCommand().equals("About")) {
+            //TODO Pause game
+            String aboutTxt = "Awesome Dominoes was written by:\nAbbie James\nNick Mackin\nTimothy Baldock";
+            JOptionPane.showMessageDialog(new JFrame(), aboutTxt, "About Awesome Dominoes",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
-        else if (evt.getActionCommand().equals("NewGame")) {
-            //Are you sure you want to start a new game?
+
+    }
+
+    public void windowClosing(WindowEvent e) {exitOption();}
+    public void exitOption() {
+        Object[] options = {"Yes, sorry", "No, whoops!"};
+        int x = JOptionPane.showOptionDialog(new JFrame(), "Are you sure you want to quit?",
+                "Leaving so soon?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
+                null, options,  options[1]);
+        if (x == 1) {
+            System.out.println("Knew you wouldn't leave");
+        }
+        else {
+            System.out.println("Closing...");
+            this.setVisible(false);
+            System.exit(0);
         }
     }
 
+    @Override
     public void paint(Graphics graphics){
         super.paint(graphics);
 

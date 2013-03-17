@@ -7,6 +7,7 @@ import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,19 +33,13 @@ public class WelcomePage extends JFrame implements ActionListener {
     public WelcomePage() {
         super("Awesome Dominoes");
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        setSize(800, 800);
         setBackground(Color.BLUE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         addTitlePanel();
         addTargetScorePanel();
         addPlayerChoicePanels();
         addButtonsPanel();
-        //super.setVisible(true);
-        try {
-            Thread.sleep(2000);
-        } catch(InterruptedException e) {
-        }
+        this.pack();
     }
 
     public void setUpGame() {
@@ -53,6 +48,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         newGame.addActionListener(this);
         exitGame.addActionListener(this);
     }
+
     private void addTitlePanel() {
         //Draw a background square
         titlePanel = new JPanel();
@@ -67,15 +63,9 @@ public class WelcomePage extends JFrame implements ActionListener {
         EtchedBorder eb1 = new EtchedBorder(Color.white, Color.cyan);
         gameButtons.setBorder(eb1);
         newGame = new OptionButton("Begin Game!", "newGame");
-//        newGame.setBackground(Color.BLUE);
-//        newGame.setForeground(Color.WHITE);
-//        newGame.setActionCommand("newGame");
         exitGame = new OptionButton("Leave Dominoes", "Exit");
-//        exitGame.setBackground(Color.BLUE);
-//        exitGame.setForeground(Color.WHITE);
-//        exitGame.setActionCommand("Exit");
-        //newGame.addActionListener(this);
-        //exitGame.addActionListener(this);
+//        newGame.addActionListener(this);
+//        exitGame.addActionListener(this);
         gameButtons.setBackground(Color.green);
         gameButtons.add(newGame);
         gameButtons.add(exitGame);
@@ -137,20 +127,7 @@ public class WelcomePage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evt) {
         if (evt.getActionCommand().equals("Exit")) {
-            //Are you sure you want to quit?
-            Object[] options = {"Yes, sorry", "No, whoops!"};
-            int x = JOptionPane.showOptionDialog(new JFrame(), "Are you sure you want to quit?",
-                    "Leaving so soon?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
-                    null, options,  options[1]);
-            if (x == 1) {
-                System.out.println("Knew you wouldn't leave");
-            }
-            else {
-                //TODO Actually close the program
-                System.out.println("Closing...");
-                this.setVisible(false);
-                System.exit(0);
-            }
+            exitOption();
         }
          else if (evt.getActionCommand().equals("newGame")) {
             //Validate game options
@@ -182,11 +159,25 @@ public class WelcomePage extends JFrame implements ActionListener {
                 return;
             }
             //start game
-            this.setVisible(false);
+            this.dispose();
             Controller.runGame(args);
         }
     }
-
+    public void windowClosing(WindowEvent e) {exitOption();}
+    public void exitOption() {
+        Object[] options = {"Yes, sorry", "No, whoops!"};
+        int x = JOptionPane.showOptionDialog(new JFrame(), "Are you sure you want to quit?",
+                "Leaving so soon?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
+                null, options,  options[1]);
+        if (x == 1) {
+            System.out.println("Knew you wouldn't leave");
+        }
+        else {
+            System.out.println("Closing...");
+            this.setVisible(false);
+            System.exit(0);
+        }
+    }
     private class OptionButton extends JButton {
          private OptionButton(String label, String action) {
              super(label);
