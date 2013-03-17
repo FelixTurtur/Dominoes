@@ -134,8 +134,8 @@ public class WelcomePage extends JFrame implements ActionListener {
         }
          else if (evt.getActionCommand().equals("newGame")) {
             //Validate game options
-            PlayerType player1Type = p1H.isSelected() ? PlayerType.Human : PlayerType.Computer;
-            PlayerType player2Type = p1H.isSelected() ? PlayerType.Human : PlayerType.Computer;
+            PlayerType player1Type = p1H.isSelected() ? PlayerType.Human : p1C.isSelected() ? PlayerType.Computer : PlayerType.None;
+            PlayerType player2Type = p2H.isSelected() ? PlayerType.Human : p2C.isSelected() ? PlayerType.Computer : PlayerType.None;
             String player1Name = p1NameBox.getText();
             String player2Name = p2NameBox.getText();
             int targetScore = parseInt(scoreBox.getText());
@@ -150,7 +150,7 @@ public class WelcomePage extends JFrame implements ActionListener {
                 );
                 return;
             }
-            if (player1Name == "" || player2Name == "") {
+            if (player1Name.isEmpty() || player2Name.isEmpty()) {
                 JOptionPane.showMessageDialog(
                         new JFrame(),
                         "Unable to start Game. Please select a name for players 1 and 2.",
