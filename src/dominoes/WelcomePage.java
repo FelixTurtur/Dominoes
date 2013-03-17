@@ -42,10 +42,10 @@ public class WelcomePage extends JFrame implements ActionListener {
         this.pack();
     }
 
-    public void setUpGame() {
+    public void setUpGame(Settings settings) {
         //TODO reset controls
         super.setVisible(true);
-        newGame.addActionListener(this);
+        newGame.addActionListener(settings);
         exitGame.addActionListener(this);
     }
 
@@ -129,39 +129,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         if (evt.getActionCommand().equals("Exit")) {
             exitOption();
         }
-         else if (evt.getActionCommand().equals("newGame")) {
-            //Validate game options
-            String[] args = {"","","","",""};
-            try {
-                if (p1H.isSelected()) {
-                    args[0] = p1H.getText();
-                }
-                else args[0] = p1C.getText();
-                if (p2H.isSelected()) {
-                    args[1] = p2H.getText();
-                }
-                else args[1] = p2C.getText();
-                args[2] = p1NameBox.getText();
-                args[3] = p2NameBox.getText();
-                args[4] = scoreBox.getText();
-                for (String s : args) {
-                    if (s.length() == 0) {
-                        throw new Exception("Missing value");
-                    }
-                }
-            } catch (Exception e){
-                JOptionPane.showMessageDialog(
-                        new JFrame(),
-                        "Unable to start Game. Please ensure all fields are populated",
-                        e.getMessage(),
-                        JOptionPane.ERROR_MESSAGE
-                );
-                return;
-            }
-            //start game
-            this.dispose();
-            Controller.runGame(args);
-        }
+
     }
     public void windowClosing(WindowEvent e) {exitOption();}
     public void exitOption() {

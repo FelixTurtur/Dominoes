@@ -107,7 +107,7 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         if (evt.getActionCommand().equals("NewGame")) {
             //TODO: If game not over: "Leave this game?"
             super.setVisible(false);
-            Controller.main(new String[] {});
+            GameRunner.runGame();
         } else if (evt.getActionCommand().equals("About")) {
             //TODO Pause game
             String aboutTxt = "Awesome Dominoes was written by:\nAbbie James\nNick Mackin\nTimothy Baldock";
