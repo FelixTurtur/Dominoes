@@ -16,24 +16,10 @@ public class Player implements DominoPlayer {
     private String name = "new player";
     private int points = 0;
     protected List<Bone> hand = new LinkedList<Bone>();
-    protected Boolean isHuman;
 
     public Player(String name) {
         this.name = name;
     }
-
-    protected void detectLifeform() {
-        isHuman = true;
-    }
-
-    public Boolean isHuman() {
-        return isHuman;
-    }
-
-    public PlayerType getPlayerType() {
-        return isHuman ? PlayerType.Human : PlayerType.Computer;
-    }
-
 
     public dominoes.Play makePlay(dominoes.Table table) throws dominoes.CantPlayException{
         Play thePlay=chooseMove(table);

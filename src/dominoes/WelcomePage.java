@@ -171,6 +171,8 @@ public class WelcomePage extends JFrame implements ActionListener {
 
             //start game
             this.dispose();
+            System.out.println("Calling runGame with params: player1Type: " + player1Type + ", player2Type: " + player2Type);
+
             Controller.runGame(player1Type, player2Type, player1Name, player2Name, targetScore);
         }
     }

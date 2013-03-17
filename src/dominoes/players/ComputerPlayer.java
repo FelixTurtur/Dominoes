@@ -18,10 +18,6 @@ public class ComputerPlayer extends Player {
         super(name);
     }
 
-    protected void detectLifeform() {
-        isHuman = false;
-    }
-
     protected dominoes.Play chooseMove(dominoes.Table table){
         Play thePlay=null;
         List<PossiblePlay> legalMoves=findLegalMoves(table);

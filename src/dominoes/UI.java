@@ -141,7 +141,6 @@ public class UI extends JFrame implements ActionListener, DominoUI {
     @Override
     public void paint(Graphics graphics){
         super.paint(graphics);
-
     }
 
     public static UI getInstance(){
