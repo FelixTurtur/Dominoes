@@ -14,6 +14,7 @@ import java.awt.event.WindowEvent;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.toHexString;
+import static java.lang.Integer.toString;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,7 +27,6 @@ public class WelcomePage extends JDialog implements ActionListener {
     //region Parameters
     //A whole tonne of parameters
     DominoPlayer p1, p2;
-    String ScoreTarget = "50"; //Textfield is string, resulting args is string
     JPanel titlePanel, p1Panel, p2Panel, targetScorePanel, gameButtons;
     JToggleButton p1H, p1C, p2H, p2C;
     ButtonGroup p1Options, p2Options;
@@ -71,11 +71,9 @@ public class WelcomePage extends JDialog implements ActionListener {
 
     private void addButtonsPanel() {
         gameButtons = new JPanel();
-        gameButtons.setSize(800,50);
+        gameButtons.setSize(800, 50);
         newGame = new OptionButton("Begin Game!", "newGame");
         exitGame = new OptionButton("Leave Dominoes", "Exit");
-//        newGame.addActionListener(this);
-//        exitGame.addActionListener(this);
         gameButtons.add(newGame);
         gameButtons.add(exitGame);
         add(gameButtons);
@@ -85,8 +83,8 @@ public class WelcomePage extends JDialog implements ActionListener {
         targetScorePanel = new JPanel();
         targetScorePanel.setSize(800, 10);
         targetScorePanel.add(new JLabel("Score goal to reach:"));
-        scoreBox = new JTextField(ScoreTarget);
-        scoreBox.setText(ScoreTarget);
+        scoreBox = new JTextField();
+        scoreBox.setText(Integer.toString(targetScore));
         scoreBox.setSize(100, 50);
         scoreBox.setBorder(new EtchedBorder());
         scoreBox.setColumns(3);
@@ -176,8 +174,6 @@ public class WelcomePage extends JDialog implements ActionListener {
             }
 
             super.setVisible(false);
-
-            //this.runGame(player1Type, player2Type, player1Name, player2Name, targetScore);
         }
     }
 
