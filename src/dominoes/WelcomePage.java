@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.Integer.toHexString;
 
 /**
  * Created with IntelliJ IDEA.
@@ -36,44 +37,45 @@ public class WelcomePage extends JDialog implements ActionListener {
     int targetScore = 50;
     PlayerType player1Type;
     PlayerType player2Type;
-    String player1Name;
-    String player2Name;
+    String player1Name = "Player 1";
+    String player2Name = "Player 2";
 
     public WelcomePage(Frame aFrame, String aWord, UI parent) {
-        //super("Awesome Dominoes");
         super(aFrame, true);
+
+        this.player1Type = parent.getPlayer1Type();
+        this.player1Type = parent.getPlayer2Type();
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        setBackground(Color.BLUE);
+
         addTitlePanel();
         addTargetScorePanel();
-        addPlayerChoicePanels();
+        addPlayer1ChoicePanel();
+        addPlayer2ChoicePanel();
         addButtonsPanel();
         this.pack();
+
+        super.setLocationRelativeTo(parent);
 
         newGame.addActionListener(this);
         exitGame.addActionListener(this);
     }
 
     private void addTitlePanel() {
-        //Draw a background square
         titlePanel = new JPanel();
         titlePanel.add(new JLabel("DOMINOES!"));
-        titlePanel.setSize(800,10);
+        titlePanel.setSize(800, 10);
         add(titlePanel);
     }
 
     private void addButtonsPanel() {
         gameButtons = new JPanel();
         gameButtons.setSize(800,50);
-        EtchedBorder eb1 = new EtchedBorder(Color.white, Color.cyan);
-        gameButtons.setBorder(eb1);
         newGame = new OptionButton("Begin Game!", "newGame");
         exitGame = new OptionButton("Leave Dominoes", "Exit");
 //        newGame.addActionListener(this);
 //        exitGame.addActionListener(this);
-        gameButtons.setBackground(Color.green);
         gameButtons.add(newGame);
         gameButtons.add(exitGame);
         add(gameButtons);
@@ -92,42 +94,42 @@ public class WelcomePage extends JDialog implements ActionListener {
         add(targetScorePanel);
     }
 
-    private void addPlayerChoicePanels() {
-        //TODO add toggles for human/computer for each player
-        //TODO If Human is selected, provide a JTextField to collect player name
-        EtchedBorder eb1 = new EtchedBorder(Color.white, Color.cyan);
+    private void addPlayer1ChoicePanel() {
         p1Panel = new JPanel();
-        p1Panel.setBorder(eb1);
-        p1Panel.add(new JLabel("Player 1 Type:"));
+        p1Panel.add(new JLabel("Player 1 - Type:"));
         p1Options = new ButtonGroup();
-        p1H = new JToggleButton("Human");
+        p1H = new JRadioButton("Human");
         p1Options.add(p1H);
-        p1C = new JToggleButton("Computer");
+        p1C = new JRadioButton("Computer", true);
         p1Options.add(p1C);
         p1Panel.add(p1H);
         p1Panel.add(p1C);
-        p1Panel.add(new JLabel("Player 1 Name:"));
+        p1Panel.add(new JLabel("Name:"));
         //getPlayerChoicePanel(eb1, "Player 1", p1Options);
         p1Panel.setSize(800,10);
         p1NameBox = new JTextField();
         p1NameBox.setColumns(20);
+        p1NameBox.setText(this.player1Name);
         p1Panel.add(p1NameBox);
+        add(p1Panel);
+    }
+
+    private void addPlayer2ChoicePanel() {
         p2Panel = new JPanel();
-        p2Panel.setBorder(eb1);
-        p2Panel.add(new JLabel("Player 2 Type:"));
+        p2Panel.add(new JLabel("Player 2 - Type:"));
         p2Options = new ButtonGroup();
-        p2H = new JToggleButton("Human");
+        p2H = new JRadioButton("Human");
         p2Options.add(p2H);
-        p2C = new JToggleButton("Computer");
+        p2C = new JRadioButton("Computer", true);
         p2Options.add(p2C);
         p2Panel.add(p2H);
         p2Panel.add(p2C);
-        p2Panel.add(new JLabel("Player 2 Name:"));
-        p2Panel.setSize(800,10);
+        p2Panel.add(new JLabel("Name:"));
+        p2Panel.setSize(800, 10);
         p2NameBox = new JTextField();
         p2NameBox.setColumns(20);
+        p2NameBox.setText(this.player2Name);
         p2Panel.add(p2NameBox);
-        add(p1Panel);
         add(p2Panel);
    }
 
@@ -201,8 +203,6 @@ public class WelcomePage extends JDialog implements ActionListener {
     private class OptionButton extends JButton {
          private OptionButton(String label, String action) {
              super(label);
-             this.setBackground(Color.BLUE);
-             this.setForeground(Color.WHITE);
              this.setActionCommand(action);
          }
     }

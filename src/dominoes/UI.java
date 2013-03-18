@@ -37,14 +37,11 @@ public class UI extends JFrame implements ActionListener, DominoUI {
     int size=120; //size of bones
     BoneYard boneYard;
 
-    Boolean gametime = true;
     int maxpips = 6;  //graphics output currently can not cope with higher than 6
 
     private PlayerType player1Type = PlayerType.None;
     private PlayerType player2Type = PlayerType.None;
-    private String player1Name;
-    private String player2Name;
-    private int targetScore;
+    private int targetScore = 50;
 
     public UI() {
         super("Awesome Dominoes");
@@ -208,6 +205,14 @@ public class UI extends JFrame implements ActionListener, DominoUI {
     public void setPlayer2Type(PlayerType type) {
         this.player2Type = type;
         this.player2Hand.setPlayerType(type);
+    }
+
+    public PlayerType getPlayer1Type() {
+        return this.player1Type;
+    }
+
+    public PlayerType getPlayer2Type() {
+        return this.player2Type;
     }
 
     private Player createPlayer(PlayerType type, String name) {
