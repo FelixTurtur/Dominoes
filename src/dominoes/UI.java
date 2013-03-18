@@ -1,7 +1,9 @@
 package dominoes;
 
 
+import dominoes.players.ComputerPlayer;
 import dominoes.players.DominoPlayer;
+import dominoes.players.Player;
 import dominoes.players.PlayerType;
 
 import javax.swing.*;
@@ -35,20 +37,29 @@ public class UI extends JFrame implements ActionListener, DominoUI {
     int size=120; //size of bones
     BoneYard boneYard;
 
+    Boolean gametime = true;
+    int maxpips = 6;  //graphics output currently can not cope with higher than 6
+
     private PlayerType player1Type = PlayerType.None;
     private PlayerType player2Type = PlayerType.None;
     private String player1Name;
     private String player2Name;
+    private int targetScore;
 
-    private UI() {
+    public UI() {
         super("Awesome Dominoes");
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+
         setSize(windowWidth, windowHeight);
+        setPreferredSize(new Dimension(windowWidth, windowHeight));
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
+
         //add items in order top -> bottom
         setupMenuBar(eb1, windowWidth, windowHeight/10);
-        infoPanel =new InfoPanel(new FlowLayout());
-        setupScorePanel(infoPanel,eb1);
+
+        infoPanel = new InfoPanel(new FlowLayout());
+        setupScorePanel(infoPanel, eb1);
         player1Hand = new PlayerHandPanel(player1Type);
         setupPlayerHand(player1Hand, eb1);
 
@@ -57,15 +68,17 @@ public class UI extends JFrame implements ActionListener, DominoUI {
 
         player2Hand = new PlayerHandPanel(player2Type);
         setupPlayerHand(player2Hand, eb1);
+
+        this.validate();
         this.setVisible(true);
     }
-
-
 
     private void setupTableArea(EtchedBorder eb1) {
         tableArea.setBackground(Color.orange);
         tableArea.setSize(windowWidth, windowHeight / 3);
+        tableArea.setPreferredSize(new Dimension(windowWidth, windowHeight / 3));
         tableArea.setBorder(eb1);
+        tableArea.validate();
         add(tableArea);
     }
 
@@ -138,17 +151,16 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         }
     }
 
-    @Override
-    public void paint(Graphics graphics){
+    public void paint(Graphics graphics) {
         super.paint(graphics);
     }
 
-    public static UI getInstance(){
+    /*public static UI getInstance(){
         if (instance == null){
             instance = new UI();
         }
         return instance;
-    }
+    }*/
 
     private void setTable(Table table){
         tableArea.setTable(table);
@@ -173,18 +185,19 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         this.setDominoPlayers(dominoPlayers);
         this.setBoneYard(boneYard);
 
-        this.repaint();
+        this.validate();
     }
 
     public void displayRoundWinner(DominoPlayer dominoPlayer){
         infoPanel.setWinner(dominoPlayer);
         //TODO - technically possible in a test situation that table, dominoPlayers, etc are null which would break at this point
-        this.repaint();
+        this.validate();
     }
 
     public void displayInvalidPlay(dominoes.players.DominoPlayer dominoPlayer){
         //TODO - make graphics version of this. Need unit test or human interaction first to ensure it works
         System.out.println("%%%%% Invalid Play %%%%%");
+        this.validate();
     }
 
     public void setPlayer1Type(PlayerType type) {
@@ -196,4 +209,54 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         this.player2Type = type;
         this.player2Hand.setPlayerType(type);
     }
+
+    private Player createPlayer(PlayerType type, String name) {
+        if (type == PlayerType.Computer) {
+            return new ComputerPlayer(name);
+        } else if (type == PlayerType.Human) {
+            return new Player(name);
+        }
+        throw new IllegalArgumentException("type was not a valid createable player type");
+    }
+
+    public Player[] showNewGameDialog() {
+        //To change body of created methods use File | Settings | File Templates.
+        WelcomePage welcomePage = new WelcomePage(this, "Welcome to Dominoes - start a new game", this);
+        welcomePage.setModal(true);
+        welcomePage.setVisible(true);
+
+        // Should now be done showing the dialog and can collect results
+        System.out.println("targetScore is: " + welcomePage.targetScore);
+
+        this.setPlayer1Type(welcomePage.player1Type);
+        this.setPlayer2Type(welcomePage.player2Type);
+        this.setTargetScore(welcomePage.targetScore);
+
+        return new Player[]{createPlayer(welcomePage.player1Type, welcomePage.player1Name),
+                createPlayer(welcomePage.player2Type, welcomePage.player2Name)};
+
+    }
+
+    public void setTargetScore(int targetScore) {
+        this.targetScore = targetScore;
+    }
+
+    public int getTargetScore() {
+        return targetScore;
+    }
+
+    public int getMaxpips() {
+        return maxpips;
+    }
+
+    /*public void runGame(PlayerType player1Type, PlayerType player2Type, String player1Name, String player2Name, int targetScore) {
+        System.out.println("runGame with params: player1Type: " + player1Type + ", player2Type: " + player2Type +
+                ", player1Name: " + player1Name + ", player2Name: " + player2Name + ", targetScore: " + targetScore);
+
+        //UI ui = new UI();
+        this.ui.setVisible(true);
+
+
+    }*/
+
 }

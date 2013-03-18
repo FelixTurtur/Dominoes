@@ -1,6 +1,8 @@
 package dominoes;
 
+import dominoes.players.ComputerPlayer;
 import dominoes.players.DominoPlayer;
+import dominoes.players.Player;
 import dominoes.players.PlayerType;
 
 import javax.swing.*;
@@ -19,35 +21,37 @@ import static java.lang.Integer.parseInt;
  * Time: 21:06
  * To change this template use File | Settings | File Templates.
  */
-public class WelcomePage extends JFrame implements ActionListener {
-
-
+public class WelcomePage extends JDialog implements ActionListener {
     //region Parameters
     //A whole tonne of parameters
     DominoPlayer p1, p2;
     String ScoreTarget = "50"; //Textfield is string, resulting args is string
-    JPanel titlePanel, p1Panel, p2Panel, targetScore, gameButtons;
+    JPanel titlePanel, p1Panel, p2Panel, targetScorePanel, gameButtons;
     JToggleButton p1H, p1C, p2H, p2C;
     ButtonGroup p1Options, p2Options;
     JTextField p1NameBox, p2NameBox, scoreBox;
     JButton newGame, exitGame;
     //endregion
 
-    public WelcomePage() {
-        super("Awesome Dominoes");
+    int targetScore = 50;
+    PlayerType player1Type;
+    PlayerType player2Type;
+    String player1Name;
+    String player2Name;
+
+    public WelcomePage(Frame aFrame, String aWord, UI parent) {
+        //super("Awesome Dominoes");
+        super(aFrame, true);
+
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(Color.BLUE);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addTitlePanel();
         addTargetScorePanel();
         addPlayerChoicePanels();
         addButtonsPanel();
         this.pack();
-    }
 
-    public void setUpGame() {
-        //TODO reset controls
-        super.setVisible(true);
         newGame.addActionListener(this);
         exitGame.addActionListener(this);
     }
@@ -76,16 +80,16 @@ public class WelcomePage extends JFrame implements ActionListener {
     }
 
     private void addTargetScorePanel() {
-        targetScore = new JPanel();
-        targetScore.setSize(800, 10);
-        targetScore.add(new JLabel("Score goal to reach:"));
+        targetScorePanel = new JPanel();
+        targetScorePanel.setSize(800, 10);
+        targetScorePanel.add(new JLabel("Score goal to reach:"));
         scoreBox = new JTextField(ScoreTarget);
         scoreBox.setText(ScoreTarget);
         scoreBox.setSize(100, 50);
         scoreBox.setBorder(new EtchedBorder());
         scoreBox.setColumns(3);
-        targetScore.add(scoreBox);
-        add(targetScore);
+        targetScorePanel.add(scoreBox);
+        add(targetScorePanel);
     }
 
     private void addPlayerChoicePanels() {
@@ -134,11 +138,11 @@ public class WelcomePage extends JFrame implements ActionListener {
         }
          else if (evt.getActionCommand().equals("newGame")) {
             //Validate game options
-            PlayerType player1Type = p1H.isSelected() ? PlayerType.Human : p1C.isSelected() ? PlayerType.Computer : PlayerType.None;
-            PlayerType player2Type = p2H.isSelected() ? PlayerType.Human : p2C.isSelected() ? PlayerType.Computer : PlayerType.None;
-            String player1Name = p1NameBox.getText();
-            String player2Name = p2NameBox.getText();
-            int targetScore = parseInt(scoreBox.getText());
+            player1Type = p1H.isSelected() ? PlayerType.Human : p1C.isSelected() ? PlayerType.Computer : PlayerType.None;
+            player2Type = p2H.isSelected() ? PlayerType.Human : p2C.isSelected() ? PlayerType.Computer : PlayerType.None;
+            player1Name = p1NameBox.getText();
+            player2Name = p2NameBox.getText();
+            targetScore = parseInt(scoreBox.getText());
 
             // Validate fields
             if (player1Type == PlayerType.None || player2Type == PlayerType.None) {
@@ -169,14 +173,16 @@ public class WelcomePage extends JFrame implements ActionListener {
                 return;
             }
 
-            //start game
-            this.dispose();
-            System.out.println("Calling runGame with params: player1Type: " + player1Type + ", player2Type: " + player2Type);
+            super.setVisible(false);
 
-            Controller.runGame(player1Type, player2Type, player1Name, player2Name, targetScore);
+            //this.runGame(player1Type, player2Type, player1Name, player2Name, targetScore);
         }
     }
-    public void windowClosing(WindowEvent e) {exitOption();}
+
+    public void windowClosing(WindowEvent e) {
+        exitOption();
+    }
+
     public void exitOption() {
         Object[] options = {"Yes, sorry", "No, whoops!"};
         int x = JOptionPane.showOptionDialog(new JFrame(), "Are you sure you want to quit?",
@@ -191,6 +197,7 @@ public class WelcomePage extends JFrame implements ActionListener {
             System.exit(0);
         }
     }
+
     private class OptionButton extends JButton {
          private OptionButton(String label, String action) {
              super(label);

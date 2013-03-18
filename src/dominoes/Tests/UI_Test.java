@@ -24,7 +24,7 @@ public class UI_Test {
 
     public static void main(String[] args) {
         while (x == 0) {
-            UI ui = UI.getInstance();
+            UI ui = new UI();
             ui.setPlayer1Type(PlayerType.Computer);
             ui.setPlayer2Type(PlayerType.Computer);
 

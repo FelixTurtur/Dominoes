@@ -19,6 +19,7 @@ public class TablePanel extends JPanel {
 
     public TablePanel() {
         this.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 5));
+        this.validate();
     }
 
     public void setTable(Table t) {
