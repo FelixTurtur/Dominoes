@@ -23,8 +23,10 @@ public class TablePanel extends JPanel {
     PlayPositionWidget leftPlayPosition = new PlayPositionWidget(boneSize);
     PlayPositionWidget rightPlayPosition = new PlayPositionWidget(boneSize);
     private boolean showPlays = false;
+    private TurnCoordinator turnCoordinator;
 
-    public TablePanel() {
+    public TablePanel(TurnCoordinator turnCoordinator) {
+        this.turnCoordinator = turnCoordinator;
         this.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 5));
         this.validate();
     }
@@ -73,9 +75,11 @@ public class TablePanel extends JPanel {
         // Container should not see event
         if (e.target == this.leftPlayPosition) {
             // Send left play event
+            turnCoordinator.nextMovePosition(Play.LEFT);
             System.out.println("Left play position clicked");
         } else if (e.target == this.rightPlayPosition) {
             // Send right play event
+            turnCoordinator.nextMovePosition(Play.RIGHT);
             System.out.println("Right play position clicked");
         }
         return true;
@@ -84,10 +88,14 @@ public class TablePanel extends JPanel {
     // Used by observer to indicate whether play indicators should be shown or hidden at the current time
     public void showPlayIndicators() {
         this.showPlays = true;
+        System.out.println("showPlayIndicators: " + this.showPlays);
+        setUpBones();
     }
 
     public void hidePlayIndicators() {
         this.showPlays = false;
+        System.out.println("hidePlayIndicators: " + this.showPlays);
+        setUpBones();
     }
 
     public void paint(Graphics graphics) {

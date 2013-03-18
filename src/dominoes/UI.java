@@ -24,7 +24,8 @@ import java.awt.event.WindowEvent;
 //TODO - terminate program if window is closed
 
 
-public class UI extends JFrame implements ActionListener, DominoUI {
+// TODO - add an interface to contain the turn interface stuff which UI can implement
+public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordinator {
     MenuBar menuBar;
     PlayerHandPanel player1Hand;
     PlayerHandPanel player2Hand;
@@ -44,6 +45,8 @@ public class UI extends JFrame implements ActionListener, DominoUI {
     private int targetScore = 50;
     private Player player1;
     private Player player2;
+    private CubbyHole nextMove;
+    private Bone nextMoveBone;
 
     public UI() {
         super("Awesome Dominoes");
@@ -59,13 +62,13 @@ public class UI extends JFrame implements ActionListener, DominoUI {
 
         infoPanel = new InfoPanel(new FlowLayout());
         setupScorePanel(infoPanel, eb1);
-        player1Hand = new PlayerHandPanel(player1Type);
+        player1Hand = new PlayerHandPanel(player1Type, this);
         setupPlayerHand(player1Hand, eb1);
 
-        tableArea = new TablePanel();
+        tableArea = new TablePanel(this);
         setupTableArea(eb1);
 
-        player2Hand = new PlayerHandPanel(player2Type);
+        player2Hand = new PlayerHandPanel(player2Type, this);
         setupPlayerHand(player2Hand, eb1);
 
         this.validate();
@@ -176,29 +179,6 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         infoPanel.setBoneYard(boneYard);
     }
 
-    // Update state of UI prior to redraw
-    public void display ( DominoPlayer[] dominoPlayers, Table table,BoneYard boneYard) {
-        //TODO we should not need to set these every time!
-
-        this.setTable(table);
-        this.setDominoPlayers(dominoPlayers);
-        this.setBoneYard(boneYard);
-
-        this.validate();
-    }
-
-    public void displayRoundWinner(DominoPlayer dominoPlayer){
-        infoPanel.setWinner(dominoPlayer);
-        //TODO - technically possible in a test situation that table, dominoPlayers, etc are null which would break at this point
-        this.validate();
-    }
-
-    public void displayInvalidPlay(dominoes.players.DominoPlayer dominoPlayer){
-        //TODO - make graphics version of this. Need unit test or human interaction first to ensure it works
-        System.out.println("%%%%% Invalid Play %%%%%");
-        this.validate();
-    }
-
     public void setPlayer1Type(PlayerType type) {
         this.player1Type = type;
         this.player1Hand.setPlayerType(type);
@@ -219,7 +199,7 @@ public class UI extends JFrame implements ActionListener, DominoUI {
 
     private Player createPlayer(PlayerType type, String name) {
         if (type == PlayerType.Computer) {
-            return new ComputerPlayer(name, this);
+            return new ComputerPlayer(name);
         } else if (type == PlayerType.Human) {
             return new Player(name, this);
         }
@@ -257,24 +237,6 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         return maxpips;
     }
 
-    public void getPlayerMove(Player player) {
-        if (player == this.player1) {
-            this.getPlayer1Move();
-        } else if (player == this.player2) {
-            this.getPlayer2Move();
-        }
-    }
-
-    private void getPlayer1Move() {
-        // Set UI to indicate player 1 should make their move
-        player1Hand.yourMove();
-    }
-
-    private void getPlayer2Move() {
-        // Set UI to indicate player 2 should make their move
-        player2Hand.yourMove();
-    }
-
     public void setPlayer1(Player player1) {
         this.player1 = player1;
     }
@@ -291,9 +253,62 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         return player2;
     }
 
-    /*public void runGame(PlayerType player1Type, PlayerType player2Type, String player1Name, String player2Name, int targetScore) {
-        System.out.println("runGame with params: player1Type: " + player1Type + ", player2Type: " + player2Type +
-                ", player1Name: " + player1Name + ", player2Name: " + player2Name + ", targetScore: " + targetScore);
-    }*/
+
+    // DominoUI implementation
+    public void display ( DominoPlayer[] dominoPlayers, Table table,BoneYard boneYard) {
+        //TODO we should not need to set these every time!
+
+        this.setTable(table);
+        this.setDominoPlayers(dominoPlayers);
+        this.setBoneYard(boneYard);
+
+        this.validate();
+    }
+
+    public void displayRoundWinner(DominoPlayer dominoPlayer){
+        infoPanel.setWinner(dominoPlayer);
+        //TODO - technically possible in a test situation that table, dominoPlayers, etc are null which would break at this point
+        this.validate();
+    }
+
+    public void displayInvalidPlay(dominoes.players.DominoPlayer dominoPlayer){
+        //TODO - make graphics version of this. Need unit test or human interaction first to ensure it works
+        System.out.println("%%%%% Invalid Play %%%%%");
+        this.validate();
+    }
+
+
+    // TurnCoordinator implementation
+    // Called by PlayerHandPanel when player selects a bone to play
+    public void nextMoveBoneSelected(Bone bone) {
+        this.nextMoveBone = bone;
+        this.tableArea.showPlayIndicators();
+    }
+
+    // Called by TablePanel when player selects play position
+    public void nextMovePosition(int position) {
+        this.tableArea.hidePlayIndicators();
+        this.nextMove.put(new Play(this.nextMoveBone, position));
+    }
+
+    // Called by Player when it requires a move from the UI
+    public void getPlayerMove(Player player, CubbyHole nextMove) {
+        this.nextMove = nextMove;
+        if (player == this.player1) {
+            this.getPlayer1Move();
+        } else if (player == this.player2) {
+            this.getPlayer2Move();
+        }
+    }
+
+    // Set UI to indicate player 1 should make their move
+    private void getPlayer1Move() {
+        player1Hand.yourMove();
+    }
+
+    // Set UI to indicate player 2 should make their move
+    private void getPlayer2Move() {
+        player2Hand.yourMove();
+    }
 
 }

@@ -15,8 +15,8 @@ import java.util.List;
 
 public class ComputerPlayer extends Player {
 
-    public ComputerPlayer(String name, UI ui) {
-        super(name, ui);
+    public ComputerPlayer(String name) {
+        super(name);
     }
 
     protected dominoes.Play chooseMove(dominoes.Table table){

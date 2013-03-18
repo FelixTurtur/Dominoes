@@ -25,14 +25,16 @@ public class PlayerHandPanel extends JPanel {
 
     DominoPlayer player;
     private PlayerType playerType;
+    private TurnCoordinator turnCoordinator;
     int size = 120;
     int boneSpacing = 30;
 
     List<BoneWidget> boneWidgets = new LinkedList<BoneWidget>();
     private boolean ourTurn = false;
 
-    public PlayerHandPanel(PlayerType playerType) {
+    public PlayerHandPanel(PlayerType playerType, TurnCoordinator turnCoordinator) {
         this.playerType = playerType;
+        this.turnCoordinator = turnCoordinator;
         this.turnText = new JLabel();
         this.bonePanel = new JPanel();
         this.bonePanel.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 5));
@@ -75,6 +77,7 @@ public class PlayerHandPanel extends JPanel {
                 } else {
                     boneWidgets.get(i).eventSelected();
                     // Send event to indicate that the bone in question has been selected for play
+                    turnCoordinator.nextMoveBoneSelected(boneWidgets.get(i).getBone());
                     System.out.println("Bone has been selected for play: " + boneWidgets.get(i).getBone().toString());
                 }
             }

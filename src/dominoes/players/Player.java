@@ -1,9 +1,6 @@
 package dominoes.players;
 
-import dominoes.Bone;
-import dominoes.CubbyHole;
-import dominoes.Play;
-import dominoes.UI;
+import dominoes.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,17 +14,20 @@ import static java.lang.Thread.sleep;
  * Time: 21:54
  */
 public class Player implements DominoPlayer {
-
     private String name = "new player";
+    private TurnCoordinator turnCoordinator;
     private int points = 0;
     protected List<Bone> hand = new LinkedList<Bone>();
-    UI ui;
 
     public CubbyHole nextMove = new CubbyHole();
 
-    public Player(String name, UI ui) {
+    protected Player(String name) {
         this.name = name;
-        this.ui = ui;
+    }
+
+    public Player(String name, TurnCoordinator turnCoordinator) {
+        this(name);
+        this.turnCoordinator = turnCoordinator;
     }
 
     public dominoes.Play makePlay(dominoes.Table table) throws dominoes.CantPlayException{
@@ -40,7 +40,7 @@ public class Player implements DominoPlayer {
     protected dominoes.Play chooseMove(dominoes.Table table){
         //not implemented yet
         nextMove.put(null);
-        ui.getPlayerMove(this);
+        turnCoordinator.getPlayerMove(this, nextMove);
 
         // Wait for UI thread to place the next move in here
         while (nextMove.get() == null) {
