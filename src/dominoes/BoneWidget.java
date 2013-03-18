@@ -21,6 +21,8 @@ public class BoneWidget extends Canvas {
 
     long entered = 0;
     long inComponent = 0;
+    private Color backgroundColorSelected = Color.gray;
+    private Color backgroundColorDeselected = Color.black;
 
     public BoneWidget(Bone bone, PlayerType playerType, int size) {
         this.bone = bone;
@@ -54,17 +56,17 @@ public class BoneWidget extends Canvas {
     }*/
 
     public boolean mouseUp(Event e, int x, int y) {
-        // Send bone selected event to parent
-        // Update bone colour to indicate selection
-        background = Color.gray;
         // Container should see event
-        repaint();
         return false;
     }
 
+    public void eventSelected() {
+        background = this.backgroundColorSelected;
+        repaint();
+    }
+
     public void eventDeselected() {
-        // This bone has been deselected, normal colour
-        background = Color.black;
+        background = this.backgroundColorDeselected;
         repaint();
     }
 

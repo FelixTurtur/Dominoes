@@ -71,6 +71,8 @@ public class PlayerHandPanel extends JPanel {
         for (int i = 0; i < boneWidgets.size(); i++) {
             if (e.target != boneWidgets.get(i)) {
                 boneWidgets.get(i).eventDeselected();
+            } else {
+                boneWidgets.get(i).eventSelected();
             }
         }
         // Container should not see event
