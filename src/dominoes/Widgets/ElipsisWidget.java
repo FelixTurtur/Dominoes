@@ -1,4 +1,4 @@
-package dominoes;
+package dominoes.Widgets;
 
 import java.awt.*;
 

@@ -265,14 +265,14 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         }
     }
 
-    private void getPlayer2Move() {
-        // Set UI to indicate player 1 should make their move
-        player2Hand.yourMove(player2.nextMove);
-    }
-
     private void getPlayer1Move() {
         // Set UI to indicate player 1 should make their move
-        player1Hand.yourMove(player1.nextMove);
+        player1Hand.yourMove();
+    }
+
+    private void getPlayer2Move() {
+        // Set UI to indicate player 2 should make their move
+        player2Hand.yourMove();
     }
 
     public void setPlayer1(Player player1) {

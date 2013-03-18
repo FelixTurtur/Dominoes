@@ -1,5 +1,6 @@
-package dominoes;
+package dominoes.Widgets;
 
+import dominoes.Bone;
 import dominoes.players.PlayerType;
 
 import java.awt.*;
@@ -39,6 +40,10 @@ public class BoneWidget extends Canvas {
         } else {
             reshape(0, 0, size, size / 2);
         }
+    }
+
+    public Bone getBone() {
+        return bone;
     }
 
     /*public boolean mouseEnter(Event e, int x, int y) {

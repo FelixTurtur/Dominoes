@@ -1,9 +1,10 @@
 package dominoes;
 
+import dominoes.Widgets.BoneWidget;
+import dominoes.Widgets.ElipsisWidget;
+import dominoes.Widgets.PlayPositionWidget;
 import dominoes.players.PlayerType;
 
-import java.util.List;
-import java.util.LinkedList;
 import javax.swing.*;
 import java.awt.*;
 
@@ -21,6 +22,7 @@ public class TablePanel extends JPanel {
     // Indicator for play positions and click targets
     PlayPositionWidget leftPlayPosition = new PlayPositionWidget(boneSize);
     PlayPositionWidget rightPlayPosition = new PlayPositionWidget(boneSize);
+    private boolean showPlays = false;
 
     public TablePanel() {
         this.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 5));
@@ -41,7 +43,9 @@ public class TablePanel extends JPanel {
             // Max number of bones = width of display area divided by bone size + spacing
             int maxBones = this.getSize().width / (boneSize + boneSpacing) - 2;
 
-            this.add(this.leftPlayPosition);
+            if (this.showPlays) {
+                this.add(this.leftPlayPosition);
+            }
             if (bones.length > maxBones) {
                 // Draw elipsis in middle
                 for (int i = 0; i < maxBones / 2; i++) {
@@ -57,7 +61,9 @@ public class TablePanel extends JPanel {
                     this.add(new BoneWidget(bones[i], PlayerType.None, boneSize));
                 }
             }
-            this.add(this.rightPlayPosition);
+            if (this.showPlays) {
+                this.add(this.rightPlayPosition);
+            }
         }
         this.validate();
     }
@@ -67,10 +73,21 @@ public class TablePanel extends JPanel {
         // Container should not see event
         if (e.target == this.leftPlayPosition) {
             // Send left play event
+            System.out.println("Left play position clicked");
         } else if (e.target == this.rightPlayPosition) {
             // Send right play event
+            System.out.println("Right play position clicked");
         }
         return true;
+    }
+
+    // Used by observer to indicate whether play indicators should be shown or hidden at the current time
+    public void showPlayIndicators() {
+        this.showPlays = true;
+    }
+
+    public void hidePlayIndicators() {
+        this.showPlays = false;
     }
 
     public void paint(Graphics graphics) {

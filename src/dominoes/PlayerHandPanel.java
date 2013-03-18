@@ -1,5 +1,6 @@
 package dominoes;
 
+import dominoes.Widgets.BoneWidget;
 import dominoes.players.DominoPlayer;
 import dominoes.players.PlayerType;
 
@@ -27,9 +28,8 @@ public class PlayerHandPanel extends JPanel {
     int size = 120;
     int boneSpacing = 30;
 
-    CubbyHole nextTurn;
-
     List<BoneWidget> boneWidgets = new LinkedList<BoneWidget>();
+    private boolean ourTurn = false;
 
     public PlayerHandPanel(PlayerType playerType) {
         this.playerType = playerType;
@@ -67,12 +67,16 @@ public class PlayerHandPanel extends JPanel {
 
     public boolean mouseUp(Event e, int x, int y) {
         // Update all bones except the one clicked on to tell them they are inactive
-        Component[] components = this.bonePanel.getComponents();
-        for (int i = 0; i < boneWidgets.size(); i++) {
-            if (e.target != boneWidgets.get(i)) {
-                boneWidgets.get(i).eventDeselected();
-            } else {
-                boneWidgets.get(i).eventSelected();
+        if (ourTurn) {
+            Component[] components = this.bonePanel.getComponents();
+            for (int i = 0; i < boneWidgets.size(); i++) {
+                if (e.target != boneWidgets.get(i)) {
+                    boneWidgets.get(i).eventDeselected();
+                } else {
+                    boneWidgets.get(i).eventSelected();
+                    // Send event to indicate that the bone in question has been selected for play
+                    System.out.println("Bone has been selected for play: " + boneWidgets.get(i).getBone().toString());
+                }
             }
         }
         // Container should not see event
@@ -83,9 +87,9 @@ public class PlayerHandPanel extends JPanel {
         super.paint(graphics);
     }
 
-    public void yourMove(CubbyHole nextMove) {
+    public void yourMove() {
         // Indicate that it is this player's move, and then use synchronised cubby hole to indicate move taken
         this.turnText.setText("It's your turn!");
-        this.nextTurn = nextMove;
+        this.ourTurn = true;
     }
 }
