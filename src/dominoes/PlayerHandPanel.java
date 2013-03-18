@@ -3,6 +3,8 @@ package dominoes;
 import dominoes.players.DominoPlayer;
 import dominoes.players.PlayerType;
 
+import java.util.LinkedList;
+import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,23 +19,38 @@ public class PlayerHandPanel extends JPanel {
     // TODO Make a class to derive TablePanel and PlayerHandPanel from!!!!!!!!!!
 
     //TODO use this.getWidth() and this.getHeight to place everthing in case we resize the window
+    JPanel bonePanel;
+    JLabel turnText;
 
     DominoPlayer player;
     private PlayerType playerType;
     int size = 120;
     int boneSpacing = 30;
 
+    CubbyHole nextTurn;
+
+    List<BoneWidget> boneWidgets = new LinkedList<BoneWidget>();
+
     public PlayerHandPanel(PlayerType playerType) {
         this.playerType = playerType;
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 5));
+        this.turnText = new JLabel();
+        this.bonePanel = new JPanel();
+        this.bonePanel.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 5));
+
+        this.add(this.turnText);
+        this.add(this.bonePanel);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
 
     private void setUpBones() {
-        this.removeAll();
+        this.bonePanel.removeAll();
+        this.boneWidgets.clear();
         if (player != null) {
             Bone[] bones = player.bonesInHand();
             for (int i = 0; i < bones.length; i++) {
-                this.add(new BoneWidget(bones[i], this.playerType, 120));
+                BoneWidget boneWidget = new BoneWidget(bones[i], this.playerType, 120);
+                this.boneWidgets.add(boneWidget);
+                this.bonePanel.add(boneWidget);
             }
         }
         this.validate();
@@ -50,11 +67,10 @@ public class PlayerHandPanel extends JPanel {
 
     public boolean mouseUp(Event e, int x, int y) {
         // Update all bones except the one clicked on to tell them they are inactive
-        Component[] components = this.getComponents();
-        for (int i = 0; i < components.length; i++) {
-            // TODO this is bad, should not be using a cast
-            if (e.target != components[i] && components[i].getClass() == BoneWidget.class) {
-                ((BoneWidget)components[i]).eventDeselected();
+        Component[] components = this.bonePanel.getComponents();
+        for (int i = 0; i < boneWidgets.size(); i++) {
+            if (e.target != boneWidgets.get(i)) {
+                boneWidgets.get(i).eventDeselected();
             }
         }
         // Container should not see event
@@ -63,5 +79,11 @@ public class PlayerHandPanel extends JPanel {
 
     public void paint(Graphics graphics) {
         super.paint(graphics);
+    }
+
+    public void yourMove(CubbyHole nextMove) {
+        // Indicate that it is this player's move, and then use synchronised cubby hole to indicate move taken
+        this.turnText.setText("It's your turn!");
+        this.nextTurn = nextMove;
     }
 }

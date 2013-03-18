@@ -56,8 +56,9 @@ public class BoneWidget extends Canvas {
     public boolean mouseUp(Event e, int x, int y) {
         // Send bone selected event to parent
         // Update bone colour to indicate selection
-        background = Color.red;
+        background = Color.gray;
         // Container should see event
+        repaint();
         return false;
     }
 

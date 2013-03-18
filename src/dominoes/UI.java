@@ -42,6 +42,8 @@ public class UI extends JFrame implements ActionListener, DominoUI {
     private PlayerType player1Type = PlayerType.None;
     private PlayerType player2Type = PlayerType.None;
     private int targetScore = 50;
+    private Player player1;
+    private Player player2;
 
     public UI() {
         super("Awesome Dominoes");
@@ -217,9 +219,9 @@ public class UI extends JFrame implements ActionListener, DominoUI {
 
     private Player createPlayer(PlayerType type, String name) {
         if (type == PlayerType.Computer) {
-            return new ComputerPlayer(name);
+            return new ComputerPlayer(name, this);
         } else if (type == PlayerType.Human) {
-            return new Player(name);
+            return new Player(name, this);
         }
         throw new IllegalArgumentException("type was not a valid createable player type");
     }
@@ -237,9 +239,10 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         this.setPlayer2Type(welcomePage.player2Type);
         this.setTargetScore(welcomePage.targetScore);
 
-        return new Player[]{createPlayer(welcomePage.player1Type, welcomePage.player1Name),
-                createPlayer(welcomePage.player2Type, welcomePage.player2Name)};
+        this.setPlayer1(createPlayer(welcomePage.player1Type, welcomePage.player1Name));
+        this.setPlayer2(createPlayer(welcomePage.player2Type, welcomePage.player2Name));
 
+        return new Player[]{this.player1, this.player2};
     }
 
     public void setTargetScore(int targetScore) {
@@ -254,14 +257,43 @@ public class UI extends JFrame implements ActionListener, DominoUI {
         return maxpips;
     }
 
+    public void getPlayerMove(Player player) {
+        if (player == this.player1) {
+            this.getPlayer1Move();
+        } else if (player == this.player2) {
+            this.getPlayer2Move();
+        }
+    }
+
+    private void getPlayer2Move() {
+        // Set UI to indicate player 1 should make their move
+        player2Hand.yourMove(player2.nextMove);
+    }
+
+    private void getPlayer1Move() {
+        // Set UI to indicate player 1 should make their move
+        player1Hand.yourMove(player1.nextMove);
+    }
+
+    public void setPlayer1(Player player1) {
+        this.player1 = player1;
+    }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public void setPlayer2(Player player2) {
+        this.player2 = player2;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
     /*public void runGame(PlayerType player1Type, PlayerType player2Type, String player1Name, String player2Name, int targetScore) {
         System.out.println("runGame with params: player1Type: " + player1Type + ", player2Type: " + player2Type +
                 ", player1Name: " + player1Name + ", player2Name: " + player2Name + ", targetScore: " + targetScore);
-
-        //UI ui = new UI();
-        this.ui.setVisible(true);
-
-
     }*/
 
 }

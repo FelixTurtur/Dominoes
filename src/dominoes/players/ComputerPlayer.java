@@ -1,6 +1,7 @@
 package dominoes.players;
 
 import dominoes.Play;
+import dominoes.UI;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,8 +15,8 @@ import java.util.List;
 
 public class ComputerPlayer extends Player {
 
-    public ComputerPlayer(String name) {
-        super(name);
+    public ComputerPlayer(String name, UI ui) {
+        super(name, ui);
     }
 
     protected dominoes.Play chooseMove(dominoes.Table table){
