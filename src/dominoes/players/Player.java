@@ -39,17 +39,9 @@ public class Player implements DominoPlayer {
 
     protected dominoes.Play chooseMove(dominoes.Table table){
         //not implemented yet
-        nextMove.put(null);
+        //nextMove.put(null);
         turnCoordinator.getPlayerMove(this, nextMove);
 
-        // Wait for UI thread to place the next move in here
-        while (nextMove.get() == null) {
-            try {
-                Thread.currentThread().sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
-        }
         return (Play)nextMove.get();
     }
 
