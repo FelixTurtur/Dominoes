@@ -1,5 +1,6 @@
 package dominoes;
 
+import dominoes.Widgets.BoneYardWidget;
 import dominoes.players.DominoPlayer;
 
 import javax.swing.*;
@@ -11,74 +12,97 @@ import java.awt.*;
  * Date: 10/03/13
  * Time: 20:08
  */
-public class InfoPanel extends JPanel{
-    private DominoPlayer[] players;
+public class InfoPanel extends JPanel {
     private Font font;
-    private BoneYard boneYard;
-    private static int size=120;
-    private DominoPlayer winner=null;
+    private static int size = 120;
 
-    //TODO - work out how to centre all text output
+    private final BoneYardWidget boneYardWidget;
+    private boolean interactive;
+    private TurnCoordinator turnCoordinator;
+    private final JButton newGameButton;
+    private final ScoreBoard scoreBoard;
+    private final JButton boneYardButton;
+    private final JPanel lowerPanel;
+    private final JLabel warningText;
+    private Color warningColour = Color.yellow;
+    private Color gameWinColour = Color.blue;
+    private Color roundWinColour = Color.green;
 
-    InfoPanel(FlowLayout flowLayout){
-        super(flowLayout);
-        font = new Font("Arial", Font.BOLD, 36);
+    public InfoPanel(TurnCoordinator turnCoordinator) {
+        this.turnCoordinator = turnCoordinator;
+        this.font = new Font("Arial", Font.BOLD, 36);
 
+        JPanel boneYardPanel = new JPanel();
+        boneYardPanel.setLayout(new BoxLayout(boneYardPanel, BoxLayout.Y_AXIS));
+        JLabel boneYardDescription = new JLabel();
+        boneYardDescription.setText("Boneyard");
+        boneYardPanel.add(boneYardDescription);
+        this.boneYardWidget = new BoneYardWidget(this.size);
+        boneYardPanel.add(boneYardWidget);
+        this.boneYardButton = new JButton();
+        this.boneYardButton.setText("Draw");
+        boneYardPanel.add(this.boneYardButton);
+
+        this.newGameButton = new JButton("New Game");
+        this.scoreBoard = new ScoreBoard();
+
+        this.lowerPanel = new JPanel();
+        this.lowerPanel.add(this.newGameButton);
+        this.lowerPanel.add(boneYardPanel);
+        this.lowerPanel.add(this.scoreBoard);
+        this.lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.X_AXIS));
+
+        this.warningText = new JLabel();
+
+        this.add(this.warningText);
+        this.add(this.lowerPanel);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
 
-    public void setPlayers(DominoPlayer[] p){
-        players=p;
+    public void setPlayers(DominoPlayer[] p) {
+        this.scoreBoard.setPlayers(p);
     }
 
-    public void setBoneYard(BoneYard by){
-        boneYard=by;
+    public void setBoneYard(BoneYard boneYard) {
+        this.boneYardWidget.setBoneYard(boneYard);
     }
 
-    public void setWinner(DominoPlayer w){
-        winner=w;
+    public void roundWinner(DominoPlayer dominoPlayer) {
+        // TODO display round winner message
+        this.scoreBoard.incrementRound();
+        this.warningText.setText(dominoPlayer.getName() + " has won the round!");
+        this.warningText.setBackground(this.roundWinColour);
     }
 
-
-    public void paint(Graphics graphics){
-        super.paint(graphics);
-        displayScore(graphics);
-        drawBoneYard(graphics);
-        if (winner!=null){
-            displayWinner(graphics);
-            winner=null;
-        }
+    public void gameWinner(DominoPlayer dominoPlayer) {
+        // TODO display game winner message
+        //this.scoreBoard.finalScore();
+        this.warningText.setText(dominoPlayer.getName() + " has won the game with " + dominoPlayer.getPoints() + " points!");
+        this.warningText.setBackground(this.gameWinColour);
     }
 
-    private void displayWinner(Graphics graphics){
-        graphics.setColor(Color.yellow);
-        graphics.fill3DRect(this.getWidth() / 4, 10, getWidth() / 2, getHeight() - 20,true);
-        graphics.setColor(Color.black);
-        graphics.setFont(new Font("Arial", Font.BOLD, 50));
-        graphics.drawString(winner.getName() + " wins the round!", this.getWidth()/2-300, this.getHeight() / 2+20);
+    public void invalidMove(DominoPlayer dominoPlayer) {
+        this.warningText.setText("Sorry " + dominoPlayer.getName() + " that was not a valid move. Please try again.");
+        this.warningText.setBackground(this.warningColour);
     }
 
-
-    private void displayScore(Graphics graphics){
-        graphics.setFont(font);
-        graphics.setColor(Color.blue);
-        if (players != null) { //on first paint call players will not be set up
-            for (int i=0; i<players.length;i++){
-                graphics.drawString(players[i].getPoints() + "    " ,this.getWidth()-300,this.getHeight()*(i+1)/3);
-                graphics.drawString(players[i].getName(),this.getWidth()-230,this.getHeight()*(i+1)/3);
-
+    public boolean mouseUp(Event e, int x, int y) {
+        // If click was on bone yard, and we are in a stage of play which allows interaction with the boneyard...
+        if (interactive) {
+            if (e.target == this.boneYardWidget) {
+                // TODO - also do this on events from the draw/pass button
+                turnCoordinator.drawOrPass();
             }
         }
+        // Container should not see event
+        return true;
     }
 
-    private void drawBoneYard(Graphics graphics){
-        graphics.setColor(Color.black);
-        graphics.fillRoundRect(40, this.getHeight()/2-60, size /2, size, size / 20, size / 20);
-        graphics.setColor(Color.white);
-        String s="";
-        if (boneYard != null) {
-            if (boneYard.size()<10) s=" ";
-            graphics.drawString(s+boneYard.size(),50,this.getHeight()/2+10);
-        }
+    public void allowBoneYard() {
+        this.interactive = true;
     }
 
+    public void denyBoneYard() {
+        this.interactive = false;
+    }
 }
