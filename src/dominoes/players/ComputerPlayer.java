@@ -1,6 +1,7 @@
 package dominoes.players;
 
 import dominoes.Play;
+import dominoes.TurnCoordinator;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,11 +15,13 @@ import java.util.List;
 
 public class ComputerPlayer extends Player {
 
-    public ComputerPlayer(String name) {
-        super(name);
+    public ComputerPlayer(String name, TurnCoordinator turnCoordinator) {
+        super(name, turnCoordinator);
     }
 
     protected dominoes.Play chooseMove(dominoes.Table table) {
+        turnCoordinator.aiMoveBegins(this);
+
         Play thePlay = null;
         List<PossiblePlay> legalMoves = findLegalMoves(table);
 
@@ -33,6 +36,7 @@ public class ComputerPlayer extends Player {
         } catch (InterruptedException e) {
         }
 
+        turnCoordinator.aiMoveEnds();
         return thePlay;
     }
 

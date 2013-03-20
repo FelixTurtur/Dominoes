@@ -13,18 +13,14 @@ import java.util.List;
  */
 public class Player implements DominoPlayer {
     private String name;
-    private TurnCoordinator turnCoordinator;
+    protected TurnCoordinator turnCoordinator;
     private int points = 0;
     protected List<Bone> hand = new LinkedList<Bone>();
 
     public CubbyHole nextMove = new CubbyHole();
 
-    protected Player(String name) {
-        this.name = name;
-    }
-
     public Player(String name, TurnCoordinator turnCoordinator) {
-        this(name);
+        this.name = name;
         this.turnCoordinator = turnCoordinator;
     }
 

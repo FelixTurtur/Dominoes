@@ -199,7 +199,7 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
 
     private Player createPlayer(PlayerType type, String name) {
         if (type == PlayerType.Computer) {
-            return new ComputerPlayer(name);
+            return new ComputerPlayer(name, this);
         } else if (type == PlayerType.Human) {
             return new Player(name, this);
         }
@@ -293,24 +293,26 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
         this.player2Hand.notYourMove();
     }
 
+    public void aiMoveBegins(Player player) {
+        if (player == this.player1) {
+            player1Hand.yourMove();
+        } else if (player == this.player2) {
+            player2Hand.yourMove();
+        }
+    }
+
+    public void aiMoveEnds() {
+        this.player1Hand.notYourMove();
+        this.player2Hand.notYourMove();
+    }
+
     // Called by Player when it requires a move from the UI
     public void getPlayerMove(Player player, CubbyHole nextMove) {
         this.nextMove = nextMove;
         if (player == this.player1) {
-            this.getPlayer1Move();
+            player1Hand.yourMove();
         } else if (player == this.player2) {
-            this.getPlayer2Move();
+            player2Hand.yourMove();
         }
     }
-
-    // Set UI to indicate player 1 should make their move
-    private void getPlayer1Move() {
-        player1Hand.yourMove();
-    }
-
-    // Set UI to indicate player 2 should make their move
-    private void getPlayer2Move() {
-        player2Hand.yourMove();
-    }
-
 }

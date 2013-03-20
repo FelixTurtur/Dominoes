@@ -28,7 +28,7 @@ public class UI_Test {
             ui.setPlayer1Type(PlayerType.Computer);
             ui.setPlayer2Type(PlayerType.Computer);
 
-            Player[] players = {new ComputerPlayer("Player 1"), new ComputerPlayer("Player 2")};
+            Player[] players = {new ComputerPlayer("Player 1", ui), new ComputerPlayer("Player 2", ui)};
 
             Dominoes dominoes = new Dominoes(ui, players[0], players[1], targetScore, maxpips);
             dominoes.players.DominoPlayer victorious = dominoes.play();

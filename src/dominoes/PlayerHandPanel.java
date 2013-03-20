@@ -31,6 +31,7 @@ public class PlayerHandPanel extends JPanel {
 
     List<BoneWidget> boneWidgets = new LinkedList<BoneWidget>();
     private boolean ourTurn = false;
+    private boolean interactive;
 
     public PlayerHandPanel(PlayerType playerType, TurnCoordinator turnCoordinator) {
         this.playerType = playerType;
@@ -69,7 +70,7 @@ public class PlayerHandPanel extends JPanel {
 
     public boolean mouseUp(Event e, int x, int y) {
         // Update all bones except the one clicked on to tell them they are inactive
-        if (ourTurn) {
+        if (interactive) {
             Component[] components = this.bonePanel.getComponents();
             for (int i = 0; i < boneWidgets.size(); i++) {
                 if (e.target != boneWidgets.get(i)) {
@@ -92,12 +93,18 @@ public class PlayerHandPanel extends JPanel {
 
     public void yourMove() {
         // Indicate that it is this player's move, and then use synchronised cubby hole to indicate move taken
-        this.turnText.setText("It's your turn!");
+        if (this.playerType == PlayerType.Human) {
+            this.turnText.setText("It's your turn!");
+            this.interactive = true;
+        } else {
+            this.turnText.setText("Computer player is taking their turn...");
+        }
         this.ourTurn = true;
     }
 
     public void notYourMove() {
         this.turnText.setText("");
         this.ourTurn = false;
+        this.interactive = false;
     }
 }

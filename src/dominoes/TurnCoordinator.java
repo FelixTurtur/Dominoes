@@ -19,4 +19,10 @@ public interface TurnCoordinator {
 
     // Called by Player when it requires a move from the UI
     void getPlayerMove(Player player, CubbyHole nextMove);
+
+    // Called to indicate the start of the AI's turn to the UI
+    void aiMoveBegins(Player player);
+
+    // Called to indicate the end of the AI's turn to the UI
+    void aiMoveEnds();
 }
