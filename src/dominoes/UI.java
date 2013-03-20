@@ -289,6 +289,8 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
     public void nextMovePosition(int position) {
         this.tableArea.hidePlayIndicators();
         this.nextMove.put(new Play(this.nextMoveBone, position));
+        this.player1Hand.notYourMove();
+        this.player2Hand.notYourMove();
     }
 
     // Called by Player when it requires a move from the UI

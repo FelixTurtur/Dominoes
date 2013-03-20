@@ -95,4 +95,9 @@ public class PlayerHandPanel extends JPanel {
         this.turnText.setText("It's your turn!");
         this.ourTurn = true;
     }
+
+    public void notYourMove() {
+        this.turnText.setText("");
+        this.ourTurn = false;
+    }
 }
