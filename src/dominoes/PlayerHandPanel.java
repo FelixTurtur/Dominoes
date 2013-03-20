@@ -16,10 +16,6 @@ import java.awt.*;
  * Time: 00:39
  */
 public class PlayerHandPanel extends JPanel {
-
-    // TODO Make a class to derive TablePanel and PlayerHandPanel from!!!!!!!!!!
-
-    //TODO use this.getWidth() and this.getHeight to place everthing in case we resize the window
     JPanel bonePanel;
     JLabel turnText;
 
@@ -37,6 +33,7 @@ public class PlayerHandPanel extends JPanel {
         this.playerType = playerType;
         this.turnCoordinator = turnCoordinator;
         this.turnText = new JLabel();
+        this.turnText.setText(" ");
         this.bonePanel = new JPanel();
         this.bonePanel.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 5));
 
@@ -46,6 +43,8 @@ public class PlayerHandPanel extends JPanel {
     }
 
     private void setUpBones() {
+        // TODO - flicker on redraw is caused because you can't tell AWT to sync redrawing all these components
+        // with the screen redrawing - I don't know how to fix this.
         this.bonePanel.removeAll();
         this.boneWidgets.clear();
         if (player != null) {
@@ -103,7 +102,7 @@ public class PlayerHandPanel extends JPanel {
     }
 
     public void notYourMove() {
-        this.turnText.setText("");
+        this.turnText.setText(" ");
         this.ourTurn = false;
         this.interactive = false;
     }

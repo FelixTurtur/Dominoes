@@ -32,10 +32,9 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
     InfoPanel infoPanel;
     TablePanel tableArea;
     JPanel infoText;
-    static UI instance;
-    int windowWidth=1400;
-    int windowHeight=800;
-    int size=120; //size of bones
+    int windowWidth = 1400;
+    int windowHeight = 800;
+    int size = 120; //size of bones
     BoneYard boneYard;
 
     int maxpips = 6;  //graphics output currently can not cope with higher than 6
@@ -58,7 +57,7 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
 
         //add items in order top -> bottom
-        setupMenuBar(eb1, windowWidth, windowHeight/10);
+        setupMenuBar(eb1, windowWidth, windowHeight / 10);
 
         infoPanel = new InfoPanel(this);
         setupScorePanel(infoPanel, eb1);
@@ -93,7 +92,7 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
 
     private void setupScorePanel(InfoPanel panel, EtchedBorder eb1) {
         panel.setBackground(Color.lightGray);
-        panel.setSize(windowWidth,windowHeight/5);
+        panel.setSize(windowWidth, windowHeight / 5);
         panel.setBorder(eb1);
         add(panel);
     }
@@ -114,7 +113,9 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
         newGame.addActionListener(this);
         exitGame.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {exitOption();}
+            public void actionPerformed(ActionEvent e) {
+                exitOption();
+            }
         });
         dom.add(newGame);
         dom.add(exitGame);
@@ -127,7 +128,7 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
         if (evt.getActionCommand().equals("NewGame")) {
             //TODO: If game not over: "Leave this game?"
             super.setVisible(false);
-            Controller.main(new String[] {});
+            Controller.main(new String[]{});
         } else if (evt.getActionCommand().equals("About")) {
             //TODO Pause game
             String aboutTxt = "Awesome Dominoes was written by:\nAbbie James\nNick Mackin\nTimothy Baldock";
@@ -137,16 +138,18 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
 
     }
 
-    public void windowClosing(WindowEvent e) {exitOption();}
+    public void windowClosing(WindowEvent e) {
+        exitOption();
+    }
+
     public void exitOption() {
         Object[] options = {"Yes, sorry", "No, whoops!"};
         int x = JOptionPane.showOptionDialog(new JFrame(), "Are you sure you want to quit?",
                 "Leaving so soon?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
-                null, options,  options[1]);
+                null, options, options[1]);
         if (x == 1) {
             System.out.println("Knew you wouldn't leave");
-        }
-        else {
+        } else {
             System.out.println("Closing...");
             this.setVisible(false);
             System.exit(0);
@@ -164,17 +167,17 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
         return instance;
     }*/
 
-    private void setTable(Table table){
+    private void setTable(Table table) {
         tableArea.setTable(table);
     }
 
-    private void setDominoPlayers(dominoes.players.DominoPlayer[] dominoPlayers){
+    private void setDominoPlayers(dominoes.players.DominoPlayer[] dominoPlayers) {
         player1Hand.setPlayer(dominoPlayers[0]);
         player2Hand.setPlayer(dominoPlayers[1]);
         infoPanel.setPlayers(dominoPlayers);
     }
 
-    private void setBoneYard(BoneYard boneYard){
+    private void setBoneYard(BoneYard boneYard) {
         this.boneYard = boneYard;
         infoPanel.setBoneYard(boneYard);
     }
@@ -255,26 +258,27 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
 
 
     // DominoUI implementation
-    public void display ( DominoPlayer[] dominoPlayers, Table table,BoneYard boneYard) {
+    public void display(DominoPlayer[] dominoPlayers, Table table, BoneYard boneYard) {
         //TODO we should not need to set these every time!
 
         this.setTable(table);
         this.setDominoPlayers(dominoPlayers);
         this.setBoneYard(boneYard);
-
-        this.validate();
     }
 
-    public void displayRoundWinner(DominoPlayer dominoPlayer){
-        infoPanel.setWinner(dominoPlayer);
-        //TODO - technically possible in a test situation that table, dominoPlayers, etc are null which would break at this point
-        this.validate();
+    public void displayRoundWinner(DominoPlayer dominoPlayer) {
+        // Check if target score has been met, if yes, then it's a game win, if not, round win
+        if (dominoPlayer.getPoints() >= this.targetScore) {
+            this.infoPanel.gameWinner(dominoPlayer);
+        } else {
+            this.infoPanel.roundWinner(dominoPlayer);
+        }
     }
 
-    public void displayInvalidPlay(dominoes.players.DominoPlayer dominoPlayer){
+    public void displayInvalidPlay(DominoPlayer dominoPlayer) {
         //TODO - make graphics version of this. Need unit test or human interaction first to ensure it works
         System.out.println("%%%%% Invalid Play %%%%%");
-        this.validate();
+        this.infoPanel.invalidMove(dominoPlayer);
     }
 
 

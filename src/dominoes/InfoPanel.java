@@ -12,10 +12,9 @@ import java.awt.*;
  * Date: 10/03/13
  * Time: 20:08
  */
-public class InfoPanel extends JPanel{
+public class InfoPanel extends JPanel {
     private Font font;
-    private static int size=120;
-    private DominoPlayer winner=null;
+    private static int size = 120;
 
     private final BoneYardWidget boneYardWidget;
     private boolean interactive;
@@ -23,8 +22,6 @@ public class InfoPanel extends JPanel{
     private final JButton newGameButton;
     private final ScoreBoard scoreBoard;
     private final JButton boneYardButton;
-
-    //TODO - work out how to centre all text output
 
     public InfoPanel(TurnCoordinator turnCoordinator) {
         this.turnCoordinator = turnCoordinator;
@@ -58,23 +55,25 @@ public class InfoPanel extends JPanel{
         this.boneYardWidget.setBoneYard(boneYard);
     }
 
-    public void setWinner(DominoPlayer w) {
-        this.winner = w;
+    public void roundWinner(DominoPlayer dominoPlayer) {
+        // TODO display round winner message
+        this.scoreBoard.incrementRound();
     }
 
+    public void gameWinner(DominoPlayer dominoPlayer) {
+        // TODO display game winner message
+        //this.scoreBoard.finalScore();
+    }
 
-    public void paint(Graphics graphics){
-        super.paint(graphics);
-        if (winner!=null){
-            displayWinner(graphics);
-            winner=null;
-        }
+    public void invalidMove(DominoPlayer dominoPlayer) {
+        // TODO display invalid move message
     }
 
     public boolean mouseUp(Event e, int x, int y) {
         // If click was on bone yard, and we are in a stage of play which allows interaction with the boneyard...
         if (interactive) {
             if (e.target == this.boneYardWidget) {
+                // TODO - also do this on events from the draw/pass button
                 turnCoordinator.drawOrPass();
             }
         }
@@ -88,13 +87,5 @@ public class InfoPanel extends JPanel{
 
     public void denyBoneYard() {
         this.interactive = false;
-    }
-
-    private void displayWinner(Graphics graphics){
-        graphics.setColor(Color.yellow);
-        graphics.fill3DRect(this.getWidth() / 4, 10, getWidth() / 2, getHeight() - 20, true);
-        graphics.setColor(Color.black);
-        graphics.setFont(new Font("Arial", Font.BOLD, 50));
-        graphics.drawString(winner.getName() + " wins the round!", this.getWidth()/2-300, this.getHeight() / 2+20);
     }
 }

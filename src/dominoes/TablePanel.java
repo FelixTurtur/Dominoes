@@ -26,8 +26,10 @@ public class TablePanel extends JPanel {
     private TurnCoordinator turnCoordinator;
 
     public TablePanel(TurnCoordinator turnCoordinator) {
+        this.setMinimumSize(new Dimension(0, boneSize / 2 + 10));
+        this.setSize(new Dimension(0, boneSize / 2 + 10));
         this.turnCoordinator = turnCoordinator;
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 5));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 0));
         this.validate();
     }
 

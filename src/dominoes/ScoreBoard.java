@@ -62,6 +62,11 @@ public class ScoreBoard extends JPanel {
         updateFields();
     }
 
+    public void incrementRound() {
+        this.round++;
+        updateFields();
+    }
+
     private void updateFields() {
         this.roundCount.setText(Integer.toString(this.round));
         if (this.player1 != null) {
@@ -80,5 +85,4 @@ public class ScoreBoard extends JPanel {
         }
         validate();
     }
-    // Shows current round and scores for both players
 }
