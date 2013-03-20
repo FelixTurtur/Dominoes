@@ -45,7 +45,7 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
     private int targetScore = 50;
     private Player player1;
     private Player player2;
-    private CubbyHole nextMove;
+    private PlayWrapperCubbyHole nextMove;
     private Bone nextMoveBone;
 
     public UI() {
@@ -60,7 +60,7 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
         //add items in order top -> bottom
         setupMenuBar(eb1, windowWidth, windowHeight/10);
 
-        infoPanel = new InfoPanel(new FlowLayout());
+        infoPanel = new InfoPanel(this);
         setupScorePanel(infoPanel, eb1);
         player1Hand = new PlayerHandPanel(player1Type, this);
         setupPlayerHand(player1Hand, eb1);
@@ -288,9 +288,10 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
     // Called by TablePanel when player selects play position
     public void nextMovePosition(int position) {
         this.tableArea.hidePlayIndicators();
-        this.nextMove.put(new Play(this.nextMoveBone, position));
+        this.nextMove.put(new PlayWrapper(true, new Play(this.nextMoveBone, position)));
         this.player1Hand.notYourMove();
         this.player2Hand.notYourMove();
+        this.infoPanel.denyBoneYard();
     }
 
     public void aiMoveBegins(Player player) {
@@ -306,9 +307,19 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
         this.player2Hand.notYourMove();
     }
 
+    public void drawOrPass() {
+        //To change body of implemented methods use File | Settings | File Templates.
+        this.tableArea.hidePlayIndicators();
+        this.nextMove.put(new PlayWrapper(false, null));
+        this.player1Hand.notYourMove();
+        this.player2Hand.notYourMove();
+        System.out.println("Draw or pass");
+    }
+
     // Called by Player when it requires a move from the UI
-    public void getPlayerMove(Player player, CubbyHole nextMove) {
+    public void getPlayerMove(Player player, PlayWrapperCubbyHole nextMove) {
         this.nextMove = nextMove;
+        this.infoPanel.allowBoneYard();
         if (player == this.player1) {
             player1Hand.yourMove();
         } else if (player == this.player2) {

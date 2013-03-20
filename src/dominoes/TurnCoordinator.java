@@ -18,11 +18,14 @@ public interface TurnCoordinator {
     void nextMovePosition(int position);
 
     // Called by Player when it requires a move from the UI
-    void getPlayerMove(Player player, CubbyHole nextMove);
+    void getPlayerMove(Player player, PlayWrapperCubbyHole nextMove);
 
     // Called to indicate the start of the AI's turn to the UI
     void aiMoveBegins(Player player);
 
     // Called to indicate the end of the AI's turn to the UI
     void aiMoveEnds();
+
+    // Indicate that the player wishes to draw a bone from the boneyard (or pass if there are none)
+    void drawOrPass();
 }

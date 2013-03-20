@@ -17,13 +17,10 @@ public class Player implements DominoPlayer {
     private int points = 0;
     protected List<Bone> hand = new LinkedList<Bone>();
 
-    public CubbyHole nextMove = new CubbyHole();
-
     public Player(String name, TurnCoordinator turnCoordinator) {
         this.name = name;
         this.turnCoordinator = turnCoordinator;
     }
-
 
     // Implementation of DominoPlayer interface
     public dominoes.Play makePlay(dominoes.Table table) throws dominoes.CantPlayException {
@@ -49,10 +46,17 @@ public class Player implements DominoPlayer {
     }
 
     protected dominoes.Play chooseMove(dominoes.Table table) {
+        PlayWrapperCubbyHole nextMove = new PlayWrapperCubbyHole();
         // Ask for a move to be made through the UI
         turnCoordinator.getPlayerMove(this, nextMove);
         // This will block until the other thread puts something here for us to retrieve
-        return (Play) nextMove.get();
+        PlayWrapper playWrapper = nextMove.get();
+
+        if (playWrapper.isValid()) {
+            return playWrapper.getPlay();
+        } else {
+            return null;
+        }
     }
 
     public dominoes.Bone[] bonesInHand() {
