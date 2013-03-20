@@ -13,7 +13,6 @@ import java.awt.*;
  * Time: 20:08
  */
 public class InfoPanel extends JPanel{
-    private DominoPlayer[] players;
     private Font font;
     private static int size=120;
     private DominoPlayer winner=null;
@@ -21,6 +20,8 @@ public class InfoPanel extends JPanel{
     private final BoneYardWidget boneYardWidget;
     private boolean interactive;
     private TurnCoordinator turnCoordinator;
+    private final JButton newGameButton;
+    private final ScoreBoard scoreBoard;
 
     //TODO - work out how to centre all text output
 
@@ -29,13 +30,17 @@ public class InfoPanel extends JPanel{
         this.font = new Font("Arial", Font.BOLD, 36);
 
         this.boneYardWidget = new BoneYardWidget(this.size);
+        this.newGameButton = new JButton("New Game");
+        this.scoreBoard = new ScoreBoard();
 
+        this.add(this.newGameButton);
         this.add(this.boneYardWidget);
+        this.add(this.scoreBoard);
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
     }
 
     public void setPlayers(DominoPlayer[] p) {
-        this.players = p;
+        this.scoreBoard.setPlayers(p);
     }
 
     public void setBoneYard(BoneYard boneYard) {
@@ -49,7 +54,6 @@ public class InfoPanel extends JPanel{
 
     public void paint(Graphics graphics){
         super.paint(graphics);
-        displayScore(graphics);
         if (winner!=null){
             displayWinner(graphics);
             winner=null;
@@ -81,17 +85,5 @@ public class InfoPanel extends JPanel{
         graphics.setColor(Color.black);
         graphics.setFont(new Font("Arial", Font.BOLD, 50));
         graphics.drawString(winner.getName() + " wins the round!", this.getWidth()/2-300, this.getHeight() / 2+20);
-    }
-
-
-    private void displayScore(Graphics graphics){
-        graphics.setFont(font);
-        graphics.setColor(Color.blue);
-        if (players != null) { //on first paint call players will not be set up
-            for (int i=0; i<players.length;i++){
-                graphics.drawString(players[i].getPoints() + "    " ,this.getWidth()-300,this.getHeight()*(i+1)/3);
-                graphics.drawString(players[i].getName(),this.getWidth()-230,this.getHeight()*(i+1)/3);
-            }
-        }
     }
 }

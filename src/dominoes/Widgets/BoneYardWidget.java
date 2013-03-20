@@ -39,7 +39,8 @@ public class BoneYardWidget extends Canvas {
         if (this.boneYard != null) {
             String s = "";
             if (boneYard.size() < 10) s = " ";
-            g.drawString(s + boneYard.size(), 50, this.getHeight() / 2 + 10);
+            g.setFont(new Font("Arial", Font.BOLD, 50));
+            g.drawString(s + boneYard.size(), 0, size / 2 + 15);
         }
     }
 
