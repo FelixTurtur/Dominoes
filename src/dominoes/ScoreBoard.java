@@ -13,26 +13,26 @@ import java.awt.*;
  * To change this template use File | Settings | File Templates.
  */
 public class ScoreBoard extends JPanel {
-    private int round = 0;
+    private int round = 1;
     private DominoPlayer player1;
     private DominoPlayer player2;
 
-    private final JTextPane roundLabel;
-    private final JTextPane roundCount;
-    private final JTextPane player1Name;
-    private final JTextPane player1Score;
-    private final JTextPane player2Name;
-    private final JTextPane player2Score;
+    private final JLabel roundLabel;
+    private final JLabel roundCount;
+    private final JLabel player1Name;
+    private final JLabel player1Score;
+    private final JLabel player2Name;
+    private final JLabel player2Score;
 
     public ScoreBoard() {
-        this.roundLabel = new JTextPane();
+        this.roundLabel = new JLabel();
         this.roundLabel.setText("Round:");
-        this.roundCount = new JTextPane();
+        this.roundCount = new JLabel();
         this.roundCount.setText("0");
-        this.player1Name = new JTextPane();
-        this.player1Score = new JTextPane();
-        this.player2Name = new JTextPane();
-        this.player2Score = new JTextPane();
+        this.player1Name = new JLabel();
+        this.player1Score = new JLabel();
+        this.player2Name = new JLabel();
+        this.player2Score = new JLabel();
 
         this.setLayout(new GridLayout(3, 2, 10, 10));
         this.add(this.roundLabel);
