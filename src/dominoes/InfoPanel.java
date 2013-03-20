@@ -22,6 +22,7 @@ public class InfoPanel extends JPanel{
     private TurnCoordinator turnCoordinator;
     private final JButton newGameButton;
     private final ScoreBoard scoreBoard;
+    private final JButton boneYardButton;
 
     //TODO - work out how to centre all text output
 
@@ -29,12 +30,22 @@ public class InfoPanel extends JPanel{
         this.turnCoordinator = turnCoordinator;
         this.font = new Font("Arial", Font.BOLD, 36);
 
+        JPanel boneYardPanel = new JPanel();
+        boneYardPanel.setLayout(new BoxLayout(boneYardPanel, BoxLayout.Y_AXIS));
+        JTextPane boneYardDescription = new JTextPane();
+        boneYardDescription.setText("Boneyard");
+        boneYardPanel.add(boneYardDescription);
         this.boneYardWidget = new BoneYardWidget(this.size);
+        boneYardPanel.add(boneYardWidget);
+        this.boneYardButton = new JButton();
+        this.boneYardButton.setText("Draw");
+        boneYardPanel.add(this.boneYardButton);
+
         this.newGameButton = new JButton("New Game");
         this.scoreBoard = new ScoreBoard();
 
         this.add(this.newGameButton);
-        this.add(this.boneYardWidget);
+        this.add(boneYardPanel);
         this.add(this.scoreBoard);
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
     }
@@ -81,7 +92,7 @@ public class InfoPanel extends JPanel{
 
     private void displayWinner(Graphics graphics){
         graphics.setColor(Color.yellow);
-        graphics.fill3DRect(this.getWidth() / 4, 10, getWidth() / 2, getHeight() - 20,true);
+        graphics.fill3DRect(this.getWidth() / 4, 10, getWidth() / 2, getHeight() - 20, true);
         graphics.setColor(Color.black);
         graphics.setFont(new Font("Arial", Font.BOLD, 50));
         graphics.drawString(winner.getName() + " wins the round!", this.getWidth()/2-300, this.getHeight() / 2+20);
