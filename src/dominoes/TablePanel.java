@@ -39,12 +39,12 @@ public class TablePanel extends JPanel {
     }
 
     private void setUpBones() {
-        // Number of displayed bones depends on size of containing panel
+        // Number of displayed bones depends on boneSize of containing panel
         // Truncate in the middle by displaying elipsis
         this.removeAll();
         if (table != null) {
             Bone[] bones = table.layout();
-            // Max number of bones = width of display area divided by bone size + spacing
+            // Max number of bones = width of display area divided by bone boneSize + spacing
             int maxBones = this.getSize().width / (boneSize + boneSpacing) - 2;
 
             if (this.showPlays) {

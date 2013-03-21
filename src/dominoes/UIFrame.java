@@ -99,7 +99,7 @@ public class UIFrame extends JFrame implements ActionListener {
         }
     }
 
-    public Dominoes showNewGameDialog() {
+    public void showNewGameDialog() {
         //To change body of created methods use File | Settings | File Templates.
         WelcomePage page = new WelcomePage(this, "Welcome to Dominoes - start a new game", this);
         page.setModal(true);
@@ -116,7 +116,5 @@ public class UIFrame extends JFrame implements ActionListener {
 
         this.add(this.ui);
         this.validate();
-
-        return this.ui.dominoesGame;
     }
 }

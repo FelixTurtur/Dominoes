@@ -16,14 +16,12 @@ import java.awt.*;
  * Time: 22:57
  */
 
-//TODO - terminate program if window is closed
-
 public class UI extends JPanel implements DominoUI, TurnCoordinator {
     PlayerHandPanel player1Hand;
     PlayerHandPanel player2Hand;
     InfoPanel infoPanel;
     TablePanel tableArea;
-    int size = 120; //size of bones
+    int boneSize = 120;
     int maxpips = 6;  //graphics output currently can not cope with higher than 6
 
     private PlayerType player1Type = PlayerType.None;
@@ -33,7 +31,8 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
     private Player player2;
     private PlayWrapperCubbyHole nextMove;
     private Bone nextMoveBone;
-    public final Dominoes dominoesGame;
+    private final Dominoes dominoesGame;
+    private final Thread dominoesThread;
 
     private Player createPlayer(PlayerType type, String name) {
         if (type == PlayerType.Computer) {
@@ -53,6 +52,7 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
         this.player2Type = player2Type;
 
         this.dominoesGame = new Dominoes(this, this.player1, this.player2, this.targetScore, this.maxpips);
+        this.dominoesThread = new Thread(new DominoesThread(this.dominoesGame));
 
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -69,6 +69,8 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
         setupPlayerHand(player2Hand, eb1);
 
         this.validate();
+
+        this.dominoesThread.start();
     }
 
     private void setupTableArea(EtchedBorder eb1) {

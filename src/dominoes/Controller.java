@@ -21,18 +21,6 @@ public class Controller {
     public static void main(String[] args) {
         UIFrame uiFrame = new UIFrame();
         uiFrame.setVisible(true);
-
-        boolean gametime = true;
-        while (gametime) {
-            Dominoes dominoesGame = uiFrame.showNewGameDialog();
-
-            dominoesGame.play();
-
-            /*int x = JOptionPane.showOptionDialog(new JFrame(),
-                    winningMessage, "Game Over", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
-                    null, new Object[]{"Yes", "No"}, null);
-            if (x == 1) gametime = false;*/
-        }
+        uiFrame.showNewGameDialog();
     }
-
 }
