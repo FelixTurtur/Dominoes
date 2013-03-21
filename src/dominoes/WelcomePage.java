@@ -40,11 +40,13 @@ public class WelcomePage extends JDialog implements ActionListener {
     String player1Name = "Player 1";
     String player2Name = "Player 2";
 
-    public WelcomePage(Frame aFrame, String aWord, UI parent) {
+    public WelcomePage(Frame aFrame, String aWord, UIFrame parent) {
         super(aFrame, true);
 
-        this.player1Type = parent.getPlayer1Type();
-        this.player1Type = parent.getPlayer2Type();
+        //this.player1Type = parent.getPlayer1Type();
+        //this.player1Type = parent.getPlayer2Type();
+        this.player1Type = PlayerType.Computer;
+        this.player2Type = PlayerType.Computer;
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);

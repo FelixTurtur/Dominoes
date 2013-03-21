@@ -1,6 +1,5 @@
 package dominoes;
 
-
 import dominoes.players.ComputerPlayer;
 import dominoes.players.DominoPlayer;
 import dominoes.players.Player;
@@ -9,10 +8,6 @@ import dominoes.players.PlayerType;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,19 +18,12 @@ import java.awt.event.WindowEvent;
 
 //TODO - terminate program if window is closed
 
-
-// TODO - add an interface to contain the turn interface stuff which UI can implement
-public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordinator {
-    MenuBar menuBar;
+public class UI extends JPanel implements DominoUI, TurnCoordinator {
     PlayerHandPanel player1Hand;
     PlayerHandPanel player2Hand;
     InfoPanel infoPanel;
     TablePanel tableArea;
-    JPanel infoText;
-    int windowWidth = 1400;
-    int windowHeight = 800;
     int size = 120; //size of bones
-
     int maxpips = 6;  //graphics output currently can not cope with higher than 6
 
     private PlayerType player1Type = PlayerType.None;
@@ -45,18 +33,29 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
     private Player player2;
     private PlayWrapperCubbyHole nextMove;
     private Bone nextMoveBone;
+    public final Dominoes dominoesGame;
 
-    public UI() {
-        super("Awesome Dominoes");
+    private Player createPlayer(PlayerType type, String name) {
+        if (type == PlayerType.Computer) {
+            return new ComputerPlayer(name, this);
+        } else if (type == PlayerType.Human) {
+            return new Player(name, this);
+        }
+        throw new IllegalArgumentException("type was not a valid createable player type");
+    }
 
-        setSize(windowWidth, windowHeight);
-        setPreferredSize(new Dimension(windowWidth, windowHeight));
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+    public UI(PlayerType player1Type, String player1Name, PlayerType player2Type, String player2Name, int targetScore) {
+        super();
+        this.player1 = this.createPlayer(player1Type, player1Name);
+        this.player2 = this.createPlayer(player2Type, player2Name);
+        this.targetScore = targetScore;
+        this.player1Type = player1Type;
+        this.player2Type = player2Type;
+
+        this.dominoesGame = new Dominoes(this, this.player1, this.player2, this.targetScore, this.maxpips);
 
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
-
-        //add items in order top -> bottom
-        setupMenuBar(eb1, windowWidth, windowHeight / 10);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         infoPanel = new InfoPanel(this);
         setupScorePanel(infoPanel, eb1);
@@ -70,13 +69,12 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
         setupPlayerHand(player2Hand, eb1);
 
         this.validate();
-        this.setVisible(true);
     }
 
     private void setupTableArea(EtchedBorder eb1) {
         tableArea.setBackground(Color.orange);
-        tableArea.setSize(windowWidth, windowHeight / 3);
-        tableArea.setPreferredSize(new Dimension(windowWidth, windowHeight / 3));
+        //tableArea.setSize(windowWidth, windowHeight / 3);
+        //tableArea.setPreferredSize(new Dimension(windowWidth, windowHeight / 3));
         tableArea.setBorder(eb1);
         tableArea.validate();
         add(tableArea);
@@ -84,87 +82,17 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
 
     private void setupPlayerHand(PlayerHandPanel panel, EtchedBorder eb1) {
         panel.setBackground(Color.lightGray);
-        panel.setSize(windowWidth, windowHeight / 3);
+        //panel.setSize(windowWidth, windowHeight / 3);
         panel.setBorder(eb1);
         add(panel);
     }
 
     private void setupScorePanel(InfoPanel panel, EtchedBorder eb1) {
         panel.setBackground(Color.lightGray);
-        panel.setSize(windowWidth, windowHeight / 5);
+        //panel.setSize(windowWidth, windowHeight / 5);
         panel.setBorder(eb1);
         add(panel);
     }
-
-    private void setupMenuBar(EtchedBorder eb, int x, int y) {
-        //Creates menu bar with chosen settings and all components required
-        menuBar = new MenuBar();
-        this.setMenuBar(menuBar);
-        Menu dom = new Menu("Dominoes");
-        menuBar.add(dom);
-        Menu about = new Menu("About");
-        menuBar.add(about);
-        MenuItem newGame = new MenuItem("New Game", new MenuShortcut(KeyEvent.VK_N));
-        MenuItem exitGame = new MenuItem("Exit Dominoes", new MenuShortcut(KeyEvent.VK_X));
-        MenuItem aboutItem = new MenuItem("About AD", new MenuShortcut(KeyEvent.VK_A));
-        newGame.setActionCommand("NewGame"); // set the command
-        exitGame.setActionCommand("Exit"); // set the command
-        newGame.addActionListener(this);
-        exitGame.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                exitOption();
-            }
-        });
-        dom.add(newGame);
-        dom.add(exitGame);
-        aboutItem.setActionCommand("About");
-        aboutItem.addActionListener(this);
-        about.add(aboutItem);
-    }
-
-    public void actionPerformed(ActionEvent evt) {
-        if (evt.getActionCommand().equals("NewGame")) {
-            //TODO: If game not over: "Leave this game?"
-            super.setVisible(false);
-            Controller.main(new String[]{});
-        } else if (evt.getActionCommand().equals("About")) {
-            //TODO Pause game
-            String aboutTxt = "Awesome Dominoes was written by:\nAbbie James\nNick Mackin\nTimothy Baldock";
-            JOptionPane.showMessageDialog(new JFrame(), aboutTxt, "About Awesome Dominoes",
-                    JOptionPane.INFORMATION_MESSAGE);
-        }
-
-    }
-
-    public void windowClosing(WindowEvent e) {
-        exitOption();
-    }
-
-    public void exitOption() {
-        Object[] options = {"Yes, sorry", "No, whoops!"};
-        int x = JOptionPane.showOptionDialog(new JFrame(), "Are you sure you want to quit?",
-                "Leaving so soon?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
-                null, options, options[1]);
-        if (x == 1) {
-            System.out.println("Knew you wouldn't leave");
-        } else {
-            System.out.println("Closing...");
-            this.setVisible(false);
-            System.exit(0);
-        }
-    }
-
-    public void paint(Graphics graphics) {
-        super.paint(graphics);
-    }
-
-    /*public static UI getInstance(){
-        if (instance == null){
-            instance = new UI();
-        }
-        return instance;
-    }*/
 
     public void setPlayer1Type(PlayerType type) {
         this.player1Type = type;
@@ -182,69 +110,6 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
 
     public PlayerType getPlayer2Type() {
         return this.player2Type;
-    }
-
-    private Player createPlayer(PlayerType type, String name) {
-        if (type == PlayerType.Computer) {
-            return new ComputerPlayer(name, this);
-        } else if (type == PlayerType.Human) {
-            return new Player(name, this);
-        }
-        throw new IllegalArgumentException("type was not a valid createable player type");
-    }
-
-    public Player[] showNewGameDialog() {
-        //To change body of created methods use File | Settings | File Templates.
-        WelcomePage welcomePage = new WelcomePage(this, "Welcome to Dominoes - start a new game", this);
-        welcomePage.setModal(true);
-        welcomePage.setVisible(true);
-
-        // Should now be done showing the dialog and can collect results
-        System.out.println("targetScore is: " + welcomePage.targetScore);
-
-        this.setPlayer1Type(welcomePage.player1Type);
-        this.setPlayer2Type(welcomePage.player2Type);
-        this.setTargetScore(welcomePage.targetScore);
-
-        this.setPlayer1(createPlayer(welcomePage.player1Type, welcomePage.player1Name));
-        this.setPlayer2(createPlayer(welcomePage.player2Type, welcomePage.player2Name));
-
-        return new Player[]{this.player1, this.player2};
-    }
-
-    public void setTargetScore(int targetScore) {
-        this.targetScore = targetScore;
-    }
-
-    public int getTargetScore() {
-        return targetScore;
-    }
-
-    public int getMaxpips() {
-        return maxpips;
-    }
-
-    public void setPlayer1(Player player1) {
-        this.player1 = player1;
-    }
-
-    public Player getPlayer1() {
-        return player1;
-    }
-
-    public void setPlayer2(Player player2) {
-        this.player2 = player2;
-    }
-
-    public Player getPlayer2() {
-        return player2;
-    }
-
-
-    private void setDominoPlayers(dominoes.players.DominoPlayer[] dominoPlayers) {
-        player1Hand.setPlayer(dominoPlayers[0]);
-        player2Hand.setPlayer(dominoPlayers[1]);
-        infoPanel.setPlayers(dominoPlayers);
     }
 
     // DominoUI implementation
@@ -322,4 +187,39 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
             player2Hand.yourMove();
         }
     }
+
+    public void setTargetScore(int targetScore) {
+        this.targetScore = targetScore;
+    }
+
+    public int getTargetScore() {
+        return targetScore;
+    }
+
+    public int getMaxpips() {
+        return maxpips;
+    }
+
+    public void setPlayer1(Player player1) {
+        this.player1 = player1;
+    }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public void setPlayer2(Player player2) {
+        this.player2 = player2;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    private void setDominoPlayers(DominoPlayer[] dominoPlayers) {
+        player1Hand.setPlayer(dominoPlayers[0]);
+        player2Hand.setPlayer(dominoPlayers[1]);
+        infoPanel.setPlayers(dominoPlayers);
+    }
+
 }

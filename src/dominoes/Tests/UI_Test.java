@@ -23,7 +23,7 @@ public class UI_Test {
     static int x = 0;
 
     public static void main(String[] args) {
-        while (x == 0) {
+        /*while (x == 0) {
             UI ui = new UI();
             ui.setPlayer1Type(PlayerType.Computer);
             ui.setPlayer2Type(PlayerType.Computer);
@@ -36,7 +36,7 @@ public class UI_Test {
             x = JOptionPane.showOptionDialog(new JFrame(),
                     winningMessage, "Game Over", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
                     null, new Object[]{"Yes", "No"}, null);
-        }
+        }*/
     }
 
 }

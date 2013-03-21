@@ -19,19 +19,19 @@ public class Controller {
     //parameters
 
     public static void main(String[] args) {
-        UI ui = new UI();
-        ui.setVisible(true);
-        Player[] players = ui.showNewGameDialog();
+        UIFrame uiFrame = new UIFrame();
+        uiFrame.setVisible(true);
 
         boolean gametime = true;
         while (gametime) {
-            Dominoes dominoes = new Dominoes(ui, players[0], players[1], ui.getTargetScore(), ui.getMaxpips());
-            DominoPlayer victorious = dominoes.play();
-            String winningMessage = victorious.getName() + " has won! Would you like to play again?";
-            int x = JOptionPane.showOptionDialog(new JFrame(),
+            Dominoes dominoesGame = uiFrame.showNewGameDialog();
+
+            dominoesGame.play();
+
+            /*int x = JOptionPane.showOptionDialog(new JFrame(),
                     winningMessage, "Game Over", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
                     null, new Object[]{"Yes", "No"}, null);
-            if (x == 1) gametime = false;
+            if (x == 1) gametime = false;*/
         }
     }
 
