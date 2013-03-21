@@ -7,6 +7,8 @@ package dominoes;
  * Time: 13:16
  * To change this template use File | Settings | File Templates.
  */
+
+// Wraps a Play for communication between the UI and the game engine
 public class PlayWrapper {
     private boolean valid;
     private Play play;
@@ -20,6 +22,7 @@ public class PlayWrapper {
         return play;
     }
 
+    // Shows whether this Play is valid or not
     public boolean isValid() {
         return valid;
     }
