@@ -1,11 +1,6 @@
 package dominoes;
 
 
-import dominoes.players.ComputerPlayer;
-import dominoes.players.DominoPlayer;
-import dominoes.players.Player;
-import dominoes.players.PlayerType;
-
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
@@ -14,14 +9,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
-// This is the frame which contains the game UI
+// Frame which contains game UI implemented in UI class
 public class UIFrame extends JFrame implements ActionListener {
     MenuBar menuBar;
-    JPanel infoText;
     int windowWidth = 1400;
     int windowHeight = 800;
-
-    // Game window implementation
     private UI ui;
 
     public UIFrame() {
@@ -29,19 +21,17 @@ public class UIFrame extends JFrame implements ActionListener {
 
         setSize(windowWidth, windowHeight);
         setPreferredSize(new Dimension(windowWidth, windowHeight));
-        //setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
 
-        //add items in order top -> bottom
         setupMenuBar(eb1, windowWidth, windowHeight / 10);
 
         this.validate();
         this.setVisible(true);
     }
 
+    // Creates menu bar with chosen settings and all components required
     private void setupMenuBar(EtchedBorder eb, int x, int y) {
-        //Creates menu bar with chosen settings and all components required
         menuBar = new MenuBar();
         this.setMenuBar(menuBar);
         Menu dom = new Menu("Dominoes");
@@ -70,15 +60,12 @@ public class UIFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
         if (evt.getActionCommand().equals("NewGame")) {
             //TODO: If game not over: "Leave this game?"
-            // this.ui.pauseGame(); // Requires self-contained thread TODO
             this.showNewGameDialog();
         } else if (evt.getActionCommand().equals("About")) {
-            // this.ui.pauseGame(); // Requires self-contained thread TODO
             String aboutTxt = "Awesome Dominoes was written by:\nAbbie James\nNick Mackin\nTimothy Baldock";
             JOptionPane.showMessageDialog(new JFrame(), aboutTxt, "About Awesome Dominoes",
                     JOptionPane.INFORMATION_MESSAGE);
         }
-
     }
 
     public void windowClosing(WindowEvent e) {
@@ -100,19 +87,16 @@ public class UIFrame extends JFrame implements ActionListener {
     }
 
     public void showNewGameDialog() {
-        //To change body of created methods use File | Settings | File Templates.
-        WelcomePage page = new WelcomePage(this, "Welcome to Dominoes - start a new game", this);
-        page.setModal(true);
-        page.setVisible(true);
-
-        // Should now be done showing the dialog and can collect results
-        System.out.println("targetScore is: " + page.targetScore);
+        NewGameDialog dialog = new NewGameDialog(this, "Welcome to Dominoes - start a new game", this);
+        dialog.setModal(true);
+        dialog.setVisible(true);
 
         if (this.ui != null) {
             this.remove(this.ui);
         }
 
-        this.ui = new UI(page.player1Type, page.player1Name, page.player2Type, page.player2Name, page.targetScore);
+        // Collect results from new game dialog and use them to create new UI panel with game in it
+        this.ui = new UI(dialog.player1Type, dialog.player1Name, dialog.player2Type, dialog.player2Name, dialog.targetScore);
 
         this.add(this.ui);
         this.validate();

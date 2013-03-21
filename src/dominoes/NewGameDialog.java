@@ -23,7 +23,7 @@ import static java.lang.Integer.toString;
  * Time: 21:06
  * To change this template use File | Settings | File Templates.
  */
-public class WelcomePage extends JDialog implements ActionListener {
+public class NewGameDialog extends JDialog implements ActionListener {
     //region Parameters
     //A whole tonne of parameters
     DominoPlayer p1, p2;
@@ -40,7 +40,7 @@ public class WelcomePage extends JDialog implements ActionListener {
     String player1Name = "Player 1";
     String player2Name = "Player 2";
 
-    public WelcomePage(Frame aFrame, String aWord, UIFrame parent) {
+    public NewGameDialog(Frame aFrame, String aWord, UIFrame parent) {
         super(aFrame, true);
 
         //this.player1Type = parent.getPlayer1Type();
