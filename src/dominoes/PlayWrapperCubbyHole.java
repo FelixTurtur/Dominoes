@@ -8,18 +8,20 @@ package dominoes;
  * To change this template use File | Settings | File Templates.
  */
 
-// This is a lovely little example of the facade pattern used to enforce type-safety when casting from object
-public class PlayWrapperCubbyHole extends CubbyHole {
+// This uses the Proxy pattern to provide type-safety when using the CubbyHole for PlayWrapper objects
+public class PlayWrapperCubbyHole {
+    // A CubbyHole that we can only put PlayWrappers into
+    private CubbyHole cubbyHole;
 
     public PlayWrapperCubbyHole() {
-        super();
+        this.cubbyHole = new CubbyHole();
     }
 
-    public synchronized PlayWrapper get() {
-        return (PlayWrapper) super.get();
+    public PlayWrapper get() {
+        return (PlayWrapper) this.cubbyHole.get();
     }
 
-    public synchronized void put(PlayWrapper playWrapper) {
-        super.put(playWrapper);
+    public void put(PlayWrapper playWrapper) {
+        this.cubbyHole.put(playWrapper);
     }
 }
