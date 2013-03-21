@@ -23,19 +23,20 @@ public class Player implements DominoPlayer {
     }
 
     // Implementation of DominoPlayer interface
-    public dominoes.Play makePlay(dominoes.Table table) throws dominoes.CantPlayException {
+    public Play makePlay(Table table) throws CantPlayException {
         Play thePlay = chooseMove(table);
-        if (thePlay == null) throw new dominoes.CantPlayException();
+        if (thePlay == null) throw new CantPlayException();
         hand.remove(thePlay.bone());
         return thePlay;
     }
 
-    public void takeBack(dominoes.Bone bone) {
+    public void takeBack(Bone bone) {
         hand.add(bone);
     }
 
-    public void draw(dominoes.BoneYard boneYard) {
+    public void draw(BoneYard boneYard) {
         Bone newBone = boneYard.draw();
+        this.turnCoordinator.updateBoneYard(boneYard);
         if (newBone != null) {
             hand.add(newBone);
         }
@@ -45,7 +46,7 @@ public class Player implements DominoPlayer {
         return hand.size();
     }
 
-    protected dominoes.Play chooseMove(dominoes.Table table) {
+    protected Play chooseMove(Table table) {
         PlayWrapperCubbyHole nextMove = new PlayWrapperCubbyHole();
         // Ask for a move to be made through the UI
         turnCoordinator.getPlayerMove(this, nextMove);
@@ -59,7 +60,7 @@ public class Player implements DominoPlayer {
         }
     }
 
-    public dominoes.Bone[] bonesInHand() {
+    public Bone[] bonesInHand() {
         Bone[] b = hand.toArray(new Bone[0]);
         return b;
     }

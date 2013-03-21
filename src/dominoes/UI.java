@@ -35,7 +35,6 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
     int windowWidth = 1400;
     int windowHeight = 800;
     int size = 120; //size of bones
-    BoneYard boneYard;
 
     int maxpips = 6;  //graphics output currently can not cope with higher than 6
 
@@ -167,21 +166,6 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
         return instance;
     }*/
 
-    private void setTable(Table table) {
-        tableArea.setTable(table);
-    }
-
-    private void setDominoPlayers(dominoes.players.DominoPlayer[] dominoPlayers) {
-        player1Hand.setPlayer(dominoPlayers[0]);
-        player2Hand.setPlayer(dominoPlayers[1]);
-        infoPanel.setPlayers(dominoPlayers);
-    }
-
-    private void setBoneYard(BoneYard boneYard) {
-        this.boneYard = boneYard;
-        infoPanel.setBoneYard(boneYard);
-    }
-
     public void setPlayer1Type(PlayerType type) {
         this.player1Type = type;
         this.player1Hand.setPlayerType(type);
@@ -257,13 +241,17 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
     }
 
 
+    private void setDominoPlayers(dominoes.players.DominoPlayer[] dominoPlayers) {
+        player1Hand.setPlayer(dominoPlayers[0]);
+        player2Hand.setPlayer(dominoPlayers[1]);
+        infoPanel.setPlayers(dominoPlayers);
+    }
+
     // DominoUI implementation
     public void display(DominoPlayer[] dominoPlayers, Table table, BoneYard boneYard) {
-        //TODO we should not need to set these every time!
-
-        this.setTable(table);
+        this.tableArea.setTable(table);
         this.setDominoPlayers(dominoPlayers);
-        this.setBoneYard(boneYard);
+        this.infoPanel.setBoneYard(boneYard);
     }
 
     public void displayRoundWinner(DominoPlayer dominoPlayer) {
@@ -276,7 +264,6 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
     }
 
     public void displayInvalidPlay(DominoPlayer dominoPlayer) {
-        //TODO - make graphics version of this. Need unit test or human interaction first to ensure it works
         System.out.println("%%%%% Invalid Play %%%%%");
         this.infoPanel.invalidMove(dominoPlayer);
     }
@@ -312,12 +299,17 @@ public class UI extends JFrame implements ActionListener, DominoUI, TurnCoordina
     }
 
     public void drawOrPass() {
-        //To change body of implemented methods use File | Settings | File Templates.
         this.tableArea.hidePlayIndicators();
-        this.nextMove.put(new PlayWrapper(false, null));
+        if (this.nextMove != null) {
+            this.nextMove.put(new PlayWrapper(false, null));
+        }
         this.player1Hand.notYourMove();
         this.player2Hand.notYourMove();
         System.out.println("Draw or pass");
+    }
+
+    public void updateBoneYard(BoneYard boneYard) {
+        this.infoPanel.setBoneYard(boneYard);
     }
 
     // Called by Player when it requires a move from the UI

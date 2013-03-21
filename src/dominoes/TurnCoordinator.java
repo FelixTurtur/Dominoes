@@ -9,6 +9,8 @@ import dominoes.players.Player;
  * Time: 23:30
  * To change this template use File | Settings | File Templates.
  */
+
+// This acts as an observer for certain events from Player and the UI elements
 public interface TurnCoordinator {
     // Interface for turns
     // Called by PlayerHandPanel when player selects a bone to play
@@ -28,4 +30,7 @@ public interface TurnCoordinator {
 
     // Indicate that the player wishes to draw a bone from the boneyard (or pass if there are none)
     void drawOrPass();
+
+    // Indicates that the display of the boneYard needs to be updated due to it changing
+    void updateBoneYard(BoneYard boneYard);
 }

@@ -20,7 +20,6 @@ public class BoneYardWidget extends Canvas {
 
     public BoneYardWidget(int size) {
         this.size = size;
-
         reshape(0, 0, size / 2, size);
     }
 
@@ -38,9 +37,9 @@ public class BoneYardWidget extends Canvas {
         g.setColor(foreground);
         if (this.boneYard != null) {
             String s = "";
-            if (boneYard.size() < 10) s = " ";
+            if (this.boneYard.size() < 10) s = " ";
             g.setFont(new Font("Arial", Font.BOLD, 50));
-            g.drawString(s + boneYard.size(), 0, size / 2 + 15);
+            g.drawString(s + this.boneYard.size(), 0, size / 2 + 15);
         }
     }
 
@@ -51,10 +50,10 @@ public class BoneYardWidget extends Canvas {
 
     public void setBoneYard(BoneYard boneYard) {
         this.boneYard = boneYard;
-        validate();
+        repaint();
     }
 
     public BoneYard getBoneYard() {
-        return boneYard;
+        return this.boneYard;
     }
 }

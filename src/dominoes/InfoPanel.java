@@ -65,17 +65,16 @@ public class InfoPanel extends JPanel {
 
     public void setBoneYard(BoneYard boneYard) {
         this.boneYardWidget.setBoneYard(boneYard);
+        validate();
     }
 
     public void roundWinner(DominoPlayer dominoPlayer) {
-        // TODO display round winner message
         this.scoreBoard.incrementRound();
         this.warningText.setText(dominoPlayer.getName() + " has won the round!");
         this.warningText.setBackground(this.roundWinColour);
     }
 
     public void gameWinner(DominoPlayer dominoPlayer) {
-        // TODO display game winner message
         //this.scoreBoard.finalScore();
         this.warningText.setText(dominoPlayer.getName() + " has won the game with " + dominoPlayer.getPoints() + " points!");
         this.warningText.setBackground(this.gameWinColour);
