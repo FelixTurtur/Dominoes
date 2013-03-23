@@ -74,6 +74,7 @@ public class NewGameDialog extends JDialog implements ActionListener {
         exitGame = new OptionButton("Leave Dominoes", "Exit");
         gameButtons.add(newGame);
         gameButtons.add(exitGame);
+        this.getRootPane().setDefaultButton(newGame);
         add(gameButtons);
     }
 
@@ -180,15 +181,11 @@ public class NewGameDialog extends JDialog implements ActionListener {
     }
 
     public void exitOption() {
-        Object[] options = {"Yes, sorry", "No, whoops!"};
+        Object[] options = {"Yes, goodbye.", "No, take me back!"};
         int x = JOptionPane.showOptionDialog(new JFrame(), "Are you sure you want to quit?",
                 "Leaving so soon?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
                 null, options,  options[1]);
-        if (x == 1) {
-            System.out.println("Knew you wouldn't leave");
-        }
-        else {
-            System.out.println("Closing...");
+        if (x==0){
             this.setVisible(false);
             System.exit(0);
         }

@@ -89,7 +89,6 @@ public class UIFrame extends JFrame {//} implements ActionListener {
     }
 
     public void windowClosing(WindowEvent e) {
-        System.out.println("So here we are");
         exitOption();
     }
 

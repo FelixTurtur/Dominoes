@@ -14,8 +14,7 @@ import java.awt.event.ActionListener;
  * Date: 10/03/13
  * Time: 20:08
  */
-public class InfoPanel extends JPanel implements ActionListener {
-    private static int size = 120;
+public class InfoPanel extends JPanel {
 
     private final BoneYardWidget boneYardWidget;
     private boolean interactive;
@@ -37,10 +36,17 @@ public class InfoPanel extends JPanel implements ActionListener {
         JLabel boneYardLabel = new JLabel(" Boneyard ");
         c.gridx=0;c.gridy=1; c.weightx=0.0;
         this.add(boneYardLabel,c);
-        boneYardWidget = new BoneYardWidget(InfoPanel.size);
+        boneYardWidget = new BoneYardWidget();
         c.gridx=1; c.gridheight=3;c.gridy=0;  c.weightx=0.0;
         this.add(boneYardWidget,c);
         boneYardButton = new JButton("Draw");
+        boneYardButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (interactive) {
+                    buttonDraw();
+                }
+            }
+        });
         c.gridx=2;c.gridy=1;c.gridheight=1; c.weighty=0.8;
         this.add(boneYardButton,c);
         JPanel textPanel = new JPanel();
@@ -55,13 +61,20 @@ public class InfoPanel extends JPanel implements ActionListener {
         this.add(scoreBoard,c);
     }
 
+    private void buttonDraw() {
+        turnCoordinator.drawOrPass();
+    }
+
     public void setPlayers(DominoPlayer[] p) {
         this.scoreBoard.setPlayers(p);
     }
 
-    public void setBoneYard(BoneYard boneYard) {
+    public void updateInfoPanel(BoneYard boneYard) {
         this.boneYardWidget.setBoneYard(boneYard);
-        this.warningText.setText(""); //reset text at same time
+        this.warningText.setText("");
+        if (boneYard.size() == 0) {
+            boneYardButton.setText("Pass");
+        }
         validate();
     }
 
@@ -108,18 +121,4 @@ public class InfoPanel extends JPanel implements ActionListener {
     public void denyBoneYard() {
         this.interactive = false;
     }
-
-    public void actionPerformed(ActionEvent evt) {
-        if (evt.getActionCommand().equals("NewGame")) {
-            if (true) { //TODO game in progress
-                JOptionPane.showMessageDialog(new JFrame(), "Abandon game?", "Mid-game Departure", JOptionPane.QUESTION_MESSAGE);
-            }
-            //this.showNewGameDialog();
-        } else if (evt.getActionCommand().equals("About")) {
-            String aboutTxt = "Awesome Dominoes was written by:\nAbbie James\nNick Mackin\nTimothy Baldock";
-            JOptionPane.showMessageDialog(new JFrame(), aboutTxt, "About Awesome Dominoes",
-                    JOptionPane.INFORMATION_MESSAGE);
-        }
-    }
-
 }

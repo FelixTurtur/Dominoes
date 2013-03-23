@@ -13,19 +13,13 @@ import java.awt.*;
  */
 public class BoneYardWidget extends Canvas {
     private BoneYard boneYard;
-    private int size = 120;
+    private final int size = 120;
 
     private Color background = Color.black;
     private Color foreground = Color.white;
 
-    public BoneYardWidget(int size) {
-        this.size = size;
-        reshape(0, 0, size / 2, size);
-    }
-
-    public boolean mouseUp(Event e, int x, int y) {
-        // Container should see event
-        return false;
+    public BoneYardWidget() {
+       setSize(size / 2, size);
     }
 
     public void paint(Graphics g) {
@@ -56,4 +50,5 @@ public class BoneYardWidget extends Canvas {
     public BoneYard getBoneYard() {
         return this.boneYard;
     }
+
 }

@@ -37,10 +37,9 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
     private Player createPlayer(PlayerType type, String name) {
         if (type == PlayerType.Computer) {
             return new ComputerPlayer(name, this);
-        } else if (type == PlayerType.Human) {
+        } else {
             return new Player(name, this);
         }
-        throw new IllegalArgumentException("type was not a valid createable player type");
     }
 
     public UI(PlayerType player1Type, String player1Name, PlayerType player2Type, String player2Name, int targetScore) {
@@ -55,18 +54,22 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
         this.dominoesThread = new Thread(new DominoesThread(this.dominoesGame));
 
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
+        Dimension notTooTall = new Dimension(2000,200);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         infoPanel = new InfoPanel(this);
-        infoPanel.setMaximumSize(new Dimension(2000,200));
+        infoPanel.setMaximumSize(notTooTall);
         setupScorePanel(infoPanel, eb1);
         player1Hand = new PlayerHandPanel(player1Type, this);
+        player1Hand.setMaximumSize(notTooTall);
         setupPlayerHand(player1Hand, eb1);
 
         tableArea = new TablePanel(this);
+        tableArea.setMaximumSize(notTooTall);
         setupTableArea(eb1);
 
         player2Hand = new PlayerHandPanel(player2Type, this);
+        player2Hand.setMaximumSize(notTooTall);
         setupPlayerHand(player2Hand, eb1);
 
         this.validate();
@@ -153,11 +156,12 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
     public void display(DominoPlayer[] dominoPlayers, Table table, BoneYard boneYard) {
         this.tableArea.setTable(table);
         this.setDominoPlayers(dominoPlayers);
-        this.infoPanel.setBoneYard(boneYard);
+        this.infoPanel.updateInfoPanel(boneYard);
     }
 
     public void displayRoundWinner(DominoPlayer dominoPlayer) {
         if (dominoPlayer == null) {
+            //Interrupted game - end run
             this.dominoesThread.stop();
             return;
         }
@@ -213,7 +217,7 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
     }
 
     public void updateBoneYard(BoneYard boneYard) {
-        this.infoPanel.setBoneYard(boneYard);
+        this.infoPanel.updateInfoPanel(boneYard);
     }
 
     // Called by Player when it requires a move from the UI

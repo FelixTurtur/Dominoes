@@ -4,10 +4,10 @@ import dominoes.Widgets.BoneWidget;
 import dominoes.players.DominoPlayer;
 import dominoes.players.PlayerType;
 
-import java.util.LinkedList;
-import java.util.List;
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -49,8 +49,8 @@ public class PlayerHandPanel extends JPanel {
         this.boneWidgets.clear();
         if (player != null) {
             Bone[] bones = player.bonesInHand();
-            for (int i = 0; i < bones.length; i++) {
-                BoneWidget boneWidget = new BoneWidget(bones[i], this.playerType, 120);
+            for (Bone b : bones) {
+                BoneWidget boneWidget = new BoneWidget(b, this.playerType, 120);
                 this.boneWidgets.add(boneWidget);
                 this.bonePanel.add(boneWidget);
             }
@@ -70,15 +70,13 @@ public class PlayerHandPanel extends JPanel {
     public boolean mouseUp(Event e, int x, int y) {
         // Update all bones except the one clicked on to tell them they are inactive
         if (interactive) {
-            Component[] components = this.bonePanel.getComponents();
-            for (int i = 0; i < boneWidgets.size(); i++) {
-                if (e.target != boneWidgets.get(i)) {
-                    boneWidgets.get(i).eventDeselected();
+            for (BoneWidget bw : boneWidgets) {
+                if (e.target != bw) {
+                    bw.eventDeselected();
                 } else {
-                    boneWidgets.get(i).eventSelected();
-                    // Send event to indicate that the bone in question has been selected for play
-                    turnCoordinator.nextMoveBoneSelected(boneWidgets.get(i).getBone());
-                    System.out.println("Bone has been selected for play: " + boneWidgets.get(i).getBone().toString());
+                    bw.eventSelected();
+                    // indicate bone selected for play
+                    turnCoordinator.nextMoveBoneSelected(bw.getBone());
                 }
             }
         }
@@ -96,7 +94,7 @@ public class PlayerHandPanel extends JPanel {
             this.turnText.setText("It's your turn!");
             this.interactive = true;
         } else {
-            this.turnText.setText("Computer player is taking their turn...");
+            this.turnText.setText(player.getName() + " is taking their turn...");
         }
         this.ourTurn = true;
     }
