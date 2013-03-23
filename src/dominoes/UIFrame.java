@@ -93,7 +93,7 @@ public class UIFrame extends JFrame {//} implements ActionListener {
     }
 
     public void showNewGameDialog() {
-        NewGameDialog dialog = new NewGameDialog(this, "Welcome to Dominoes - start a new game", this);
+        NewGameDialog dialog = new NewGameDialog(this, this);
         dialog.setModal(true);
         dialog.setVisible(true);
 

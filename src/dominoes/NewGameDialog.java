@@ -36,18 +36,16 @@ public class NewGameDialog extends JDialog implements ActionListener {
     String player1Name = "Player 1";
     String player2Name = "Player 2";
 
-    public NewGameDialog(Frame aFrame, String aWord, UIFrame parent) {
+    public NewGameDialog(Frame aFrame, UIFrame parent) {
         super(aFrame, true);
+        super.setTitle("Let's play Dominoes!");
 
-        //this.player1Type = parent.getPlayer1Type();
-        //this.player1Type = parent.getPlayer2Type();
         this.player1Type = PlayerType.Computer;
         this.player2Type = PlayerType.Computer;
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-        addTitlePanel();
         addTargetScorePanel();
         addPlayer1ChoicePanel();
         addPlayer2ChoicePanel();
@@ -58,13 +56,6 @@ public class NewGameDialog extends JDialog implements ActionListener {
 
         newGame.addActionListener(this);
         exitGame.addActionListener(this);
-    }
-
-    private void addTitlePanel() {
-        titlePanel = new JPanel();
-        titlePanel.add(new JLabel("Let's play Dominoes!"));
-        titlePanel.setSize(800, 10);
-        add(titlePanel);
     }
 
     private void addButtonsPanel() {

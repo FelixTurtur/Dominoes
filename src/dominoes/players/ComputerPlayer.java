@@ -32,7 +32,7 @@ public class ComputerPlayer extends Player {
 
         // Pause so that we can watch the computer play
         try {
-            Thread.sleep(200);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
         }
 
