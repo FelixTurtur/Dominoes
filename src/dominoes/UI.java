@@ -74,28 +74,7 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
         this.dominoesThread.start();
     }
 
-    private void setupTableArea(EtchedBorder eb1) {
-        tableArea.setBackground(Color.orange);
-        //tableArea.setSize(windowWidth, windowHeight / 3);
-        //tableArea.setPreferredSize(new Dimension(windowWidth, windowHeight / 3));
-        tableArea.setBorder(eb1);
-        tableArea.validate();
-        add(tableArea);
-    }
-
-    private void setupPlayerHand(PlayerHandPanel panel, EtchedBorder eb1) {
-        panel.setBackground(Color.lightGray);
-        //panel.setSize(windowWidth, windowHeight / 3);
-        panel.setBorder(eb1);
-        add(panel);
-    }
-
-    private void setupScorePanel(InfoPanel panel, EtchedBorder eb1) {
-        panel.setBackground(Color.lightGray);
-        panel.setBorder(eb1);
-        add(panel);
-    }
-
+    //region sets and gets
     public void setPlayer1Type(PlayerType type) {
         this.player1Type = type;
         this.player1Hand.setPlayerType(type);
@@ -113,6 +92,62 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
     public PlayerType getPlayer2Type() {
         return this.player2Type;
     }
+
+    public void setTargetScore(int targetScore) {
+        this.targetScore = targetScore;
+    }
+
+    public int getTargetScore() {
+        return targetScore;
+    }
+
+    public int getMaxpips() {
+        return maxpips;
+    }
+
+    public void setPlayer1(Player player1) {
+        this.player1 = player1;
+    }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public void setPlayer2(Player player2) {
+        this.player2 = player2;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    private void setDominoPlayers(DominoPlayer[] dominoPlayers) {
+        player1Hand.setPlayer(dominoPlayers[0]);
+        player2Hand.setPlayer(dominoPlayers[1]);
+        infoPanel.setPlayers(dominoPlayers);
+    }
+    //endregion
+
+    //region setups
+    private void setupTableArea(EtchedBorder eb1) {
+        tableArea.setBackground(Color.orange);
+        tableArea.setBorder(eb1);
+        tableArea.validate();
+        add(tableArea);
+    }
+
+    private void setupPlayerHand(PlayerHandPanel panel, EtchedBorder eb1) {
+        panel.setBackground(Color.lightGray);
+        panel.setBorder(eb1);
+        add(panel);
+    }
+
+    private void setupScorePanel(InfoPanel panel, EtchedBorder eb1) {
+        panel.setBackground(Color.lightGray);
+        panel.setBorder(eb1);
+        add(panel);
+    }
+    //endregion
 
     // DominoUI implementation
     public void display(DominoPlayer[] dominoPlayers, Table table, BoneYard boneYard) {
@@ -187,40 +222,6 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
         } else if (player == this.player2) {
             player2Hand.yourMove();
         }
-    }
-
-    public void setTargetScore(int targetScore) {
-        this.targetScore = targetScore;
-    }
-
-    public int getTargetScore() {
-        return targetScore;
-    }
-
-    public int getMaxpips() {
-        return maxpips;
-    }
-
-    public void setPlayer1(Player player1) {
-        this.player1 = player1;
-    }
-
-    public Player getPlayer1() {
-        return player1;
-    }
-
-    public void setPlayer2(Player player2) {
-        this.player2 = player2;
-    }
-
-    public Player getPlayer2() {
-        return player2;
-    }
-
-    private void setDominoPlayers(DominoPlayer[] dominoPlayers) {
-        player1Hand.setPlayer(dominoPlayers[0]);
-        player2Hand.setPlayer(dominoPlayers[1]);
-        infoPanel.setPlayers(dominoPlayers);
     }
 
 }

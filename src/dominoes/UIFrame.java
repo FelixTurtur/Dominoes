@@ -2,21 +2,17 @@ package dominoes;
 
 
 import javax.swing.*;
-import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
-// This is the frame which contains the game UI
+// Frame which contains game UI implemented in UI class
 public class UIFrame extends JFrame implements ActionListener {
     MenuBar menuBar;
-    JPanel infoText;
     int windowWidth = 1400;
     int windowHeight = 800;
-
-    // Game window implementation
     private UI ui;
 
     public UIFrame() {
@@ -25,17 +21,14 @@ public class UIFrame extends JFrame implements ActionListener {
         setPreferredSize(new Dimension(windowWidth, windowHeight));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
-
-        //add items in order top -> bottom
-        setupMenuBar(eb1, windowWidth, windowHeight / 10);
+        setupMenuBar();
 
         this.validate();
         this.setVisible(true);
     }
 
-    private void setupMenuBar(EtchedBorder eb, int x, int y) {
-        //Creates menu bar with chosen settings and all components required
+    //Creates menu bar for navigation
+    private void setupMenuBar() {
         menuBar = new MenuBar();
         this.setMenuBar(menuBar);
         Menu dom = new Menu("Dominoes");
@@ -46,7 +39,7 @@ public class UIFrame extends JFrame implements ActionListener {
         MenuItem exitGame = new MenuItem("Exit Dominoes", new MenuShortcut(KeyEvent.VK_X));
         MenuItem aboutItem = new MenuItem("About AD", new MenuShortcut(KeyEvent.VK_A));
         newGame.setActionCommand("NewGame"); // set the command
-        exitGame.setActionCommand("Exit"); // set the command
+        //exitGame.setActionCommand("Exit"); // set the command
         newGame.addActionListener(this);
         exitGame.addActionListener(new ActionListener() {
             @Override
@@ -63,16 +56,15 @@ public class UIFrame extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent evt) {
         if (evt.getActionCommand().equals("NewGame")) {
-            //TODO: If game not over: "Leave this game?"
-            // this.ui.pauseGame(); // Requires self-contained thread TODO
+            if (true) { //TODO game in progress
+                JOptionPane.showMessageDialog(new JFrame(), "Abandon game?", "Mid-game Departure", JOptionPane.YES_NO_OPTION);
+            }
             this.showNewGameDialog();
         } else if (evt.getActionCommand().equals("About")) {
-            // this.ui.pauseGame(); // Requires self-contained thread TODO
             String aboutTxt = "Awesome Dominoes was written by:\nAbbie James\nNick Mackin\nTimothy Baldock";
             JOptionPane.showMessageDialog(new JFrame(), aboutTxt, "About Awesome Dominoes",
                     JOptionPane.INFORMATION_MESSAGE);
         }
-
     }
 
     public void windowClosing(WindowEvent e) {
@@ -85,28 +77,23 @@ public class UIFrame extends JFrame implements ActionListener {
                 "Leaving so soon?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
                 null, options, options[1]);
         if (x == 1) {
-            System.out.println("Knew you wouldn't leave");
         } else {
-            System.out.println("Closing...");
             this.setVisible(false);
             System.exit(0);
         }
     }
 
     public void showNewGameDialog() {
-        //To change body of created methods use File | Settings | File Templates.
-        WelcomePage page = new WelcomePage(this, "Welcome to Dominoes - start a new game", this);
-        page.setModal(true);
-        page.setVisible(true);
-
-        // Should now be done showing the dialog and can collect results
-        System.out.println("targetScore is: " + page.targetScore);
+        NewGameDialog dialog = new NewGameDialog(this, "Welcome to Dominoes - start a new game", this);
+        dialog.setModal(true);
+        dialog.setVisible(true);
 
         if (this.ui != null) {
             this.remove(this.ui);
         }
 
-        this.ui = new UI(page.player1Type, page.player1Name, page.player2Type, page.player2Name, page.targetScore);
+        // Collect results from dialog and use them to create game in new UI panel
+        this.ui = new UI(dialog.player1Type, dialog.player1Name, dialog.player2Type, dialog.player2Name, dialog.targetScore);
 
         this.add(this.ui);
         this.validate();

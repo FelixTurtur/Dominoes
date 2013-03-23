@@ -77,6 +77,9 @@ public class InfoPanel extends JPanel {
         //this.scoreBoard.finalScore();
         this.warningText.setText(dominoPlayer.getName() + " has won the game with " + dominoPlayer.getPoints() + " points!");
         this.warningText.setBackground(this.gameWinColour);
+        JOptionPane.showMessageDialog(new JFrame(), dominoPlayer.getName() + " wins the game!",
+                "Game Over", JOptionPane.INFORMATION_MESSAGE);
+
     }
 
     public void invalidMove(DominoPlayer dominoPlayer) {
