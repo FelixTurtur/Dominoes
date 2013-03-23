@@ -1,13 +1,6 @@
 package dominoes.Tests;
 
-import dominoes.DominoUI;
-import dominoes.Dominoes;
-import dominoes.UI;
-import dominoes.players.ComputerPlayer;
-import dominoes.players.Player;
-import dominoes.players.PlayerType;
-
-import javax.swing.*;
+import dominoes.UIFrame;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,6 +30,8 @@ public class UI_Test {
                     winningMessage, "Game Over", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
                     null, new Object[]{"Yes", "No"}, null);
         }*/
+        UIFrame uiFrame = new UIFrame();
+        uiFrame.showNewGameDialog();
     }
 
 }

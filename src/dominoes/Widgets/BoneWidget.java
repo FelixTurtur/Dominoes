@@ -13,7 +13,7 @@ import java.awt.*;
  */
 public class BoneWidget extends Canvas {
     private Bone bone;
-    private PlayerType playerType = PlayerType.None;
+    private PlayerType playerType;
     private int size = 120;
     private boolean portraitOrientation = false;
     private boolean hidden = false;
@@ -33,12 +33,12 @@ public class BoneWidget extends Canvas {
         // Orientation depends on playerType
         if (this.playerType == PlayerType.Human || this.playerType == PlayerType.Computer) {
             portraitOrientation = true;
-            reshape(0, 0, size / 2, size);
+            this.setSize(size / 2, size);
             if (this.playerType == PlayerType.Computer) {
                 hidden = true;
             }
         } else {
-            reshape(0, 0, size, size / 2);
+            this.setSize(size, size / 2);
         }
     }
 
@@ -125,7 +125,7 @@ public class BoneWidget extends Canvas {
         if (portraitOrientation) {
             g.drawLine(0, size / 2, size / 2, size / 2);
         } else {
-            g.drawLine(0 + size / 2, 0, size / 2, size / 2);
+            g.drawLine(size / 2, 0, size / 2, size / 2);
         }
     }
 

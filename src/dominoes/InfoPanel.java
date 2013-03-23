@@ -13,50 +13,44 @@ import java.awt.*;
  * Time: 20:08
  */
 public class InfoPanel extends JPanel {
-    private Font font;
     private static int size = 120;
 
     private final BoneYardWidget boneYardWidget;
     private boolean interactive;
     private TurnCoordinator turnCoordinator;
-    private final JButton newGameButton;
     private final ScoreBoard scoreBoard;
     private final JButton boneYardButton;
-    private final JPanel lowerPanel;
     private final JLabel warningText;
     private Color warningColour = Color.yellow;
     private Color gameWinColour = Color.blue;
     private Color roundWinColour = Color.green;
+    private Color normalColor = Color.lightGray;
 
     public InfoPanel(TurnCoordinator turnCoordinator) {
         this.turnCoordinator = turnCoordinator;
-        this.font = new Font("Arial", Font.BOLD, 36);
-
-        JPanel boneYardPanel = new JPanel();
-        boneYardPanel.setLayout(new BoxLayout(boneYardPanel, BoxLayout.Y_AXIS));
-        JLabel boneYardDescription = new JLabel();
-        boneYardDescription.setText("Boneyard");
-        boneYardPanel.add(boneYardDescription);
-        this.boneYardWidget = new BoneYardWidget(this.size);
-        boneYardPanel.add(boneYardWidget);
-        this.boneYardButton = new JButton();
-        this.boneYardButton.setText("Draw");
-        boneYardPanel.add(this.boneYardButton);
-
-        this.newGameButton = new JButton("New Game");
-        this.scoreBoard = new ScoreBoard();
-
-        this.lowerPanel = new JPanel();
-        this.lowerPanel.add(this.newGameButton);
-        this.lowerPanel.add(boneYardPanel);
-        this.lowerPanel.add(this.scoreBoard);
-        this.lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.X_AXIS));
-
-        this.warningText = new JLabel();
-
-        this.add(this.warningText);
-        this.add(this.lowerPanel);
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        Font font = new Font("Arial", Font.BOLD, 18);
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        JLabel boneYardLabel = new JLabel(" Boneyard ");
+        c.gridx=0;c.gridy=1; c.weightx=0.0;
+        this.add(boneYardLabel,c);
+        boneYardWidget = new BoneYardWidget(InfoPanel.size);
+        c.gridx=1; c.gridheight=3;c.gridy=0;  c.weightx=0.0;
+        this.add(boneYardWidget,c);
+        boneYardButton = new JButton("Draw");
+        c.gridx=2;c.gridy=1;c.gridheight=1; c.weighty=0.8;
+        this.add(boneYardButton,c);
+        JPanel textPanel = new JPanel();
+        warningText = new JLabel("",JLabel.CENTER);
+        warningText.setFont(font);
+        textPanel.add(warningText, JPanel.CENTER_ALIGNMENT);
+        textPanel.setBackground(Color.lightGray);
+        c.weightx=0.8;c.weighty=0.0;c.gridwidth=5; c.gridx=3;c.gridy=0;c.gridheight=2;
+        this.add(textPanel,c);
+        scoreBoard = new ScoreBoard();
+        c.weightx=0.2; c.gridwidth=3;c.gridy=0;c.gridx=8;c.gridheight=3;c.weighty=0.8;
+        this.add(scoreBoard,c);
     }
 
     public void setPlayers(DominoPlayer[] p) {
@@ -65,13 +59,18 @@ public class InfoPanel extends JPanel {
 
     public void setBoneYard(BoneYard boneYard) {
         this.boneYardWidget.setBoneYard(boneYard);
+        this.warningText.setText(""); //reset text at same time
         validate();
     }
 
     public void roundWinner(DominoPlayer dominoPlayer) {
         this.scoreBoard.incrementRound();
-        this.warningText.setText(dominoPlayer.getName() + " has won the round!");
-        this.warningText.setBackground(this.roundWinColour);
+        this.warningText.setText(dominoPlayer.getName() + " wins the round!");
+        this.warningText.getParent().setBackground(this.roundWinColour);
+        JOptionPane.showMessageDialog(new JFrame(), dominoPlayer.getName() + " wins the round!",
+                "Round Over", JOptionPane.INFORMATION_MESSAGE);
+        warningText.setText("");
+        warningText.getParent().setBackground(this.normalColor);
     }
 
     public void gameWinner(DominoPlayer dominoPlayer) {
@@ -81,14 +80,14 @@ public class InfoPanel extends JPanel {
     }
 
     public void invalidMove(DominoPlayer dominoPlayer) {
-        this.warningText.setText("Sorry " + dominoPlayer.getName() + " that was not a valid move. Please try again.");
+        this.warningText.setText("Sorry, " + dominoPlayer.getName() + ", that was not a valid move. Please try again.");
         this.warningText.setBackground(this.warningColour);
     }
 
     public boolean mouseUp(Event e, int x, int y) {
         // If click was on bone yard, and we are in a stage of play which allows interaction with the boneyard...
         if (interactive) {
-            if (e.target == this.boneYardWidget) {
+            if (e.target == this.boneYardWidget || e.target == this.boneYardButton) {
                 // TODO - also do this on events from the draw/pass button
                 turnCoordinator.drawOrPass();
             }

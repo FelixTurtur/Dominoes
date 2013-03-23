@@ -1,11 +1,6 @@
 package dominoes;
 
 
-import dominoes.players.ComputerPlayer;
-import dominoes.players.DominoPlayer;
-import dominoes.players.Player;
-import dominoes.players.PlayerType;
-
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
@@ -26,10 +21,9 @@ public class UIFrame extends JFrame implements ActionListener {
 
     public UIFrame() {
         super("Awesome Dominoes");
-
         setSize(windowWidth, windowHeight);
         setPreferredSize(new Dimension(windowWidth, windowHeight));
-        //setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
 

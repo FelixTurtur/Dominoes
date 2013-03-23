@@ -58,6 +58,7 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         infoPanel = new InfoPanel(this);
+        infoPanel.setMaximumSize(new Dimension(2000,200));
         setupScorePanel(infoPanel, eb1);
         player1Hand = new PlayerHandPanel(player1Type, this);
         setupPlayerHand(player1Hand, eb1);
@@ -91,7 +92,6 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
 
     private void setupScorePanel(InfoPanel panel, EtchedBorder eb1) {
         panel.setBackground(Color.lightGray);
-        //panel.setSize(windowWidth, windowHeight / 5);
         panel.setBorder(eb1);
         add(panel);
     }
@@ -172,7 +172,6 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
         }
         this.player1Hand.notYourMove();
         this.player2Hand.notYourMove();
-        System.out.println("Draw or pass");
     }
 
     public void updateBoneYard(BoneYard boneYard) {
