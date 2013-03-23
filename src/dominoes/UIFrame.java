@@ -3,13 +3,10 @@ package dominoes;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 
 // Frame which contains game UI implemented in UI class
-public class UIFrame extends JFrame implements ActionListener {
+public class UIFrame extends JFrame {//} implements ActionListener {
     MenuBar menuBar;
     int windowWidth = 1400;
     int windowHeight = 800;
@@ -20,6 +17,12 @@ public class UIFrame extends JFrame implements ActionListener {
         setSize(windowWidth, windowHeight);
         setPreferredSize(new Dimension(windowWidth, windowHeight));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        super.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                JOptionPane.showConfirmDialog(new JFrame(), "Do you really want to leave?","Exit?",JOptionPane.YES_NO_OPTION);
+            }
+        });
 
         setupMenuBar();
 
@@ -39,8 +42,12 @@ public class UIFrame extends JFrame implements ActionListener {
         MenuItem exitGame = new MenuItem("Exit Dominoes", new MenuShortcut(KeyEvent.VK_X));
         MenuItem aboutItem = new MenuItem("About AD", new MenuShortcut(KeyEvent.VK_A));
         newGame.setActionCommand("NewGame"); // set the command
-        //exitGame.setActionCommand("Exit"); // set the command
-        newGame.addActionListener(this);
+        //newGame.addActionListener(ui.infoPanel);
+        newGame.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                newOption();
+            }
+        });
         exitGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,25 +57,23 @@ public class UIFrame extends JFrame implements ActionListener {
         dom.add(newGame);
         dom.add(exitGame);
         aboutItem.setActionCommand("About");
-        aboutItem.addActionListener(this);
+        aboutItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String aboutTxt = "Awesome Dominoes was written by:\nAbbie James\nNick Mackin\nTimothy Baldock";
+                JOptionPane.showMessageDialog(new JFrame(), aboutTxt, "About Awesome Dominoes",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
         about.add(aboutItem);
     }
 
-    public void actionPerformed(ActionEvent evt) {
-        if (evt.getActionCommand().equals("NewGame")) {
-            if (true) { //TODO game in progress
-                JOptionPane.showMessageDialog(new JFrame(), "Abandon game?", "Mid-game Departure", JOptionPane.YES_NO_OPTION);
-            }
-            this.showNewGameDialog();
-        } else if (evt.getActionCommand().equals("About")) {
-            String aboutTxt = "Awesome Dominoes was written by:\nAbbie James\nNick Mackin\nTimothy Baldock";
-            JOptionPane.showMessageDialog(new JFrame(), aboutTxt, "About Awesome Dominoes",
-                    JOptionPane.INFORMATION_MESSAGE);
+    private void newOption() {
+        int x = JOptionPane.showOptionDialog(new JFrame(), "Leave this game?", "New Game",
+                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,null,null,null);
+        if (x==0) {
+            ui.displayRoundWinner(null);
+            showNewGameDialog();
         }
-    }
-
-    public void windowClosing(WindowEvent e) {
-        exitOption();
     }
 
     public void exitOption() {
@@ -81,6 +86,11 @@ public class UIFrame extends JFrame implements ActionListener {
             this.setVisible(false);
             System.exit(0);
         }
+    }
+
+    public void windowClosing(WindowEvent e) {
+        System.out.println("So here we are");
+        exitOption();
     }
 
     public void showNewGameDialog() {

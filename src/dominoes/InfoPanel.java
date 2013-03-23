@@ -5,6 +5,8 @@ import dominoes.players.DominoPlayer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,7 +14,7 @@ import java.awt.*;
  * Date: 10/03/13
  * Time: 20:08
  */
-public class InfoPanel extends JPanel {
+public class InfoPanel extends JPanel implements ActionListener {
     private static int size = 120;
 
     private final BoneYardWidget boneYardWidget;
@@ -106,4 +108,18 @@ public class InfoPanel extends JPanel {
     public void denyBoneYard() {
         this.interactive = false;
     }
+
+    public void actionPerformed(ActionEvent evt) {
+        if (evt.getActionCommand().equals("NewGame")) {
+            if (true) { //TODO game in progress
+                JOptionPane.showMessageDialog(new JFrame(), "Abandon game?", "Mid-game Departure", JOptionPane.QUESTION_MESSAGE);
+            }
+            //this.showNewGameDialog();
+        } else if (evt.getActionCommand().equals("About")) {
+            String aboutTxt = "Awesome Dominoes was written by:\nAbbie James\nNick Mackin\nTimothy Baldock";
+            JOptionPane.showMessageDialog(new JFrame(), aboutTxt, "About Awesome Dominoes",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
 }

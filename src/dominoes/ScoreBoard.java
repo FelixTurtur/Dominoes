@@ -10,7 +10,6 @@ import java.awt.*;
  * User: timothy
  * Date: 20/03/2013
  * Time: 14:05
- * To change this template use File | Settings | File Templates.
  */
 public class ScoreBoard extends JPanel {
     private int round = 1;

@@ -157,6 +157,10 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
     }
 
     public void displayRoundWinner(DominoPlayer dominoPlayer) {
+        if (dominoPlayer == null) {
+            this.dominoesThread.stop();
+            return;
+        }
         // Check if target score has been met, if yes, then it's a game win, if not, round win
         if (dominoPlayer.getPoints() >= this.targetScore) {
             this.infoPanel.gameWinner(dominoPlayer);
@@ -166,7 +170,6 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
     }
 
     public void displayInvalidPlay(DominoPlayer dominoPlayer) {
-        System.out.println("%%%%% Invalid Play %%%%%");
         this.infoPanel.invalidMove(dominoPlayer);
     }
 
@@ -223,5 +226,6 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
             player2Hand.yourMove();
         }
     }
+
 
 }

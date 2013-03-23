@@ -62,7 +62,7 @@ public class NewGameDialog extends JDialog implements ActionListener {
 
     private void addTitlePanel() {
         titlePanel = new JPanel();
-        titlePanel.add(new JLabel("DOMINOES!"));
+        titlePanel.add(new JLabel("Let's play Dominoes!"));
         titlePanel.setSize(800, 10);
         add(titlePanel);
     }
@@ -70,7 +70,7 @@ public class NewGameDialog extends JDialog implements ActionListener {
     private void addButtonsPanel() {
         gameButtons = new JPanel();
         gameButtons.setSize(800, 50);
-        newGame = new OptionButton("Begin Game!", "newGame");
+        newGame = new OptionButton("Begin Game", "newGame");
         exitGame = new OptionButton("Leave Dominoes", "Exit");
         gameButtons.add(newGame);
         gameButtons.add(exitGame);
