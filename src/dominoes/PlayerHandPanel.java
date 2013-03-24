@@ -22,7 +22,7 @@ public class PlayerHandPanel extends JPanel {
     DominoPlayer player;
     private PlayerType playerType;
     private TurnCoordinator turnCoordinator;
-    int size = 120;
+    int boneSize = 120;
     int boneSpacing = 30;
 
     List<BoneWidget> boneWidgets = new LinkedList<BoneWidget>();
@@ -35,7 +35,7 @@ public class PlayerHandPanel extends JPanel {
         this.turnText = new JLabel();
         this.turnText.setText(" ");
         this.bonePanel = new JPanel();
-        this.bonePanel.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 5));
+        this.bonePanel.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 30));
 
         this.add(this.turnText);
         this.add(this.bonePanel);
@@ -50,7 +50,7 @@ public class PlayerHandPanel extends JPanel {
         if (player != null) {
             Bone[] bones = player.bonesInHand();
             for (Bone b : bones) {
-                BoneWidget boneWidget = new BoneWidget(b, this.playerType, 120);
+                BoneWidget boneWidget = new BoneWidget(b, this.playerType, boneSize);
                 this.boneWidgets.add(boneWidget);
                 this.bonePanel.add(boneWidget);
             }

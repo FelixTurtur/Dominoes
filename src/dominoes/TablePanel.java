@@ -1,12 +1,18 @@
 package dominoes;
 
+import com.sun.corba.se.impl.logging.ORBUtilSystemException;
 import dominoes.Widgets.BoneWidget;
 import dominoes.Widgets.ElipsisWidget;
 import dominoes.Widgets.PlayPositionWidget;
 import dominoes.players.PlayerType;
 
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.net.URL;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,6 +25,9 @@ public class TablePanel extends JPanel {
     int boneSize = 120;
     int boneSpacing = 5;
 
+    BufferedImage img=null;
+
+
     // Indicator for play positions and click targets
     PlayPositionWidget leftPlayPosition = new PlayPositionWidget(boneSize);
     PlayPositionWidget rightPlayPosition = new PlayPositionWidget(boneSize);
@@ -29,8 +38,15 @@ public class TablePanel extends JPanel {
         this.setMinimumSize(new Dimension(0, boneSize / 2 + 10));
         this.setSize(new Dimension(0, boneSize / 2 + 10));
         this.turnCoordinator = turnCoordinator;
-        this.setLayout(new FlowLayout(FlowLayout.CENTER,boneSpacing,this.getHeight()/2+boneSize/4));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, this.getHeight() / 2 + boneSize / 4));
         this.validate();
+
+        URL backImgFile=this.getClass().getResource("Images/back.png");
+
+        try{img=ImageIO.read(backImgFile);
+        } catch(IOException e){
+            System.out.println("Image file failed to load");
+        }
     }
 
     public void setTable(Table t) {
@@ -101,6 +117,13 @@ public class TablePanel extends JPanel {
     }
 
     public void paint(Graphics graphics) {
-        super.paint(graphics);
+            super.paint(graphics);
+     }
+
+    @Override
+    protected void paintComponent(Graphics graphics){
+        super.paintComponent(graphics);
+        graphics.drawImage(img,0,0,getWidth(),getHeight(),this);
+
     }
 }
