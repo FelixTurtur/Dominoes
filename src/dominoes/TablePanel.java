@@ -29,7 +29,7 @@ public class TablePanel extends JPanel {
         this.setMinimumSize(new Dimension(0, boneSize / 2 + 10));
         this.setSize(new Dimension(0, boneSize / 2 + 10));
         this.turnCoordinator = turnCoordinator;
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 0));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER,boneSpacing,this.getHeight()/2+boneSize/4));
         this.validate();
     }
 
