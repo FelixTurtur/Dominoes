@@ -106,7 +106,6 @@ public class InfoPanel extends JPanel {
         // If click was on bone yard, and we are in a stage of play which allows interaction with the boneyard...
         if (interactive) {
             if (e.target == this.boneYardWidget || e.target == this.boneYardButton) {
-                // TODO - also do this on events from the draw/pass button
                 turnCoordinator.drawOrPass();
             }
         }

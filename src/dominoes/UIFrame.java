@@ -16,11 +16,11 @@ public class UIFrame extends JFrame {//} implements ActionListener {
         super("Awesome Dominoes");
         setSize(windowWidth, windowHeight);
         setPreferredSize(new Dimension(windowWidth, windowHeight));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         super.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                JOptionPane.showConfirmDialog(new JFrame(), "Do you really want to leave?","Exit?",JOptionPane.YES_NO_OPTION);
+                exitOption();
             }
         });
 
@@ -86,10 +86,6 @@ public class UIFrame extends JFrame {//} implements ActionListener {
             this.setVisible(false);
             System.exit(0);
         }
-    }
-
-    public void windowClosing(WindowEvent e) {
-        exitOption();
     }
 
     public void showNewGameDialog() {
