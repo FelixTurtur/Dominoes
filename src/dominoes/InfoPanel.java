@@ -90,8 +90,9 @@ public class InfoPanel extends JPanel {
 
     public void gameWinner(DominoPlayer dominoPlayer) {
         this.scoreBoard.gameEnd();
-        this.warningText.setText(dominoPlayer.getName() + " has won the game with " + dominoPlayer.getPoints() + " points!");
         this.warningText.getParent().setBackground(this.gameWinColour);
+        this.warningText.setForeground(Color.white);
+        this.warningText.setText(dominoPlayer.getName() + " has won the game with " + dominoPlayer.getPoints() + " points!");
         JOptionPane.showMessageDialog(new JFrame(), dominoPlayer.getName() + " wins the game!",
                 "Game Over", JOptionPane.INFORMATION_MESSAGE);
         int x = JOptionPane.showOptionDialog(new JFrame(), "Would you like to play again?",
