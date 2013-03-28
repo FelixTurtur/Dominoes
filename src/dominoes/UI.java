@@ -21,6 +21,7 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
     PlayerHandPanel player2Hand;
     InfoPanel infoPanel;
     TablePanel tableArea;
+    UIFrame parent;
     int boneSize = 120;
     int maxpips = 6;  //graphics output currently can not cope with higher than 6
 
@@ -42,16 +43,17 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
         }
     }
 
-    public UI(PlayerType player1Type, String player1Name, PlayerType player2Type, String player2Name, int targetScore) {
+    public UI(PlayerType player1Type, String player1Name, PlayerType player2Type, String player2Name, int targetScore,UIFrame parent) {
         super();
         this.player1 = this.createPlayer(player1Type, player1Name);
         this.player2 = this.createPlayer(player2Type, player2Name);
         this.targetScore = targetScore;
         this.player1Type = player1Type;
         this.player2Type = player2Type;
+        this.parent = parent;
 
         this.dominoesGame = new Dominoes(this, this.player1, this.player2, this.targetScore, this.maxpips);
-        this.dominoesThread = new Thread(new DominoesThread(this.dominoesGame));
+        this.dominoesThread = new Thread(new DominoesThread(this.dominoesGame, this));
 
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
         Dimension notTooTall = new Dimension(2000,200);
@@ -161,6 +163,7 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
 
     public void displayRoundWinner(DominoPlayer dominoPlayer) {
         if (dominoPlayer == null) {
+            //TODO Javadoc says a draw condition will return null - HANDLE!
             //Interrupted game - end run
             this.dominoesThread.stop();
             return;
@@ -231,5 +234,11 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
         }
     }
 
+    public void handleWinner(DominoPlayer pWinner) {
+        displayRoundWinner(pWinner);
+    }
 
+    public void nextGame() {
+        parent.showNewGameDialog();
+    }
 }

@@ -1,5 +1,7 @@
 package dominoes;
 
+import dominoes.players.DominoPlayer;
+
 /**
  * Created with IntelliJ IDEA.
  * User: timothy
@@ -11,14 +13,18 @@ public class DominoesThread implements Runnable {
 
     private final Dominoes dominoesGame;
     private boolean started;
+    public final UI ui;
 
-    public DominoesThread(Dominoes dominoesGame) {
+    public DominoesThread(Dominoes dominoesGame, UI ui) {
         this.dominoesGame = dominoesGame;
+        this.ui = ui;
     }
 
     public void run() {
         if (!started) {
-            this.dominoesGame.play();
+            DominoPlayer pWinner = this.dominoesGame.play();
+            ui.handleWinner(pWinner);
         }
     }
+
 }

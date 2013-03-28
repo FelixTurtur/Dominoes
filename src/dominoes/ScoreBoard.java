@@ -73,6 +73,18 @@ public class ScoreBoard extends JPanel {
         updateFields();
     }
 
+    public void gameEnd() {
+        updateFields();
+        if (Integer.parseInt(player1Score.getText()) > Integer.parseInt(player2Score.getText())) {
+            player1Name.setForeground(Color.blue);
+            player1Score.setForeground(Color.blue);
+        } else {
+            player2Name.setForeground(Color.blue);
+            player2Score.setForeground(Color.blue);
+        }
+
+    }
+
     private void updateFields() {
         this.roundCount.setText(Integer.toString(this.round));
         if (this.player1 != null) {

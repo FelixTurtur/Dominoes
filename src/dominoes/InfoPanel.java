@@ -18,7 +18,7 @@ public class InfoPanel extends JPanel {
 
     private final BoneYardWidget boneYardWidget;
     private boolean interactive;
-    private TurnCoordinator turnCoordinator;
+    private UI turnCoordinator;
     private final ScoreBoard scoreBoard;
     private final JButton boneYardButton;
     private final JLabel warningText;
@@ -27,7 +27,7 @@ public class InfoPanel extends JPanel {
     private Color roundWinColour = Color.green;
     private Color normalColor = Color.lightGray;
 
-    public InfoPanel(TurnCoordinator turnCoordinator) {
+    public InfoPanel(UI turnCoordinator) {
         this.turnCoordinator = turnCoordinator;
         Font font = new Font("Arial", Font.BOLD, 18);
         this.setLayout(new GridBagLayout());
@@ -89,12 +89,16 @@ public class InfoPanel extends JPanel {
     }
 
     public void gameWinner(DominoPlayer dominoPlayer) {
-        //this.scoreBoard.finalScore();
+        this.scoreBoard.gameEnd();
         this.warningText.setText(dominoPlayer.getName() + " has won the game with " + dominoPlayer.getPoints() + " points!");
-        this.warningText.setBackground(this.gameWinColour);
+        this.warningText.getParent().setBackground(this.gameWinColour);
         JOptionPane.showMessageDialog(new JFrame(), dominoPlayer.getName() + " wins the game!",
                 "Game Over", JOptionPane.INFORMATION_MESSAGE);
-
+        int x = JOptionPane.showOptionDialog(new JFrame(), "Would you like to play again?",
+                "More?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null,null,null);
+        if (x==0) {
+            this.turnCoordinator.nextGame();
+        }
     }
 
     public void invalidMove(DominoPlayer dominoPlayer) {

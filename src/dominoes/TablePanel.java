@@ -1,18 +1,16 @@
 package dominoes;
 
-import com.sun.corba.se.impl.logging.ORBUtilSystemException;
 import dominoes.Widgets.BoneWidget;
 import dominoes.Widgets.ElipsisWidget;
 import dominoes.Widgets.PlayPositionWidget;
 import dominoes.players.PlayerType;
 
 import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.net.URL;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * Created with IntelliJ IDEA.
@@ -106,13 +104,11 @@ public class TablePanel extends JPanel {
     // Used by observer to indicate whether play indicators should be shown or hidden at the current time
     public void showPlayIndicators() {
         this.showPlays = true;
-        System.out.println("showPlayIndicators: " + this.showPlays);
         setUpBones();
     }
 
     public void hidePlayIndicators() {
         this.showPlays = false;
-        System.out.println("hidePlayIndicators: " + this.showPlays);
         setUpBones();
     }
 

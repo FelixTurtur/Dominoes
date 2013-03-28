@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 // Frame which contains game UI implemented in UI class
-public class UIFrame extends JFrame {//} implements ActionListener {
+public class UIFrame extends JFrame {
     MenuBar menuBar;
     int windowWidth = 1400;
     int windowHeight = 800;
@@ -98,7 +98,7 @@ public class UIFrame extends JFrame {//} implements ActionListener {
         }
 
         // Collect results from dialog and use them to create game in new UI panel
-        this.ui = new UI(dialog.player1Type, dialog.player1Name, dialog.player2Type, dialog.player2Name, dialog.targetScore);
+        this.ui = new UI(dialog.player1Type, dialog.player1Name, dialog.player2Type, dialog.player2Name, dialog.targetScore, this);
 
         this.add(this.ui);
         this.validate();
