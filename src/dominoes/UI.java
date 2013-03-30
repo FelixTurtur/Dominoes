@@ -160,8 +160,7 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
 
     public void displayRoundWinner(DominoPlayer dominoPlayer) {
         if (dominoPlayer == null) {
-            //TODO Javadoc says a draw condition will return null - HANDLE!
-            //Interrupted game - end run
+            //draw round condition
             this.infoPanel.roundWinner(dominoPlayer);
         }  else {
             // Check if target score has been met, if yes, then it's a game win, if not, round win
