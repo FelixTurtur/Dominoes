@@ -241,4 +241,8 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
     public void nextGame() {
         parent.showNewGameDialog();
     }
+
+    public boolean gameIsActive() {
+        return this.dominoesThread.isAlive();
+    }
 }

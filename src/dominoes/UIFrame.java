@@ -42,7 +42,6 @@ public class UIFrame extends JFrame {
         MenuItem exitGame = new MenuItem("Exit Dominoes", new MenuShortcut(KeyEvent.VK_X));
         MenuItem aboutItem = new MenuItem("About AD", new MenuShortcut(KeyEvent.VK_A));
         newGame.setActionCommand("NewGame"); // set the command
-        //newGame.addActionListener(ui.infoPanel);
         newGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 newOption();
@@ -68,8 +67,11 @@ public class UIFrame extends JFrame {
     }
 
     private void newOption() {
-        int x = JOptionPane.showOptionDialog(new JFrame(), "Leave this game?", "New Game",
-                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,null,null,null);
+        int x = 0;
+        if (ui.gameIsActive()) {
+            x = JOptionPane.showOptionDialog(new JFrame(), "Leave this game?", "New Game",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,null,null,null);
+        }
         if (x==0) {
             ui.displayRoundWinner(null);
             showNewGameDialog();
