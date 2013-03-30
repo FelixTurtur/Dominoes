@@ -73,7 +73,7 @@ public class UIFrame extends JFrame {
                     JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,null,null,null);
         }
         if (x==0) {
-            ui.displayRoundWinner(null);
+            ui.endGame();
             showNewGameDialog();
         }
     }
