@@ -19,6 +19,7 @@ public class Player implements DominoPlayer {
     private int points = 0;
     protected List<Bone> hand = new LinkedList<Bone>();
 
+    // TurnCoordinator used to request move from UI
     public Player(String name, TurnCoordinator turnCoordinator) {
         this.name = name;
         this.turnCoordinator = turnCoordinator;
