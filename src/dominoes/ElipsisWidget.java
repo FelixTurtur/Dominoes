@@ -13,20 +13,23 @@ import java.awt.*;
  * User: timothy
  * Date: 16/03/2013
  * Time: 21:10
- * To change this template use File | Settings | File Templates.
  */
+
 public class ElipsisWidget extends Canvas {
-    private int size = 120;
+    private int boneSize = 120;
 
     public ElipsisWidget(int size) {
-        this.size = size;
-        reshape(0, 0, this.size, this.size / 2);
+        this.boneSize = size;
+        reshape(0, 0, this.boneSize, this.boneSize / 2);
     }
 
     public void paint(Graphics g) {
         g.setColor(Color.black);
+        g.fillRoundRect(0,0,boneSize,boneSize/2,boneSize/20,boneSize/20);
+        g.setColor(Color.white);
         for (int i = 0; i < 5; i = i + 2) {
-            g.fillRoundRect(10 + 20 * i, this.size / 4, 20, 5, 2, 2);
+            g.fillRoundRect(10 + 20 * i, this.boneSize/4-3, 20, 6, 2, 2);
         }
+
     }
 }
