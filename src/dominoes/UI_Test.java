@@ -1,4 +1,4 @@
-package dominoes.Tests;
+package dominoes;
 
 import dominoes.UI;
 
