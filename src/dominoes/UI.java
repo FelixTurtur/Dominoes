@@ -51,27 +51,24 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
         this.player1Type = player1Type;
         this.player2Type = player2Type;
         this.parent = parent;
+        this.setSize(parent.getWidth(), parent.getHeight());
 
         this.dominoesGame = new Dominoes(this, this.player1, this.player2, this.targetScore, this.maxpips);
         this.dominoesThread = new Thread(new DominoesThread(this.dominoesGame, this));
 
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
-        Dimension notTooTall = new Dimension(2000,200);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         infoPanel = new InfoPanel(this);
-        infoPanel.setMaximumSize(notTooTall);
         setupScorePanel(infoPanel, eb1);
         player1Hand = new PlayerHandPanel(player1Type, this);
-        player1Hand.setMaximumSize(notTooTall);
         setupPlayerHand(player1Hand, eb1);
 
         tableArea = new TablePanel(this);
-        tableArea.setMaximumSize(notTooTall);
         setupTableArea(eb1);
 
         player2Hand = new PlayerHandPanel(player2Type, this);
-        player2Hand.setMaximumSize(notTooTall);
+        player2Hand.setMinimumSize(new Dimension(parent.getWidth(), 200));
         setupPlayerHand(player2Hand, eb1);
 
         this.validate();
@@ -163,16 +160,15 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
 
     public void displayRoundWinner(DominoPlayer dominoPlayer) {
         if (dominoPlayer == null) {
-            //TODO Javadoc says a draw condition will return null - HANDLE!
-            //Interrupted game - end run
-            this.dominoesThread.stop();
-            return;
-        }
-        // Check if target score has been met, if yes, then it's a game win, if not, round win
-        if (dominoPlayer.getPoints() >= this.targetScore) {
-            this.infoPanel.gameWinner(dominoPlayer);
-        } else {
+            //draw round condition
             this.infoPanel.roundWinner(dominoPlayer);
+        }  else {
+            // Check if target score has been met, if yes, then it's a game win, if not, round win
+            if (dominoPlayer.getPoints() >= this.targetScore) {
+                this.infoPanel.gameWinner(dominoPlayer);
+            } else {
+                this.infoPanel.roundWinner(dominoPlayer);
+            }
         }
     }
 
@@ -240,5 +236,46 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
 
     public void nextGame() {
         parent.showNewGameDialog();
+    }
+
+    public boolean gameIsActive() {
+        return this.dominoesThread.isAlive();
+    }
+
+    //Test-use Constructor
+    public UI() {
+        //for test case
+        this.setSize(1400,800);
+        this.player1 = this.createPlayer(PlayerType.Human, "Player 1");
+        this.player1Type = PlayerType.Human;
+        this.player2 = this.createPlayer(PlayerType.Computer, "Player 2");
+        this.player2Type = PlayerType.Computer;
+
+        EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
+        Dimension notTooTall = new Dimension(2000,200);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        infoPanel = new InfoPanel(this);
+        infoPanel.setMaximumSize(notTooTall);
+        setupScorePanel(infoPanel, eb1);
+        player1Hand = new PlayerHandPanel(player1Type, this);
+        player1Hand.setMaximumSize(notTooTall);
+        setupPlayerHand(player1Hand, eb1);
+
+        tableArea = new TablePanel(this);
+        tableArea.setMaximumSize(notTooTall);
+        setupTableArea(eb1);
+
+        player2Hand = new PlayerHandPanel(player2Type, this);
+        player2Hand.setMaximumSize(notTooTall);
+        setupPlayerHand(player2Hand, eb1);
+
+        this.validate();
+        dominoesGame = null;
+        dominoesThread = null;
+    }
+
+    public void endGame() {
+        this.dominoesThread.stop();
     }
 }

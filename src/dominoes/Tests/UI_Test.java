@@ -1,6 +1,9 @@
 package dominoes.Tests;
 
-import dominoes.UIFrame;
+import dominoes.UI;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,25 +16,22 @@ import dominoes.UIFrame;
 public class UI_Test {
     static int targetScore = 1;
     static int maxpips = 6;
-    static int x = 0;
+    static int windowWidth = 1400;
+    static int windowHeight = 800;
+    static UI ui;
 
     public static void main(String[] args) {
-        /*while (x == 0) {
-            UI ui = new UI();
-            ui.setPlayer1Type(PlayerType.Computer);
-            ui.setPlayer2Type(PlayerType.Computer);
 
-            Player[] players = {new ComputerPlayer("Player 1", ui), new ComputerPlayer("Player 2", ui)};
+        JFrame testFrame = new JFrame();
+        testFrame.setTitle("Awesome Dominoes");
+        testFrame.setSize(windowWidth, windowHeight);
+        testFrame.setPreferredSize(new Dimension(windowWidth, windowHeight));
+        testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ui = new UI();
 
-            Dominoes dominoes = new Dominoes(ui, players[0], players[1], targetScore, maxpips);
-            dominoes.players.DominoPlayer victorious = dominoes.play();
-            String winningMessage = victorious.getName() + " has won! Would you like to play again?";
-            x = JOptionPane.showOptionDialog(new JFrame(),
-                    winningMessage, "Game Over", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
-                    null, new Object[]{"Yes", "No"}, null);
-        }*/
-        UIFrame uiFrame = new UIFrame();
-        uiFrame.showNewGameDialog();
+        testFrame.add(ui);
+        testFrame.validate();
+        testFrame.setVisible(true);
     }
 
 }

@@ -21,25 +21,37 @@ public class PlayerHandPanel extends JPanel {
 
     DominoPlayer player;
     private PlayerType playerType;
-    private TurnCoordinator turnCoordinator;
+    private UI turnCoordinator;
     int boneSize = 120;
     int boneSpacing = 30;
 
     List<BoneWidget> boneWidgets = new LinkedList<BoneWidget>();
-    private boolean ourTurn = false;
     private boolean interactive;
 
-    public PlayerHandPanel(PlayerType playerType, TurnCoordinator turnCoordinator) {
+    public PlayerHandPanel(PlayerType playerType, UI turnCoordinator) {
+        Dimension mainPanelSize = new Dimension(turnCoordinator.getWidth(), turnCoordinator.getHeight()/4);
         this.playerType = playerType;
         this.turnCoordinator = turnCoordinator;
+        JPanel textHolder = new JPanel();
+        textHolder.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+        textHolder.setBackground(Color.white);
         this.turnText = new JLabel();
         this.turnText.setText(" ");
+        textHolder.add(turnText);
+        textHolder.setMaximumSize(new Dimension(2000,30));
+
         this.bonePanel = new JPanel();
         this.bonePanel.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 30));
+        this.bonePanel.setMinimumSize(new Dimension(1000,150));
+        this.bonePanel.setBackground(new Color(210,5,30));
 
-        this.add(this.turnText);
-        this.add(this.bonePanel);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(textHolder);
+        this.add(this.bonePanel);
+        this.validate();
+        this.setMaximumSize(mainPanelSize);
+        this.setMinimumSize(mainPanelSize);
+
     }
 
     private void setUpBones() {
@@ -96,12 +108,10 @@ public class PlayerHandPanel extends JPanel {
         } else {
             this.turnText.setText(player.getName() + " is taking their turn...");
         }
-        this.ourTurn = true;
     }
 
     public void notYourMove() {
         this.turnText.setText(" ");
-        this.ourTurn = false;
         this.interactive = false;
     }
 }

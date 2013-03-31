@@ -30,10 +30,11 @@ public class TablePanel extends JPanel {
     PlayPositionWidget leftPlayPosition = new PlayPositionWidget(boneSize);
     PlayPositionWidget rightPlayPosition = new PlayPositionWidget(boneSize);
     private boolean showPlays = false;
-    private TurnCoordinator turnCoordinator;
+    private UI turnCoordinator;
 
-    public TablePanel(TurnCoordinator turnCoordinator) {
-        this.setMinimumSize(new Dimension(0, boneSize / 2 + 10));
+    public TablePanel(UI turnCoordinator) {
+        this.setMinimumSize(new Dimension(turnCoordinator.getWidth(), (int)(boneSize * 1.5 + 10)));
+        this.setMaximumSize(new Dimension(turnCoordinator.getWidth(),(int)(boneSize * 1.5 + 10)));
         this.setSize(new Dimension(0, boneSize / 2 + 10));
         this.turnCoordinator = turnCoordinator;
         this.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, this.getHeight() / 2 + boneSize / 4));
@@ -92,11 +93,9 @@ public class TablePanel extends JPanel {
         if (e.target == this.leftPlayPosition) {
             // Send left play event
             turnCoordinator.nextMovePosition(Play.LEFT);
-            System.out.println("Left play position clicked");
         } else if (e.target == this.rightPlayPosition) {
             // Send right play event
             turnCoordinator.nextMovePosition(Play.RIGHT);
-            System.out.println("Right play position clicked");
         }
         return true;
     }
