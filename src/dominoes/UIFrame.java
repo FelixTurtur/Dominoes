@@ -1,3 +1,9 @@
+/*
+ * Dominoes implementation by Timothy Baldock, Abbie James and Nick Mackin
+ * MSc Computer Science
+ * Submitted 31st March 2013
+ */
+
 package dominoes;
 
 
