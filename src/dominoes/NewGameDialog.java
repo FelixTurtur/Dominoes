@@ -19,15 +19,12 @@ import static java.lang.Integer.parseInt;
  * To change this template use File | Settings | File Templates.
  */
 public class NewGameDialog extends JDialog implements ActionListener {
-    //region Parameters
-    //A whole tonne of parameters
     DominoPlayer p1, p2;
     JPanel titlePanel, p1Panel, p2Panel, targetScorePanel, gameButtons;
     JToggleButton p1H, p1C, p2H, p2C;
     ButtonGroup p1Options, p2Options;
     JTextField p1NameBox, p2NameBox, scoreBox;
     JButton newGame, exitGame;
-    //endregion
 
     int targetScore = 50;
     PlayerType player1Type;
@@ -92,7 +89,6 @@ public class NewGameDialog extends JDialog implements ActionListener {
         p1Panel.add(p1H);
         p1Panel.add(p1C);
         p1Panel.add(new JLabel("Name:"));
-        //getPlayerChoicePanel(eb1, "Player 1", p1Options);
         p1Panel.setSize(800, 10);
         p1NameBox = new JTextField();
         p1NameBox.setColumns(20);

@@ -5,10 +5,9 @@ package dominoes;
  * User: timothy
  * Date: 20/03/2013
  * Time: 13:21
- * To change this template use File | Settings | File Templates.
+ * Description: This uses the Proxy pattern to provide type-safety when using the CubbyHole for PlayWrapper objects
  */
 
-// This uses the Proxy pattern to provide type-safety when using the CubbyHole for PlayWrapper objects
 public class PlayWrapperCubbyHole {
     // A CubbyHole that we can only put PlayWrappers into
     private CubbyHole cubbyHole;

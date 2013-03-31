@@ -9,7 +9,7 @@ import java.awt.*;
  * User: timothy
  * Date: 20/03/2013
  * Time: 12:37
- * To change this template use File | Settings | File Templates.
+ * Description: Widget representing boneyard from which players can draw bones if they can't play
  */
 public class BoneYardWidget extends Canvas {
     private BoneYard boneYard;
@@ -50,5 +50,4 @@ public class BoneYardWidget extends Canvas {
     public BoneYard getBoneYard() {
         return this.boneYard;
     }
-
 }

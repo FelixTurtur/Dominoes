@@ -12,6 +12,7 @@ import java.util.List;
  * User: nick
  * Date: 16/02/13
  * Time: 21:33
+ * Description: Computer player implementation (extends interactive implementation)
  */
 
 public class ComputerPlayer extends Player {

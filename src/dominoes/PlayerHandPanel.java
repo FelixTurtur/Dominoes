@@ -12,6 +12,8 @@ import java.util.List;
  * User: nick
  * Date: 05/03/13
  * Time: 00:39
+ * Description: Panel to display the player's hand as a line of bones, contains a set of boneWidgets
+ *              which are responsible for drawing the bone graphics
  */
 public class PlayerHandPanel extends JPanel {
     JPanel bonePanel;
@@ -52,9 +54,8 @@ public class PlayerHandPanel extends JPanel {
 
     }
 
+    // Given the bones in the player's hand add boneWidget elements to represent them
     private void setUpBones() {
-        // TODO - flicker on redraw is caused because you can't tell AWT to sync redrawing all these components
-        // with the screen redrawing - I don't know how to fix this.
         this.bonePanel.removeAll();
         this.boneWidgets.clear();
         if (player != null) {

@@ -10,6 +10,7 @@ import java.awt.*;
  * User: timothy
  * Date: 20/03/2013
  * Time: 14:05
+ * Description: Panel showing scoring information
  */
 public class ScoreBoard extends JPanel {
     private int round = 1;

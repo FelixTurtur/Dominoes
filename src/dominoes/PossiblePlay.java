@@ -3,12 +3,12 @@ package dominoes;
 import dominoes.Play;
 import dominoes.Bone;
 
-
 /**
  * Created with IntelliJ IDEA.
  * User: nick
  * Date: 17/02/13
  * Time: 17:39
+ * Description: Used in the logic of the computer player to represent possible play positions for analysis
  */
 public class PossiblePlay {
     private Play play;
@@ -41,6 +41,4 @@ public class PossiblePlay {
     public void addToScore(int i) {
         score = score + i;
     }
-
-
 }

@@ -13,6 +13,7 @@ import java.awt.*;
  * User: nick
  * Date: 16/02/13
  * Time: 22:57
+ * Description: Main UI panel containing other UI panels. Creates a game instance on instantiation.
  */
 
 public class UI extends JPanel implements DominoUI, TurnCoordinator {
@@ -52,6 +53,7 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
         this.parent = parent;
         this.setSize(parent.getWidth(), parent.getHeight());
 
+        // Create a new thread to run the game simulation in with this object as its target
         this.dominoesGame = new Dominoes(this, this.player1, this.player2, this.targetScore, this.maxpips);
         this.dominoesThread = new Thread(new DominoesThread(this.dominoesGame, this));
 
@@ -72,6 +74,7 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
 
         this.validate();
 
+        // Start up game thread
         this.dominoesThread.start();
     }
 
@@ -150,7 +153,7 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
     }
     //endregion
 
-    // DominoUI implementation
+    //region DominoUI implementation
     public void display(DominoPlayer[] dominoPlayers, Table table, BoneYard boneYard) {
         this.tableArea.setTable(table);
         this.setDominoPlayers(dominoPlayers);
@@ -174,9 +177,10 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
     public void displayInvalidPlay(DominoPlayer dominoPlayer) {
         this.infoPanel.invalidMove(dominoPlayer);
     }
+    //endregion
 
 
-    // TurnCoordinator implementation
+    //region TurnCoordinator implementation
     // Called by PlayerHandPanel when player selects a bone to play
     public void nextMoveBoneSelected(Bone bone) {
         this.nextMoveBone = bone;
@@ -217,6 +221,8 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
     public void updateBoneYard(BoneYard boneYard) {
         this.infoPanel.updateInfoPanel(boneYard);
     }
+    //endregion
+
 
     // Called by Player when it requires a move from the UI
     public void getPlayerMove(Player player, PlayWrapperCubbyHole nextMove) {

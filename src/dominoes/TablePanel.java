@@ -12,6 +12,7 @@ import java.net.URL;
  * User: nick
  * Date: 05/03/13
  * Time: 01:08
+ * Description: Displays the bones in play, if the width exceeds the window width truncates bones with an ellipsis
  */
 public class TablePanel extends JPanel {
     Table table;
@@ -19,7 +20,6 @@ public class TablePanel extends JPanel {
     int boneSpacing = 5;
 
     BufferedImage img = null;
-
 
     // Indicator for play positions and click targets
     PlayPositionWidget leftPlayPosition = new PlayPositionWidget(boneSize);
@@ -115,6 +115,5 @@ public class TablePanel extends JPanel {
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         graphics.drawImage(img, 0, 0, getWidth(), getHeight(), this);
-
     }
 }

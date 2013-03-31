@@ -7,6 +7,7 @@ import java.awt.*;
  * User: timothy
  * Date: 16/03/2013
  * Time: 19:27
+ * Description: Widget which represents a bone, draws itself to represent player or table bones
  */
 public class BoneWidget extends Canvas {
     private Bone bone;
@@ -42,20 +43,6 @@ public class BoneWidget extends Canvas {
     public Bone getBone() {
         return bone;
     }
-
-    /*public boolean mouseEnter(Event e, int x, int y) {
-        entered = e.when;
-        background = Color.yellow;
-        repaint();
-        return true;
-    }
-
-    public boolean mouseExit(Event e, int x, int y) {
-        inComponent = e.when - entered;
-        background = Color.black;
-        repaint();
-        return true;
-    }*/
 
     public boolean mouseUp(Event e, int x, int y) {
         // Container should see event

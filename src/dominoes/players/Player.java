@@ -10,7 +10,9 @@ import java.util.List;
  * User: nick
  * Date: 16/02/13
  * Time: 21:54
+ * Description: Interactive player implementation
  */
+
 public class Player implements DominoPlayer {
     private String name;
     protected TurnCoordinator turnCoordinator;

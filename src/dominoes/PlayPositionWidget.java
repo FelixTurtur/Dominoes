@@ -7,7 +7,7 @@ import java.awt.*;
  * User: timothy
  * Date: 18/03/2013
  * Time: 14:36
- * To change this template use File | Settings | File Templates.
+ * Description: Widget displayed to indicate possible play locations to interactive player
  */
 public class PlayPositionWidget extends Canvas {
     private int size = 120;

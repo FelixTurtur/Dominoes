@@ -7,10 +7,9 @@ import dominoes.players.Player;
  * User: timothy
  * Date: 18/03/2013
  * Time: 23:30
- * To change this template use File | Settings | File Templates.
+ * Description: This acts as an observer for certain events from Player and the UI elements
  */
 
-// This acts as an observer for certain events from Player and the UI elements
 public interface TurnCoordinator {
     // Interface for turns
     // Called by PlayerHandPanel when player selects a bone to play
