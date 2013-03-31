@@ -19,13 +19,13 @@ import java.awt.*;
  */
 public class BoneYardWidget extends Canvas {
     private BoneYard boneYard;
-    private final int size = 120;
+    private final int boneSize = 120;
 
     private Color background = Color.black;
     private Color foreground = Color.white;
 
     public BoneYardWidget() {
-        setSize(size / 2, size);
+        setSize(boneSize / 2, boneSize);
     }
 
     public void paint(Graphics g) {
@@ -39,13 +39,13 @@ public class BoneYardWidget extends Canvas {
             String s = "";
             if (this.boneYard.size() < 10) s = " ";
             g.setFont(new Font("Arial", Font.BOLD, 50));
-            g.drawString(s + this.boneYard.size(), 0, size / 2 + 15);
+            g.drawString(s + this.boneYard.size(), 0, boneSize / 2 + 15);
         }
     }
 
     private void drawBackground(Graphics g) {
         g.setColor(background);
-        g.fillRoundRect(0, 0, size / 2, size, size / 20, size / 20);
+        g.fillRoundRect(0, 0, boneSize / 2, boneSize, boneSize / 20, boneSize / 20);
     }
 
     public void setBoneYard(BoneYard boneYard) {

@@ -18,7 +18,7 @@ import dominoes.players.DominoPlayer;
 public class DominoesThread implements Runnable {
 
     private final Dominoes dominoesGame;
-    private boolean started;
+    private boolean started=false;
     public final UI ui;
 
     public DominoesThread(Dominoes dominoesGame, UI ui) {
