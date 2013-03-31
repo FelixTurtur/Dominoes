@@ -1,6 +1,7 @@
 package dominoes.players;
 
 import dominoes.Play;
+import dominoes.PossiblePlay;
 import dominoes.TurnCoordinator;
 
 import java.util.LinkedList;

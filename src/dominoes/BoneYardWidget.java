@@ -19,7 +19,7 @@ public class BoneYardWidget extends Canvas {
     private Color foreground = Color.white;
 
     public BoneYardWidget() {
-       setSize(size / 2, size);
+        setSize(size / 2, size);
     }
 
     public void paint(Graphics g) {

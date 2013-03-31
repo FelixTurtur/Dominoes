@@ -1,7 +1,6 @@
 package dominoes;
 
 import dominoes.players.DominoPlayer;
-import dominoes.players.PlayerType;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -94,7 +93,7 @@ public class NewGameDialog extends JDialog implements ActionListener {
         p1Panel.add(p1C);
         p1Panel.add(new JLabel("Name:"));
         //getPlayerChoicePanel(eb1, "Player 1", p1Options);
-        p1Panel.setSize(800,10);
+        p1Panel.setSize(800, 10);
         p1NameBox = new JTextField();
         p1NameBox.setColumns(20);
         p1NameBox.setText(this.player1Name);
@@ -119,14 +118,13 @@ public class NewGameDialog extends JDialog implements ActionListener {
         p2NameBox.setText(this.player2Name);
         p2Panel.add(p2NameBox);
         add(p2Panel);
-   }
+    }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
         if (evt.getActionCommand().equals("Exit")) {
             exitOption();
-        }
-         else if (evt.getActionCommand().equals("newGame")) {
+        } else if (evt.getActionCommand().equals("newGame")) {
             //Validate game options
             player1Type = p1H.isSelected() ? PlayerType.Human : p1C.isSelected() ? PlayerType.Computer : PlayerType.None;
             player2Type = p2H.isSelected() ? PlayerType.Human : p2C.isSelected() ? PlayerType.Computer : PlayerType.None;
@@ -175,17 +173,17 @@ public class NewGameDialog extends JDialog implements ActionListener {
         Object[] options = {"Yes, goodbye.", "No, take me back!"};
         int x = JOptionPane.showOptionDialog(new JFrame(), "Are you sure you want to quit?",
                 "Leaving so soon?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
-                null, options,  options[1]);
-        if (x==0){
+                null, options, options[1]);
+        if (x == 0) {
             this.setVisible(false);
             System.exit(0);
         }
     }
 
     private class OptionButton extends JButton {
-         private OptionButton(String label, String action) {
-             super(label);
-             this.setActionCommand(action);
-         }
+        private OptionButton(String label, String action) {
+            super(label);
+            this.setActionCommand(action);
+        }
     }
 }

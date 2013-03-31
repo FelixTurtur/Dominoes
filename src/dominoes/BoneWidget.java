@@ -1,8 +1,5 @@
 package dominoes;
 
-import dominoes.Bone;
-import dominoes.players.PlayerType;
-
 import java.awt.*;
 
 /**
@@ -90,20 +87,44 @@ public class BoneWidget extends Canvas {
 
     private void drawPips(Graphics g) {
         switch (bone.left()) {
-            case 1: drawOnePip(g, false);   break;
-            case 2: drawTwoPips(g, false);  break;
-            case 3: drawThreePips(g, false);break;
-            case 4: drawFourPips(g, false); break;
-            case 5: drawFivePips(g, false); break;
-            case 6: drawSixPips(g, false);  break;
+            case 1:
+                drawOnePip(g, false);
+                break;
+            case 2:
+                drawTwoPips(g, false);
+                break;
+            case 3:
+                drawThreePips(g, false);
+                break;
+            case 4:
+                drawFourPips(g, false);
+                break;
+            case 5:
+                drawFivePips(g, false);
+                break;
+            case 6:
+                drawSixPips(g, false);
+                break;
         }
         switch (bone.right()) {
-            case 1: drawOnePip(g, true);    break;
-            case 2: drawTwoPips(g, true);   break;
-            case 3: drawThreePips(g, true); break;
-            case 4: drawFourPips(g, true);  break;
-            case 5: drawFivePips(g, true);  break;
-            case 6: drawSixPips(g, true);   break;
+            case 1:
+                drawOnePip(g, true);
+                break;
+            case 2:
+                drawTwoPips(g, true);
+                break;
+            case 3:
+                drawThreePips(g, true);
+                break;
+            case 4:
+                drawFourPips(g, true);
+                break;
+            case 5:
+                drawFivePips(g, true);
+                break;
+            case 6:
+                drawSixPips(g, true);
+                break;
         }
     }
 

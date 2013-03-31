@@ -37,11 +37,16 @@ public class InfoPanel extends JPanel {
         c.fill = GridBagConstraints.HORIZONTAL;
         JLabel boneYardLabel = new JLabel(" Boneyard ");
         boneYardLabel.setBackground(normalColour);
-        c.gridx=0;c.gridy=1; c.weightx=0.0;
-        this.add(boneYardLabel,c);
+        c.gridx = 0;
+        c.gridy = 1;
+        c.weightx = 0.0;
+        this.add(boneYardLabel, c);
         boneYardWidget = new BoneYardWidget();
-        c.gridx=1; c.gridheight=3;c.gridy=0;  c.weightx=0.0;
-        this.add(boneYardWidget,c);
+        c.gridx = 1;
+        c.gridheight = 3;
+        c.gridy = 0;
+        c.weightx = 0.0;
+        this.add(boneYardWidget, c);
         boneYardButton = new JButton("Draw");
         boneYardButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -50,18 +55,31 @@ public class InfoPanel extends JPanel {
                 }
             }
         });
-        c.gridx=2;c.gridy=1;c.gridheight=1; c.weighty=0.8;
-        this.add(boneYardButton,c);
+        c.gridx = 2;
+        c.gridy = 1;
+        c.gridheight = 1;
+        c.weighty = 0.8;
+        this.add(boneYardButton, c);
         JPanel textPanel = new JPanel();
-        warningText = new JLabel("",JLabel.CENTER);
+        warningText = new JLabel("", JLabel.CENTER);
         warningText.setFont(font);
         textPanel.add(warningText, JPanel.CENTER_ALIGNMENT);
         textPanel.setBackground(this.normalColour);
-        c.weightx=0.8;c.weighty=0.0;c.gridwidth=5; c.gridx=3;c.gridy=0;c.gridheight=2;
-        this.add(textPanel,c);
+        c.weightx = 0.8;
+        c.weighty = 0.0;
+        c.gridwidth = 5;
+        c.gridx = 3;
+        c.gridy = 0;
+        c.gridheight = 2;
+        this.add(textPanel, c);
         scoreBoard = new ScoreBoard();
-        c.weightx=0.2; c.gridwidth=3;c.gridy=0;c.gridx=8;c.gridheight=3;c.weighty=0.8;
-        this.add(scoreBoard,c);
+        c.weightx = 0.2;
+        c.gridwidth = 3;
+        c.gridy = 0;
+        c.gridx = 8;
+        c.gridheight = 3;
+        c.weighty = 0.8;
+        this.add(scoreBoard, c);
         this.setMaximumSize(infoPanelSize);
         this.setMinimumSize(infoPanelSize);
     }
@@ -88,7 +106,7 @@ public class InfoPanel extends JPanel {
         if (dominoPlayer == null) {
             this.warningText.setText("This round was a draw.");
             this.warningText.getParent().setBackground(this.warningColour);
-            JOptionPane.showMessageDialog(new JFrame(),"This round was a draw.",
+            JOptionPane.showMessageDialog(new JFrame(), "This round was a draw.",
                     "Round Over", JOptionPane.INFORMATION_MESSAGE);
         } else {
             this.warningText.setText(dominoPlayer.getName() + " wins the round!");
@@ -108,8 +126,8 @@ public class InfoPanel extends JPanel {
         JOptionPane.showMessageDialog(new JFrame(), dominoPlayer.getName() + " wins the game!",
                 "Game Over", JOptionPane.INFORMATION_MESSAGE);
         int x = JOptionPane.showOptionDialog(new JFrame(), "Would you like to play again?",
-                "More?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null,null,null);
-        if (x==0) {
+                "More?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+        if (x == 0) {
             this.turnCoordinator.nextGame();
         }
     }

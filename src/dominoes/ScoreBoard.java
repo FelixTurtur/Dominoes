@@ -24,20 +24,20 @@ public class ScoreBoard extends JPanel {
     private final JLabel player2Score;
 
     public ScoreBoard() {
-        Font scoreFont = new Font("Scores",Font.ITALIC, 18);
+        Font scoreFont = new Font("Scores", Font.ITALIC, 18);
         roundLabel = new JLabel();
         roundLabel.setText("Round:");
         roundLabel.setFont(scoreFont);
-        roundCount = new JLabel("",JLabel.CENTER);
+        roundCount = new JLabel("", JLabel.CENTER);
         roundCount.setText("0");
         roundCount.setFont(scoreFont);
         player1Name = new JLabel();
         player1Name.setFont(scoreFont);
-        player1Score = new JLabel("",JLabel.CENTER);
+        player1Score = new JLabel("", JLabel.CENTER);
         player1Score.setFont(scoreFont);
         player2Name = new JLabel();
         player2Name.setFont(scoreFont);
-        player2Score = new JLabel("",JLabel.CENTER);
+        player2Score = new JLabel("", JLabel.CENTER);
         player2Score.setFont(scoreFont);
 
         this.setLayout(new GridLayout(3, 2, 0, 8));

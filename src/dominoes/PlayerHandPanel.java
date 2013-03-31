@@ -1,7 +1,6 @@
 package dominoes;
 
 import dominoes.players.DominoPlayer;
-import dominoes.players.PlayerType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +27,7 @@ public class PlayerHandPanel extends JPanel {
     private boolean interactive;
 
     public PlayerHandPanel(PlayerType playerType, UI turnCoordinator) {
-        Dimension mainPanelSize = new Dimension(turnCoordinator.getWidth(), turnCoordinator.getHeight()/4);
+        Dimension mainPanelSize = new Dimension(turnCoordinator.getWidth(), turnCoordinator.getHeight() / 4);
         this.playerType = playerType;
         this.turnCoordinator = turnCoordinator;
         JPanel textHolder = new JPanel();
@@ -37,12 +36,12 @@ public class PlayerHandPanel extends JPanel {
         this.turnText = new JLabel();
         this.turnText.setText(" ");
         textHolder.add(turnText);
-        textHolder.setMaximumSize(new Dimension(2000,30));
+        textHolder.setMaximumSize(new Dimension(2000, 30));
 
         this.bonePanel = new JPanel();
         this.bonePanel.setLayout(new FlowLayout(FlowLayout.CENTER, boneSpacing, 30));
-        this.bonePanel.setMinimumSize(new Dimension(1000,150));
-        this.bonePanel.setBackground(new Color(210,5,30));
+        this.bonePanel.setMinimumSize(new Dimension(1000, 150));
+        this.bonePanel.setBackground(new Color(210, 5, 30));
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(textHolder);

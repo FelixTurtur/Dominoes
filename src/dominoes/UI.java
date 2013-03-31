@@ -3,7 +3,6 @@ package dominoes;
 import dominoes.players.ComputerPlayer;
 import dominoes.players.DominoPlayer;
 import dominoes.players.Player;
-import dominoes.players.PlayerType;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -43,7 +42,7 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
         }
     }
 
-    public UI(PlayerType player1Type, String player1Name, PlayerType player2Type, String player2Name, int targetScore,UIFrame parent) {
+    public UI(PlayerType player1Type, String player1Name, PlayerType player2Type, String player2Name, int targetScore, UIFrame parent) {
         super();
         this.player1 = this.createPlayer(player1Type, player1Name);
         this.player2 = this.createPlayer(player2Type, player2Name);
@@ -162,7 +161,7 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
         if (dominoPlayer == null) {
             //draw round condition
             this.infoPanel.roundWinner(dominoPlayer);
-        }  else {
+        } else {
             // Check if target score has been met, if yes, then it's a game win, if not, round win
             if (dominoPlayer.getPoints() >= this.targetScore) {
                 this.infoPanel.gameWinner(dominoPlayer);
@@ -245,14 +244,14 @@ public class UI extends JPanel implements DominoUI, TurnCoordinator {
     //Test-use Constructor
     public UI() {
         //for test case
-        this.setSize(1400,800);
+        this.setSize(1400, 800);
         this.player1 = this.createPlayer(PlayerType.Human, "Player 1");
         this.player1Type = PlayerType.Human;
         this.player2 = this.createPlayer(PlayerType.Computer, "Player 2");
         this.player2Type = PlayerType.Computer;
 
         EtchedBorder eb1 = new EtchedBorder(EtchedBorder.RAISED);
-        Dimension notTooTall = new Dimension(2000,200);
+        Dimension notTooTall = new Dimension(2000, 200);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         infoPanel = new InfoPanel(this);

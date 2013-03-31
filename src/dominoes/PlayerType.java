@@ -1,4 +1,4 @@
-package dominoes.players;
+package dominoes;
 
 /**
  * Created with IntelliJ IDEA.

@@ -70,9 +70,9 @@ public class UIFrame extends JFrame {
         int x = 0;
         if (ui.gameIsActive()) {
             x = JOptionPane.showOptionDialog(new JFrame(), "Leave this game?", "New Game",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,null,null,null);
+                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
         }
-        if (x==0) {
+        if (x == 0) {
             ui.endGame();
             showNewGameDialog();
         }
