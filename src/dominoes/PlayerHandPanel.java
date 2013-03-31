@@ -1,6 +1,5 @@
 package dominoes;
 
-import dominoes.Widgets.BoneWidget;
 import dominoes.players.DominoPlayer;
 import dominoes.players.PlayerType;
 

@@ -1,4 +1,4 @@
-package dominoes.Widgets;
+package dominoes;
 
 import dominoes.BoneYard;
 

@@ -1,4 +1,4 @@
-package dominoes.Widgets;
+package dominoes;
 
 import dominoes.Bone;
 import dominoes.players.PlayerType;

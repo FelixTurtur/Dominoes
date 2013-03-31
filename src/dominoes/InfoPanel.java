@@ -1,6 +1,5 @@
 package dominoes;
 
-import dominoes.Widgets.BoneYardWidget;
 import dominoes.players.DominoPlayer;
 
 import javax.swing.*;

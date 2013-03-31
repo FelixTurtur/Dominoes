@@ -1,8 +1,5 @@
 package dominoes;
 
-import dominoes.Widgets.BoneWidget;
-import dominoes.Widgets.ElipsisWidget;
-import dominoes.Widgets.PlayPositionWidget;
 import dominoes.players.PlayerType;
 
 import javax.imageio.ImageIO;
