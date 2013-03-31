@@ -6,8 +6,6 @@
 
 package dominoes;
 
-import dominoes.BoneYard;
-
 import java.awt.*;
 
 /**
@@ -21,8 +19,8 @@ public class BoneYardWidget extends Canvas {
     private BoneYard boneYard;
     private final int boneSize = 120;
 
-    private Color background = Color.black;
-    private Color foreground = Color.white;
+    private Color backgroundColour = Color.black;
+    private Color foregroundColour = Color.white;
 
     public BoneYardWidget() {
         setSize(boneSize / 2, boneSize);
@@ -34,7 +32,7 @@ public class BoneYardWidget extends Canvas {
     }
 
     private void drawForeground(Graphics g) {
-        g.setColor(foreground);
+        g.setColor(foregroundColour);
         if (this.boneYard != null) {
             String s = "";
             if (this.boneYard.size() < 10) s = " ";
@@ -44,7 +42,7 @@ public class BoneYardWidget extends Canvas {
     }
 
     private void drawBackground(Graphics g) {
-        g.setColor(background);
+        g.setColor(backgroundColour);
         g.fillRoundRect(0, 0, boneSize / 2, boneSize, boneSize / 20, boneSize / 20);
     }
 
